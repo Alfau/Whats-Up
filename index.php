@@ -27,7 +27,7 @@
 					<li><a href=# data-hover="Packages">Packages</a></li>
 					<li><a href=# data-hover="Stay">Stay</a></li>
 					<li><a href=# data-hover="Experience">Experience</a></li>
-					<li class="nav_book"><a href=# data-hover="Book">Book</a></li>
+					<li class="nav_book"><a href=# data-hover="Book">Book <b>Now</b></a></li>
 				</ul>
 			</nav>
 			<nav id="right">
@@ -61,16 +61,16 @@
 			<li><a href=#><?php //include("Icons/facebook.svg"); ?></a></li>
 		</ul>
 	</header> -->
-	<main>
-		<!-- <div id="slide">
-			<img src="Slides/slide_1.jpg"/>
-		</div> -->
-		<div class="heading_strip">
-			<div class="heading_wrapper">
-				<h3 class="heading">Featured <b>Packages</b></h3>
-				<?php //include("Icons/sort.svg") ?>
-			</div>
+	<div id="slide">
+		<img src="Slides/slide_2.jpg"/>
+	</div>
+	<div class="heading_strip">
+		<div class="heading_wrapper">
+			<h3 class="heading">Featured <b>Packages</b></h3>
+			<?php //include("Icons/sort.svg") ?>
 		</div>
+	</div>
+	<main>
 		<div id="featured_packages">
 			<div class="container">
 				<div>

@@ -136,8 +136,7 @@ h3 {
   background-color: #fff;
   box-shadow: 0 0 1px #c0c0c0;
   height: 30px;
-  margin-bottom: 2em;
-  margin-top: 2em; }
+  margin-bottom: 2em; }
   .heading_strip svg {
     height: 15px;
     float: right; }
@@ -190,6 +189,8 @@ body {
   font-size: 0.875em; }
 
 header#large {
+  position: relative;
+  z-index: 2;
   height: 75px;
   width: 100%;
   box-shadow: 0 0 1px #c0c0c0;
@@ -248,7 +249,7 @@ div#featured_packages {
     padding: 0.5em; }
     div#featured_packages div.container > div {
       background-color: #fff;
-      box-shadow: 0 0 2px #c0c0c0;
+      box-shadow: 0 0 1px #c0c0c0;
       border-radius: 3px; }
       div#featured_packages div.container > div > a:hover span.emphasis_small {
         padding-right: 4em !important; }
@@ -359,7 +360,9 @@ div#featured_packages {
         header#large div#header_bottom nav#left ul {
           height: 100%; }
         header#large div#header_bottom nav#left li.nav_book {
-          margin-left: -1em; }
+          margin-left: -1em;
+          padding-bottom: 7px !important;
+          border-radius: 0 0 3px 3px; }
           header#large div#header_bottom nav#left li.nav_book a {
             padding: 0 1em; }
       header#large div#header_bottom nav#right {
