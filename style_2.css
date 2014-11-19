@@ -1,0 +1,417 @@
+/*
+*
+*  Golden Grid System (1.0) <http://goldengridsystem.com/>
+*  by Joni Korpi        <http://jonikorpi.com/>
+*  licensed under MIT     <http://opensource.org/licenses/mit-license.php>
+*
+*/
+/*
+*
+*  Margin, padding, and border resets
+*  except for form elements
+*
+*/
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, a, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, nav, section, menu, time, mark, audio, video, canvas {
+  margin: 0;
+  padding: 0;
+  border: 0; }
+
+/*
+*
+*  Consistency fixes
+*  adopted from http://necolas.github.com/normalize.css/
+*
+*/
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
+body {
+  min-height: 100%;
+  font-size: 100%; }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, nav, section, audio, canvas, video {
+  display: block; }
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word; }
+
+b, strong {
+  font-weight: bold; }
+
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+input, textarea, button, select {
+  margin: 0;
+  font-size: 100%;
+  line-height: normal;
+  vertical-align: baseline; }
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button; }
+
+input[type="checkbox"],
+input[type="radio"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box; }
+
+textarea {
+  overflow: auto; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/*
+*
+*  Simple fluid media
+*
+*/
+figure {
+  position: relative; }
+
+figure img, figure object, figure embed, figure video {
+  max-width: 100%;
+  display: block; }
+
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic; }
+
+/*
+*
+* Zoomable baseline grid
+* type size presets
+*
+*/
+body {
+  /* 16px / 24px */
+  font-size: 1em;
+  line-height: 1.5em; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+html {
+  background-color: #EDEFF0;
+  font-family: 'PT Sans',helvetica,sans-serif; }
+
+a {
+  text-decoration: none; }
+
+h3 {
+  font-weight: normal; }
+
+.emphasis_large {
+  font-size: 1em;
+  color: #808285; }
+
+.heading_strip {
+  background-color: #fff;
+  box-shadow: 0 0 1px #ccc;
+  height: 30px;
+  margin-bottom: 2em;
+  margin-top: 2em; }
+  .heading_strip svg {
+    height: 15px;
+    float: right; }
+
+.heading_wrapper {
+  padding: 0 0.5em; }
+
+.heading {
+  display: inline-block;
+  font-size: 0.9em;
+  margin: 0 5.555%;
+  padding: 0.5em 1em;
+  color: #fff;
+  background-color: #30bec1;
+  border-radius: 0 0 3px 3px; }
+
+.emphasis_small {
+  font-size: 0.8em;
+  color: #808285; }
+
+.summary {
+  color: #999999;
+  font-size: 0.8em;
+  margin-bottom: 2em;
+  margin-top: 1em;
+  line-height: 20px; }
+
+.smallest {
+  font-size: 0.7em;
+  color: #bbbdc0; }
+
+svg.social_icon {
+  height: 15px; }
+
+svg.social_icon path {
+  transition: fill 0.2s; }
+
+a:hover svg.social_icon path {
+  fill: #30bec1; }
+
+/*
+*
+*  Four-column grid active
+*  ----------------------------------------
+*  Margin   | #  1   2   3   4   |   Margin
+*  5.55555% | %  25  50  75  100 | 5.55555%
+*
+*/
+body {
+  font-size: 0.875em; }
+
+header#large {
+  height: 75px;
+  width: 100%;
+  box-shadow: 0 0 1px #ccc;
+  background-color: #fff; }
+  header#large div#header_top {
+    position: relative;
+    height: 100%; }
+    header#large div#header_top ul {
+      display: none; }
+    header#large div#header_top > a:first-child img {
+      height: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 1em;
+      right: inherit; }
+    header#large div#header_top > a:last-child {
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: inherit;
+      right: 2em; }
+  header#large div#header_bottom li {
+    display: none;
+    background-color: #fff;
+    text-align: right;
+    border-bottom: solid 1px #ececec;
+    list-style: none;
+    padding: 0.5em 0;
+    padding-right: 2em; }
+  header#large div#header_bottom a {
+    color: #9F9F9F;
+    display: block;
+    transition: color 0.2s; }
+    header#large div#header_bottom a:hover {
+      color: #30bec1; }
+  header#large div#header_bottom li.nav_book {
+    background-color: #30bec1 !important; }
+    header#large div#header_bottom li.nav_book a {
+      color: #fff !important; }
+  header#large nav#right li {
+    text-align: left;
+    padding-left: 1em; }
+
+div#slide {
+  height: 400px;
+  overflow: hidden; }
+  div#slide img {
+    min-width: 100%; }
+
+div#featured_packages {
+  margin: 0 5.55555%; }
+  div#featured_packages div.container {
+    width: 100%;
+    padding: 0.5em; }
+    div#featured_packages div.container > div {
+      background-color: #fff;
+      box-shadow: 0 0 2px #ccc;
+      border-radius: 3px; }
+      div#featured_packages div.container > div > a:hover span.emphasis_small {
+        padding-right: 4em !important; }
+      div#featured_packages div.container > div > a > div:first-child {
+        position: relative; }
+        div#featured_packages div.container > div > a > div:first-child img {
+          width: 100%;
+          border-radius: 3px 3px 0 0; }
+        div#featured_packages div.container > div > a > div:first-child span.emphasis_small {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          color: #fff;
+          background-color: #30bec1;
+          padding: 0.5em 1em;
+          border-radius: 3px 0 0 3px;
+          transition: padding-right 0.3s; }
+      div#featured_packages div.container > div > a > div:nth-child(2) {
+        padding: 0.5em 1em; }
+      div#featured_packages div.container > div > div:last-child {
+        padding: 0.5em 1em;
+        border-top: solid 1px #ececec;
+        padding-top: 0.5em; }
+        div#featured_packages div.container > div > div:last-child span.smallest {
+          vertical-align: top;
+          margin-left: 0.5em; }
+        div#featured_packages div.container > div > div:last-child > div {
+          float: right; }
+          div#featured_packages div.container > div > div:last-child > div svg {
+            margin-left: 0.5em; }
+
+/* @media screen and (min-width: 500px) */
+@media screen and (min-width: 31.25em) {
+  body {
+    /* Zoom baseline grid to 17/16 = 1.0625 */
+    font-size: 0.9375em; }
+
+  div#featured_packages div.container {
+    float: left;
+    width: 50%; } }
+/*
+*
+*  Eight-column grid active
+*  ----------------------------------------------------------------------
+*  Margin   | #  1     2     3     4     5     6     7     8   |   Margin
+*  5.55555% | %  12.5  25.0  37.5  50.0  62.5  75.0  87.5  100 | 5.55555%
+*
+*
+*/
+/* @media screen and (min-width: 720px) */
+/* @media screen and (min-width: 888px) */
+@media screen and (min-width: 55.5em) {
+  body {
+    /* Zoom baseline grid to 17/16 = 1.0625 */
+    font-size: 1.0625em; }
+
+  div#featured_packages > div.container {
+    width: 25%; } }
+/* @media screen and (min-width: 984px) */
+@media screen and (min-width: 61.5em) {
+  body {
+    /* Reset baseline grid to 16/16 = 1.0 */
+    font-size: 1em; }
+
+  header#large {
+    top: 0;
+    height: 120px; }
+    header#large li {
+      display: inline-block !important;
+      border: none !important; }
+    header#large div#header_top {
+      height: 70%; }
+      header#large div#header_top > a:first-child img {
+        left: 5.55555%;
+        padding-left: 0.5em; }
+      header#large div#header_top > a:last-child {
+        display: none; }
+      header#large div#header_top ul {
+        display: block;
+        padding-right: 0.5em;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: inherit;
+        right: 5.55555%; }
+        header#large div#header_top ul svg {
+          margin-left: 1em; }
+    header#large div#header_bottom {
+      position: relative;
+      height: 30%;
+      border-top: solid 1px #ececec;
+      box-sizing: content-box; }
+      header#large div#header_bottom a {
+        font-size: 0.9em !important;
+        line-height: 36px; }
+      header#large div#header_bottom li {
+        padding: 0 !important;
+        background: none !important;
+        margin-right: 2em; }
+      header#large div#header_bottom nav#left {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 5.55555%;
+        right: inherit;
+        height: 100%;
+        padding-left: 0.5em; }
+        header#large div#header_bottom nav#left ul {
+          height: 100%; }
+        header#large div#header_bottom nav#left li.nav_book {
+          margin-left: -1em; }
+          header#large div#header_bottom nav#left li.nav_book a {
+            padding: 0 1em; }
+      header#large div#header_bottom nav#right {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: inherit;
+        right: 5.55555%;
+        padding-right: 0.5em; }
+        header#large div#header_bottom nav#right ul li:last-child {
+          margin: 0; }
+
+  header#small {
+    background-color: #fff;
+    box-shadow: 0 0 1px #ccc;
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    top: 0; }
+    header#small > a img {
+      height: 60%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 50%;
+      right: inherit;
+      transform: translateY(-50%); }
+    header#small li {
+      display: inline-block !important;
+      border: none !important;
+      list-style: none;
+      padding: 0.5em 0;
+      padding-right: 2em; }
+    header#small nav#right li {
+      text-align: left;
+      padding-left: 1em; } }
+/* @media screen and (min-width: 1200px) */
+/* @media screen and (min-width: 1392px) */
+/* @media screen and (min-width: 1680px) */
+/*
+*
+*  Sixteen-column grid active
+*  ----------------------------------------------------------------------------------------------------------------------
+*  Margin   | #  1     2     3     4     5     6     7     8     9     10    11    12    13    14    15    16  |   Margin
+*  5.55555% | %  6.25  12.5  18.75 25.0  31.25 37.5  43.75 50.0  56.25 62.5  68.75 75.0  81.25 87.5  93.75 100 | 5.55555%
+*
+*
+*/
+/* @media screen and (min-width: 1872px) */
+@media screen and (min-width: 117em) {
+  div#featured_packages > div {
+    width: 25%; } }
+/* @media screen and (min-width: 2080px) */
+
+/*# sourceMappingURL=style_2.css.map */
