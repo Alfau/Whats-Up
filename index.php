@@ -41,11 +41,11 @@
 	<header id="small">
 		 <nav id="left">
 			<ul>
-				<li><a href=# data-hover="Home">Home</a></li>
-				<li><a href=# data-hover="Packages">Packages</a></li>
-				<li><a href=# data-hover="Stay">Stay</a></li>
-				<li><a href=# data-hover="Experience">Experience</a></li>
-				<li class="nav_book"><a href=# data-hover="Book">Book</a></li>
+				<li><a href=#>Home</a></li>
+				<li><a href=#>Packages</a></li>
+				<li><a href=#>Stay</a></li>
+				<li><a href=#>Experience</a></li>
+				<li class="nav_book"><a href=#>Book Now</a></li>
 			</ul>
 		</nav>
 		<a href=#><img src="Icons/logo.svg" alt="What's Up? Maldives"/></a>

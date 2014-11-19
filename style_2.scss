@@ -264,7 +264,7 @@ header#large{
       padding-right:#{(($font-size/$em)*2)}em;
     }
     a{
-      color:$primary_color;
+      color:#a5a5a5;
       display:block;
       transition:color 0.2s;
       
@@ -492,11 +492,11 @@ div#featured_packages{
     z-index:10;
     
     a{
-      color:$primary_color;
-      font-size:0.9em;
+      color:#a5a5a5;
+      font-size:0.8em;
     }
     &>a img{
-      width:15%;
+      width:13%;
       position:absolute;
       top:50%;
       left:50%;
