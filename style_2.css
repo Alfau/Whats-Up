@@ -134,7 +134,7 @@ h3 {
 
 .heading_strip {
   background-color: #fff;
-  box-shadow: 0 0 1px #ccc;
+  box-shadow: 0 0 1px #c0c0c0;
   height: 30px;
   margin-bottom: 2em;
   margin-top: 2em; }
@@ -192,7 +192,7 @@ body {
 header#large {
   height: 75px;
   width: 100%;
-  box-shadow: 0 0 1px #ccc;
+  box-shadow: 0 0 1px #c0c0c0;
   background-color: #fff; }
   header#large div#header_top {
     position: relative;
@@ -248,7 +248,7 @@ div#featured_packages {
     padding: 0.5em; }
     div#featured_packages div.container > div {
       background-color: #fff;
-      box-shadow: 0 0 2px #ccc;
+      box-shadow: 0 0 2px #c0c0c0;
       border-radius: 3px; }
       div#featured_packages div.container > div > a:hover span.emphasis_small {
         padding-right: 4em !important; }
@@ -343,7 +343,7 @@ div#featured_packages {
       box-sizing: content-box; }
       header#large div#header_bottom a {
         font-size: 0.9em !important;
-        line-height: 36px; }
+        line-height: 35px; }
       header#large div#header_bottom li {
         padding: 0 !important;
         background: none !important;
@@ -374,7 +374,7 @@ div#featured_packages {
 
   header#small {
     background-color: #fff;
-    box-shadow: 0 0 1px #ccc;
+    box-shadow: 0 0 1px #c0c0c0;
     height: 60px;
     width: 100%;
     position: fixed;
