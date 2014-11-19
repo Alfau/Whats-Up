@@ -38,7 +38,7 @@
 			</nav>
 		</div>
 	</header>
-	<!--<header id="small">
+	<header id="small">
 		 <nav id="left">
 			<ul>
 				<li><a href=# data-hover="Home">Home</a></li>
@@ -49,28 +49,31 @@
 			</ul>
 		</nav>
 		<a href=#><img src="Icons/logo.svg" alt="What's Up? Maldives"/></a>
-		<nav id="right">
+		<div id="header_right">
+			<nav id="right">
+				<ul>
+					<li><a href=#>About</a></li>
+					<li><a href=#>Contact</a></li>
+				</ul>
+			</nav>
 			<ul>
-				<li><a href=#>About</a></li>
-				<li><a href=#>Contact</a></li>
+				<li><a href=#><?php include("Icons/instagram.svg"); ?></a></li>
+				<li><a href=#><?php include("Icons/twitter.svg"); ?></a></li>
+				<li><a href=#><?php include("Icons/facebook.svg"); ?></a></li>
 			</ul>
-		</nav>
-		<ul>
-			<li><a href=#><?php //include("Icons/instagram.svg"); ?></a></li>
-			<li><a href=#><?php //include("Icons/twitter.svg"); ?></a></li>
-			<li><a href=#><?php //include("Icons/facebook.svg"); ?></a></li>
-		</ul>
-	</header> -->
-	<div id="slide">
-		<img src="Slides/slide_2.jpg"/>
-	</div>
-	<div class="heading_strip">
-		<div class="heading_wrapper">
-			<h3 class="heading">Featured <b>Packages</b></h3>
-			<?php //include("Icons/sort.svg") ?>
 		</div>
-	</div>
+	</header>
+	
 	<main>
+		<div id="slide">
+			<img src="Slides/slide_2.jpg"/>
+		</div>
+		<div class="heading_strip">
+			<div class="heading_wrapper">
+				<h3 class="heading">Featured <b>Packages</b></h3>
+				<?php //include("Icons/sort.svg") ?>
+			</div>
+		</div>
 		<div id="featured_packages">
 			<div class="container">
 				<div>

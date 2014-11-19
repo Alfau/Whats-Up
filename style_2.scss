@@ -164,10 +164,6 @@ h3{
   font-weight:normal;
 }
 
-.emphasis_large{
-  font-size:#{($font-size/$em)}em;
-  color:$primary_color;
-}
 .heading_strip{
   background-color:#fff;
   box-shadow:0 0 1px #c0c0c0;
@@ -190,6 +186,10 @@ h3{
   color:#fff;
   background-color:$accent_color;
   border-radius:0 0 3px 3px;
+}
+.emphasis_large{
+  font-size:#{($font-size/$em)}em;
+  color:$primary_color;
 }
 .emphasis_small{
   font-size:0.8em;
@@ -216,15 +216,6 @@ svg.social_icon path{
 a:hover svg.social_icon path{
   fill:$accent_color;
 }
-// a:hover svg.facebook path{
-  // fill:#4862A3;
-// }
-// a:hover svg.twitter path{
-  // fill:#55ACEE;
-// }
-// a:hover svg.instagram path{
-  // fill:#3F6E94;
-// }
 /*
 *
 *  Four-column grid active
@@ -242,14 +233,13 @@ header#large{
   z-index:2;
   height:75px;
   width:100%;
-  // border-bottom:solid 1px $border_color;
   box-shadow:0 0 1px #c0c0c0;
   background-color:#fff;
-  // position:fixed;
   
   div#header_top{
     position:relative;
     height:100%;
+    
     ul{
       display:none;
     }
@@ -274,7 +264,7 @@ header#large{
       padding-right:#{(($font-size/$em)*2)}em;
     }
     a{
-      color:#9F9F9F;
+      color:$primary_color;
       display:block;
       transition:color 0.2s;
       
@@ -295,7 +285,7 @@ header#large{
     padding-left:#{($font-size/$em)}em;
   }
 }
-//slide 
+
 div#slide{
   // margin-top:120px;
   height:400px;
@@ -304,7 +294,7 @@ div#slide{
     min-width:100%;
   }
 }
-//featured packages
+
 div#featured_packages{
   margin:0 5.55555%;
   
@@ -445,15 +435,8 @@ div#featured_packages{
         @include vertical_center(inherit,5.55555%);
         
         svg{
-          // height:15px;
           margin-left:1em;
         }
-        // a .icon{
-        // transition:fill 0.3s;
-        // }
-        // a:hover .icon{
-          // fill:$accent_color;
-        // }
       }
     }
     div#header_bottom{
@@ -464,7 +447,7 @@ div#featured_packages{
       
       a{
         font-size:0.9em !important;
-        line-height:35px; // probably not very responsive
+        line-height:35px;
       }
       li{
         padding:0 !important;
@@ -499,17 +482,25 @@ div#featured_packages{
   }
   
   header#small{
+    display:none;
     background-color:#fff;
-    box-shadow:0 0 1px #c0c0c0;
+    box-shadow:0 0 2px #888;
     height:60px;
     width:100%;
     position:fixed;
     top:0;
+    z-index:10;
     
+    a{
+      color:$primary_color;
+      font-size:0.9em;
+    }
     &>a img{
-      height:60%;
-      @include vertical_center(50%,inherit);
-      transform:translateY(-50%);
+      width:15%;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
     }
     li{
       display:inline-block !important;
@@ -518,9 +509,28 @@ div#featured_packages{
       padding:#{(($font-size/$em)*.5)}em 0;
       padding-right:#{(($font-size/$em)*2)}em;
     }
-     nav#right li{
-      text-align:left;
-      padding-left:#{($font-size/$em)}em;
+    div#header_right{
+      @include vertical_center(inherit,5.555%);
+      padding:0 0.5em;
+      
+      nav,ul{
+        float:left;
+      }
+      &>ul{
+        margin-top:3px;
+      }
+      &>ul{
+        padding-left:2em;
+        border-left:solid 1px $border_color;
+        
+        li:last-child{
+          padding-right:0;
+        }
+      }
+    }
+    nav#left{
+      @include vertical_center(5.555%,inherit);
+      padding:0 0.5em;
     }
   }
 }

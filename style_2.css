@@ -128,10 +128,6 @@ a {
 h3 {
   font-weight: normal; }
 
-.emphasis_large {
-  font-size: 1em;
-  color: #808285; }
-
 .heading_strip {
   background-color: #fff;
   box-shadow: 0 0 1px #c0c0c0;
@@ -152,6 +148,10 @@ h3 {
   color: #fff;
   background-color: #30bec1;
   border-radius: 0 0 3px 3px; }
+
+.emphasis_large {
+  font-size: 1em;
+  color: #808285; }
 
 .emphasis_small {
   font-size: 0.8em;
@@ -223,7 +223,7 @@ header#large {
     padding: 0.5em 0;
     padding-right: 2em; }
   header#large div#header_bottom a {
-    color: #9F9F9F;
+    color: #808285;
     display: block;
     transition: color 0.2s; }
     header#large div#header_bottom a:hover {
@@ -376,29 +376,52 @@ div#featured_packages {
           margin: 0; }
 
   header#small {
+    display: none;
     background-color: #fff;
-    box-shadow: 0 0 1px #c0c0c0;
+    box-shadow: 0 0 2px #888;
     height: 60px;
     width: 100%;
     position: fixed;
-    top: 0; }
+    top: 0;
+    z-index: 10; }
+    header#small a {
+      color: #808285;
+      font-size: 0.9em; }
     header#small > a img {
-      height: 60%;
+      width: 15%;
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
       left: 50%;
-      right: inherit;
-      transform: translateY(-50%); }
+      transform: translate(-50%, -50%); }
     header#small li {
       display: inline-block !important;
       border: none !important;
       list-style: none;
       padding: 0.5em 0;
       padding-right: 2em; }
-    header#small nav#right li {
-      text-align: left;
-      padding-left: 1em; } }
+    header#small div#header_right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: inherit;
+      right: 5.555%;
+      padding: 0 0.5em; }
+      header#small div#header_right nav, header#small div#header_right ul {
+        float: left; }
+      header#small div#header_right > ul {
+        margin-top: 3px; }
+      header#small div#header_right > ul {
+        padding-left: 2em;
+        border-left: solid 1px #ececec; }
+        header#small div#header_right > ul li:last-child {
+          padding-right: 0; }
+    header#small nav#left {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 5.555%;
+      right: inherit;
+      padding: 0 0.5em; } }
 /* @media screen and (min-width: 1200px) */
 /* @media screen and (min-width: 1392px) */
 /* @media screen and (min-width: 1680px) */

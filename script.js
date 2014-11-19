@@ -10,6 +10,17 @@ $(document).ready(function(){
 			$(this).addClass("active");
 		}
 	});
+	
+	$(window).scroll(function(){
+		if($(window).scrollTop()>300){
+			$("header#small").slideDown(300);
+			$("header#large").slideUp();
+		}else if($(window).scrollTop()<=120){
+			$("header#small").slideUp(function(){
+				$("header#large").slideDown(300);
+			});
+		}
+	});
 });
 
 function load_remove_individually(request){
