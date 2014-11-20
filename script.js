@@ -11,13 +11,13 @@ $(document).ready(function(){
 		}
 	});
 	
-	$(window).scroll(function(){
-		if($(window).scrollTop()>300){
-			$("header#small").slideDown(200);
-		}else if($(window).scrollTop()<=300){
-			$("header#small").slideUp("fast");
-		}
-	});
+	// $(window).scroll(function(){
+		// if($(window).scrollTop()>300){
+			// $("header#small").slideDown(200);
+		// }else if($(window).scrollTop()<=300){
+			// $("header#small").slideUp("fast");
+		// }
+	// });
 	
 	slideshow(9000,700);
 });

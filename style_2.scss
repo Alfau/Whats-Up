@@ -590,6 +590,11 @@ div#featured_packages{
         color:#fff;
         border-radius:3px;
         font-size:0.4em;
+        transition:padding 0.3s;
+        
+        &:hover{
+          padding:0.5em 1.5em;
+        }
       }
     }
     
@@ -602,6 +607,7 @@ div#featured_packages{
      
       li{
         display:inline-block;
+        width:10px;
       }
       
       a{
@@ -610,7 +616,12 @@ div#featured_packages{
         background-color:#fff;
         border-radius:100px;
         display:block;
-        transition:background-color 0.9s;
+        transition:width 0.2s,height 0.2s,background-color 0.9s;
+        
+        &:hover{
+          width:12px;
+          height:12px;
+        }
       }
       a.active{
         background-color:$accent_color;
