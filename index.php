@@ -65,8 +65,27 @@
 	</header>
 	
 	<main>
-		<div id="slide">
-			<img src="Slides/slide_2.jpg"/>
+		<div id="slideshow">
+			<ul id="controls">
+				<li><a href=# class="active" data-id="1"></a></li>
+				<li><a href=# data-id="2"></a></li>
+			</ul>
+			<ul id="slides">
+				<li class="active" data-id="1">
+					<div class="slide" style="background:url('Slides/slide_1.jpg');"></div>
+					<div class="text">
+						<p class="emphasis_large">Sheraton Maldives</p>
+						<p class="emphasis_small">Your concierge through white sandy beaches of the Maldives</p>
+					</div>
+				</li>
+				<li data-id="2">
+					<div class="slide" style="background:url('Slides/slide_2.jpg');"></div>
+					<div class="text">
+						<p class="emphasis_large">Reethi Rah Resort</p>
+						<p class="emphasis_small">Be Pampered</p>
+					</div>
+				</li>
+			</ul>
 		</div>
 		<div class="heading_strip">
 			<div class="heading_wrapper">
