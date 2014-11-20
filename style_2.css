@@ -225,20 +225,23 @@ header#large {
         header#large div#header_top > a:last-child.active svg circle:nth-child(2) {
           fill: #30bec1; }
   header#large div#header_bottom {
-    display: none; }
+    box-shadow: 0 1px 1px #ccc;
+    margin-left: 100%;
+    transition: margin-left 0.5s; }
     header#large div#header_bottom li {
       background-color: #fff;
       text-align: right;
       border-bottom: solid 1px #ececec;
       list-style: none;
       padding: 1em 0;
-      padding-right: 2em; }
+      padding-right: 5.555%; }
     header#large div#header_bottom li:first-child {
       border-top: solid 1px #ececec; }
     header#large div#header_bottom a {
       color: #a5a5a5;
       display: block;
-      transition: color 0.2s; }
+      transition: color 0.2s;
+      padding: 0 0.5em; }
       header#large div#header_bottom a:hover {
         color: #30bec1; }
     header#large div#header_bottom li.nav_book {
@@ -333,8 +336,7 @@ div#featured_packages {
     header#large div#header_top {
       height: 70%; }
       header#large div#header_top > a:first-child img {
-        left: 5.55555%;
-        padding-left: 0.5em; }
+        left: 5.55555%; }
       header#large div#header_top > a:last-child {
         display: none; }
       header#large div#header_top ul {
@@ -348,13 +350,16 @@ div#featured_packages {
         header#large div#header_top ul svg {
           margin-left: 1em; }
     header#large div#header_bottom {
+      box-shadow: none;
+      margin-left: 0;
       position: relative;
       height: 30%;
       border-top: solid 1px #ececec;
       box-sizing: content-box; }
       header#large div#header_bottom a {
         font-size: 0.9em !important;
-        line-height: 35px; }
+        line-height: 35px;
+        padding: 0 !important; }
       header#large div#header_bottom li {
         padding: 0 !important;
         background: none !important;
@@ -372,7 +377,7 @@ div#featured_packages {
         header#large div#header_bottom nav#left li.nav_book {
           margin-left: -1em; }
           header#large div#header_bottom nav#left li.nav_book a {
-            padding: 0 1em; }
+            padding: 0 1em !important; }
       header#large div#header_bottom nav#right {
         position: absolute;
         top: 50%;
@@ -435,6 +440,7 @@ div#featured_packages {
       padding: 0 0.5em; }
 
   div#slideshow {
+    display: block;
     height: 400px;
     position: relative; }
     div#slideshow div.slide {

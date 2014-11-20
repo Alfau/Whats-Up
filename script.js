@@ -2,10 +2,12 @@ $(document).ready(function(){
 	$(document).on("click","a#menu",function(){
 		if($(this).hasClass("active")){
 			$(this).removeClass("active").children("svg").attr("class","");
-			$("header#large div#header_bottom").slideUp();
+			// $("header#large div#header_bottom").slideUp();
+			 $("header#large div#header_bottom").css({"margin-left":"100%"});
 		}else{
 			$(this).addClass("active").children("svg").attr("class","active");
-			$("header#large div#header_bottom").slideDown();
+			// $("header#large div#header_bottom").slideDown();
+			$("header#large div#header_bottom").css({"margin-left":"0"});
 		}
 	});
 	
