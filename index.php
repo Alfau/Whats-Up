@@ -72,17 +72,19 @@
 			</ul>
 			<ul id="slides">
 				<li class="active" data-id="1">
+					<div class="slide" style="background:url('Slides/slide_3.jpg');"></div>
+					<div class="text">
+						<p class="emphasis_large">Reethi Rah Resort</p>
+						<p class="emphasis_small">Be Pampered</p>
+						<a href=# class="details">Details</a>
+					</div>
+				</li>
+				<li data-id="2">
 					<div class="slide" style="background:url('Slides/slide_1.jpg');"></div>
 					<div class="text">
 						<p class="emphasis_large">Sheraton Maldives</p>
 						<p class="emphasis_small">Your concierge through white sandy beaches of the Maldives</p>
-					</div>
-				</li>
-				<li data-id="2">
-					<div class="slide" style="background:url('Slides/slide_2.jpg');"></div>
-					<div class="text">
-						<p class="emphasis_large">Reethi Rah Resort</p>
-						<p class="emphasis_small">Be Pampered</p>
+						<a href=# class="details">Details</a>
 					</div>
 				</li>
 			</ul>

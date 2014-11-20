@@ -494,6 +494,11 @@ div#featured_packages{
     a{
       color:#a5a5a5;
       font-size:0.8em;
+      transition:color 0.2s;
+      
+      &:hover{
+        color:$accent_color;
+      }
     }
     &>a img{
       width:13%;
@@ -554,10 +559,11 @@ div#featured_packages{
       bottom:0;
       opacity:0;
       z-index:-1;
-    }
-    ul#slides li.active{
-      opacity:1;
-      z-index:1;
+      
+      &.active{
+        opacity:1;
+        z-index:1;
+      }
     }
     div.text{
       position:absolute;
@@ -569,12 +575,21 @@ div#featured_packages{
       font-size:2em;
       
       .emphasis_large{
+        font-size:0.7em;
         color:#fff;
         margin-bottom:0.5em;
       }
       .emphasis_small{
         color:#fff;
-        font-size:0.6em;
+        font-size:0.4em;
+        margin-bottom:1em;
+      }
+      .details{
+        padding:0.5em 1em;
+        background-color:$accent_color;
+        color:#fff;
+        border-radius:3px;
+        font-size:0.4em;
       }
     }
     
@@ -595,7 +610,7 @@ div#featured_packages{
         background-color:#fff;
         border-radius:100px;
         display:block;
-        transition:width 0.1s,height 0.1s,background-color 0.9s;
+        transition:background-color 0.9s;
       }
       a.active{
         background-color:$accent_color;

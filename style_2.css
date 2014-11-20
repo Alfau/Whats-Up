@@ -384,7 +384,10 @@ div#featured_packages {
     z-index: 10; }
     header#small a {
       color: #a5a5a5;
-      font-size: 0.8em; }
+      font-size: 0.8em;
+      transition: color 0.2s; }
+      header#small a:hover {
+        color: #30bec1; }
     header#small > a img {
       width: 13%;
       position: absolute;
@@ -438,9 +441,9 @@ div#featured_packages {
       bottom: 0;
       opacity: 0;
       z-index: -1; }
-    div#slideshow ul#slides li.active {
-      opacity: 1;
-      z-index: 1; }
+      div#slideshow ul#slides li.active {
+        opacity: 1;
+        z-index: 1; }
     div#slideshow div.text {
       position: absolute;
       top: 50%;
@@ -450,11 +453,19 @@ div#featured_packages {
       text-align: center;
       font-size: 2em; }
       div#slideshow div.text .emphasis_large {
+        font-size: 0.7em;
         color: #fff;
         margin-bottom: 0.5em; }
       div#slideshow div.text .emphasis_small {
         color: #fff;
-        font-size: 0.6em; }
+        font-size: 0.4em;
+        margin-bottom: 1em; }
+      div#slideshow div.text .details {
+        padding: 0.5em 1em;
+        background-color: #30bec1;
+        color: #fff;
+        border-radius: 3px;
+        font-size: 0.4em; }
     div#slideshow ul#controls {
       z-index: 5;
       position: absolute;
@@ -469,7 +480,7 @@ div#featured_packages {
         background-color: #fff;
         border-radius: 100px;
         display: block;
-        transition: width 0.1s,height 0.1s,background-color 0.9s; }
+        transition: background-color 0.9s; }
       div#slideshow ul#controls a.active {
         background-color: #30bec1; } }
 /* @media screen and (min-width: 1200px) */
