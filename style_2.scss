@@ -228,6 +228,9 @@ a:hover svg.social_icon path{
 body {
   font-size: #{(($font-size - 2) / $em)}em;
 }
+header#small{
+  display:none;
+}
 header#large{
   position:relative;
   z-index:2;
@@ -244,24 +247,39 @@ header#large{
       display:none;
     }
     &>a:first-child img{
-      height:50%;
-      @include vertical_center(1em,inherit);
+        margin:0 0.5em;
+        height:50%;
+        @include vertical_center(5.555%,inherit);
     }
     &>a:last-child{
+      @include vertical_center(inherit,5.555%);
       display:block;
-      @include vertical_center(inherit,2em);
+      width:30px;
+      margin:0 0.5em;
+      
+      &.active svg{
+        transition:fill 0.2s;
+        
+        circle:nth-child(2){
+          fill:$accent_color;
+        }
+      }
     }
   }
   
   div#header_bottom{
+    display:none;
+    
     li{
-      display:none;
       background-color:#fff;
       text-align:right;
       border-bottom:solid 1px $border_color;
       list-style:none;
-      padding:#{(($font-size/$em)*.5)}em 0;
+      padding:#{(($font-size/$em))}em 0;
       padding-right:#{(($font-size/$em)*2)}em;
+    }
+    li:first-child{
+      border-top:solid 1px $border_color;
     }
     a{
       color:#a5a5a5;
@@ -286,13 +304,8 @@ header#large{
   }
 }
 
-div#slide{
-  // margin-top:120px;
-  height:400px;
-  overflow:hidden;
-  img{
-    min-width:100%;
-  }
+div#slideshow{
+  display:none;
 }
 
 div#featured_packages{

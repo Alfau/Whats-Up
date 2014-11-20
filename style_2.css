@@ -188,6 +188,9 @@ a:hover svg.social_icon path {
 body {
   font-size: 0.875em; }
 
+header#small {
+  display: none; }
+
 header#large {
   position: relative;
   z-index: 2;
@@ -201,46 +204,53 @@ header#large {
     header#large div#header_top ul {
       display: none; }
     header#large div#header_top > a:first-child img {
+      margin: 0 0.5em;
       height: 50%;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: 1em;
+      left: 5.555%;
       right: inherit; }
     header#large div#header_top > a:last-child {
-      display: block;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       left: inherit;
-      right: 2em; }
-  header#large div#header_bottom li {
-    display: none;
-    background-color: #fff;
-    text-align: right;
-    border-bottom: solid 1px #ececec;
-    list-style: none;
-    padding: 0.5em 0;
-    padding-right: 2em; }
-  header#large div#header_bottom a {
-    color: #a5a5a5;
-    display: block;
-    transition: color 0.2s; }
-    header#large div#header_bottom a:hover {
-      color: #30bec1; }
-  header#large div#header_bottom li.nav_book {
-    background-color: #30bec1 !important; }
-    header#large div#header_bottom li.nav_book a {
-      color: #fff !important; }
+      right: 5.555%;
+      display: block;
+      width: 30px;
+      margin: 0 0.5em; }
+      header#large div#header_top > a:last-child.active svg {
+        transition: fill 0.2s; }
+        header#large div#header_top > a:last-child.active svg circle:nth-child(2) {
+          fill: #30bec1; }
+  header#large div#header_bottom {
+    display: none; }
+    header#large div#header_bottom li {
+      background-color: #fff;
+      text-align: right;
+      border-bottom: solid 1px #ececec;
+      list-style: none;
+      padding: 1em 0;
+      padding-right: 2em; }
+    header#large div#header_bottom li:first-child {
+      border-top: solid 1px #ececec; }
+    header#large div#header_bottom a {
+      color: #a5a5a5;
+      display: block;
+      transition: color 0.2s; }
+      header#large div#header_bottom a:hover {
+        color: #30bec1; }
+    header#large div#header_bottom li.nav_book {
+      background-color: #30bec1 !important; }
+      header#large div#header_bottom li.nav_book a {
+        color: #fff !important; }
   header#large nav#right li {
     text-align: left;
     padding-left: 1em; }
 
-div#slide {
-  height: 400px;
-  overflow: hidden; }
-  div#slide img {
-    min-width: 100%; }
+div#slideshow {
+  display: none; }
 
 div#featured_packages {
   margin: 0 5.55555%; }

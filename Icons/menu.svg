@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="474.9 178.7 484 347.1" enable-background="new 474.9 178.7 484 347.1" xml:space="preserve">
-<path fill="#808285" d="M475.6,317.2h483.3l0,69.5H475.6"/>
-<path fill="#808285" d="M474.9,456.3h484.7v69.5H474.9"/>
-<path fill="#808285" d="M475.6,178.7h483.3l0,69.5H475.6"/>
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="299 384 768 177.3" enable-background="new 299 384 768 177.3" xml:space="preserve">
+<g>
+	<circle fill="#BFC0C2" cx="386.3" cy="474" r="87.3"/>
+	<circle fill="#BFC0C2" cx="683" cy="474" r="87.3"/>
+	<circle fill="#BFC0C2" cx="979.7" cy="474" r="87.3"/>
+</g>
 </svg>
