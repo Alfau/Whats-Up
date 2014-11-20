@@ -424,6 +424,10 @@ div#featured_packages {
   div#slideshow {
     height: 400px;
     position: relative; }
+    div#slideshow div.slide {
+      background-repeat: no-repeat !important;
+      background-position: left center !important;
+      background-size: cover !important; }
     div#slideshow ul#slides, div#slideshow ul#slides li, div#slideshow div.slide {
       height: 100%; }
     div#slideshow ul#slides li {

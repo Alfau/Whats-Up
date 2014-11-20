@@ -539,7 +539,9 @@ div#featured_packages{
     position:relative;
     
     div.slide{
-      
+      background-repeat:no-repeat !important;
+      background-position:left center !important;
+      background-size:cover !important;
     }
     ul#slides,ul#slides li,div.slide{
       height:100%;
