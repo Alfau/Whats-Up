@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteRule ^home/?$ index.php [NC]
+
+RewriteRule ^packages/?$ index.php
