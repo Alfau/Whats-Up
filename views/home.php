@@ -3,10 +3,10 @@
 <div id="slideshow">
 <?php
 
-include_once("controllers/HomeController.php");
+//include_once("controllers/HomeController.php");
 
-$slideshow = new HomeController();
-$slideshow = $slideshow->slideshow();
+//$slideshow = new HomeController();
+//$slideshow = $slideshow->index();
 
 echo "<ul id='controls'>";
 foreach($slideshow as $key=>$value){
@@ -40,8 +40,8 @@ echo "</ul>";
 <div id="featured_packages">
 <?php  
 
-$packages = new HomeController();
-$packages = $packages -> packages();
+// $packages = new HomeController();
+// $packages = $packages -> packages();
 
 foreach($packages as $key=>$value){
 echo "<div class='container'>"

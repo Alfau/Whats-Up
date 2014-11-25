@@ -4,15 +4,21 @@ require_once("controllers/PackagesController.php");
 require_once("models/Slideshow.php");
 require_once("models/Packages.php");
 // require_once("models/Quotes.php");
+require_once("includes/view.php");
 
 class HomeController extends PackagesController{
 	
-	function slideshow(){
+	function index(){
 		
 		$slideshow=new Slideshow();
 		$slideshow=$slideshow->getSlideshow("SELECT * FROM slideshow");
 		
-		return $slideshow;
+		$packages=new Packages();
+		$packages=$packages->getPackages("SELECT * FROM packages");
+		
+		$view = new View();
+		$view = $view -> render("home",array("slideshow" => $slideshow, "packages" => $packages));
+		
 	}
 	
 }
