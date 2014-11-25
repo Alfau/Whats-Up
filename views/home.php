@@ -26,7 +26,6 @@ echo "<li data-id='".$value['ID']."' class='";if($key==0){echo "active";}else{ec
 .	 "</li>";
 }
 echo "</ul>";
-
 ?>
 </div>
 

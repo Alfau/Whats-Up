@@ -8,8 +8,8 @@ class urlParse{
 	function __construct(){
 		$split = explode("/",$_SERVER['REQUEST_URI']);
 		
-		$this -> controller = ($x = array_shift($split)) ? $x : "Home";
-		$this -> method = ($x = array_shift($split)) ? $x : "index";
+		$this -> controller = (isset($split[2]) && !empty($split[2])) ? $split[2] : "Home";
+		$this -> method = (isset($split[3])) ? $split[3] : "index";
 		$this -> params = (isset($split[0])) ? $split : array();
 	}
 	

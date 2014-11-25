@@ -20,7 +20,9 @@ $(document).ready(function(){
 			// }
 		// });
 	// }
-	
+	$.getJSON("/whatsup/Packages.php",function(data){
+		alert(data);
+	});
 	
 	$(document).on("click","div#featuredPackages_section #controls a",function(e){
 		var page=$(this).attr("data-page");
