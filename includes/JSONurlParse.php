@@ -6,10 +6,11 @@ class urlParse{
 	protected $params;
 	
 	function __construct(){
-		$split = explode("/",$_SERVER['REQUEST_URI']); 
+		$url = $_GET['url'];
+		$split = explode("/",$url);
 		
-		$this -> controller = (isset($split[2]) && !empty($split[2])) ? $split[2] : "Home";
-		$this -> method = (isset($split[3])) ? $split[3] : "index";
+		$this -> controller = (isset($split[4]) && !empty($split[4])) ? $split[4] : "Home";
+		$this -> method = (isset($split[5])) ? $split[5] : "index";
 		$this -> params = (isset($split[0])) ? $split : array();
 	}
 	

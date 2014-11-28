@@ -28,9 +28,11 @@ $(document).ready(function(){
 		var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
 		    return result.toUpperCase();
 		});
-		var method = "get"+model;  
 		
-		basicPage(model,method);
+		var url = $(this).prop("href");
+		window.history.pushState("","Title",url);
+		
+		basicPage(model,url);
 		
 		e.preventDefault();
 	});
@@ -42,9 +44,11 @@ $(document).ready(function(){
 		var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
 		    return result.toUpperCase();
 		});
-		var method = "get"+model;
 		
-		cardsPage(model,method,"Duration","duration");
+		var url = $(this).prop("href");
+		window.history.pushState("","Title",url);
+		
+		cardsPage(model,url,"Duration","duration");
 		
 		e.preventDefault();
 	});
@@ -70,9 +74,19 @@ $(document).ready(function(){
 	basicJSON = {};
 	cardsJSON = {};
 	slideshow(9000,500);
-	packagesPaginate("Featured","1","4");
+	
 });
 
+function home(){
+	if(typeof homeJSON !== "undefined" && homeJSON.length){
+		homePageHandler();
+	}else{
+		$.getJSON("JSONroute.php",{url:url},function(data){
+			homeJSON=data;
+			homePageHandler();
+		});
+	}
+}
 
 function slideshow(interval,speed){
 	var trigger_slide=setInterval(slide,interval);
@@ -128,18 +142,18 @@ function packagesPaginateHandler(state,page,rows){
 	});
 }
 
-function basicPage(model,method){
+function basicPage(model,url){
 	if(typeof basicJSON[model] !== "undefined" && basicJSON[model].length){
 		basicPageHandler(model);
 	}else{
-		$.getJSON("queries.php",{model:model,method:method},function(data){
+		$.getJSON("JSONroute.php",{url:url},function(data){
 			basicJSON[model]=data;
 			basicPageHandler(model);
 		});
 	}
 }
 
-function basicPageHandler(model){		
+function basicPageHandler(model){	
 	$.each(basicJSON[model],function(key,value){
 		var content = value.Text;
 		
@@ -148,11 +162,11 @@ function basicPageHandler(model){
 	});
 }
 
-function cardsPage(model,method,variable,icon){
+function cardsPage(model,url,variable,icon){
 	if(typeof cardsJSON[model] !== "undefined" && cardsJSON[model].length){
 		cardsPageHandler(model,variable,icon);
 	}else{
-		$.getJSON("queries.php",{model:model,method:method},function(data){
+		$.getJSON("JSONroute.php",{url:url},function(data){
 			cardsJSON[model]=data;
 			cardsPageHandler(model,variable,icon);
 		});
@@ -184,24 +198,24 @@ $("main").append('<div class="gutter_space '+ type +'">'
 
 function cards(container,image,name,price,overview,variable,icon){
 $("div#"+container).append("<div class='container'>"
-	+	"<div>"
-	+		"<a href=#>"
-	+			"<div>"
-	+				"<img src='"+ image +"'/>"
-	+				"<span class='emphasis_small'>From <b>USD "+ price +"</b></span>"
-	+			"</div>"
-	+			"<div>"
-	+				"<span class='emphasis_large'>"+ name +"</span>"
-	+				"<p class='summary'>"+ overview +"</p>"
-	+			"</div>"
-	+		"</a>"
-	+		"<div>"
-	+		"<img src='assets/icons/"+ icon +".svg' height='15'/><span class='smallest'>"+ variable +" days</span>"
-	+			"<div>"
-	+				"<a href=#><?php include('assets/icons/twitter.svg'); ?></a>"
-	+				"<a href=#><?php include('assets/icons/facebook.svg'); ?></a>"
-	+			"</div>"
-	+		"</div>"
-	+	"</div>"
-	+"</div>").children(".container").fadeIn();
++	"<div>"
++	"<a href=#>"
++	"<div>"
++	"<img src='"+ image +"'/>"
++	"<span class='emphasis_small'>From <b>USD "+ price +"</b></span>"
++	"</div>"
++	"<div>"
++	"<span class='emphasis_large'>"+ name +"</span>"
++	"<p class='summary'>"+ overview +"</p>"
++	"</div>"
++	"</a>"
++	"<div>"
++	"<img src='assets/icons/"+ icon +".svg' height='15'/><span class='smallest'>"+ variable +" days</span>"
++	"<div>"
++	"<a href=#><?php include('assets/icons/twitter.svg'); ?></a>"
++	"<a href=#><?php include('assets/icons/facebook.svg'); ?></a>"
++	"</div>"
++	"</div>"
++	"</div>"
++	"</div>").children(".container").fadeIn();
 }
