@@ -1,13 +1,13 @@
 <?php 
 require_once("includes/connect.php");
 
-class Navigation{
-	public function getNavigation($position){
-		$table = "nav";
+class Quotes{
+	public function getQuotes($position){
+		$table = "customer_quotes";
 		
 		$con=new Connection();
 		$con=$con->setCon();
-		$query=$con -> prepare("SELECT * FROM $table WHERE Position=$position");//order by order asc
+		$query=$con -> prepare("SELECT * FROM $table");//order by order asc
 		
 		$array=array();
 		

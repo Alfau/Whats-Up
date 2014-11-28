@@ -17,7 +17,7 @@
 			<ul>
 				<?php
 					$SocialNav=new Navigation();
-					$navLinks=$SocialNav->getNav("3");
+					$navLinks=$SocialNav->getNavigation("3");
 					
 					foreach($navLinks as $value){
 						?>
@@ -33,9 +33,14 @@
 				<ul>
 					<?php
 						$MainNav=new Navigation();
-						$navLinks=$MainNav->getNav("1");
+						$navLinks=$MainNav->getNavigation("1");
 						
 						foreach($navLinks as $value){
+							if($value['HREF'] == "/book"){
+							?>
+								<li><a href=# class="book"><?php echo $value['Name'] ?></a></li>
+							<?php
+							}
 							?>
 								<li><a href=#><?php echo $value['Name'] ?></a></li>
 							<?php
@@ -47,7 +52,7 @@
 				<ul>
 					<?php
 						$SideNav=new Navigation();
-						$navLinks=$SideNav->getNav("2");
+						$navLinks=$SideNav->getNavigation("2");
 						
 						foreach($navLinks as $value){
 							?>
@@ -64,12 +69,18 @@
 			<ul>
 				<?php
 					$MainNav=new Navigation();
-					$navLinks=$MainNav->getNav("1");
+					$navLinks=$MainNav->getNavigation("1");
 					
 					foreach($navLinks as $value){
+						if($value['HREF'] == "book"){
+						?>
+							<li><a href="<?php echo $value['HREF'] ?>" class="book"><?php echo $value['Name'] ?></a></li>
+						<?php
+						}else{
 						?>
 							<li><a href="<?php echo $value['HREF'] ?>"><?php echo $value['Name'] ?></a></li>
 						<?php
+						}
 					}
 				?>
 			</ul>
@@ -80,11 +91,11 @@
 				<ul>
 					<?php
 						$SideNav=new Navigation();
-						$navLinks=$SideNav->getNav("2");
+						$navLinks=$SideNav->getNavigation("2");
 						
 						foreach($navLinks as $value){
 							?>
-								<li><a href=#><?php echo $value['Name'] ?></a></li>
+								<li><a href="<?php echo $value['HREF'] ?>"><?php echo $value['Name'] ?></a></li>
 							<?php
 						}
 					?>
@@ -93,7 +104,7 @@
 			<ul>
 				<?php
 					$SocialNav=new Navigation();
-					$navLinks=$SocialNav->getNav("3");
+					$navLinks=$SocialNav->getNavigation("3");
 					
 					foreach($navLinks as $value){
 						?>

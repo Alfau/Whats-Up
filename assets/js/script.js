@@ -20,13 +20,38 @@ $(document).ready(function(){
 			// }
 		// });
 	// }
-	$.getJSON("/whatsup/Packages.php",function(data){
-		alert(data);
+	
+	$(document).on("click","nav#right a",function(e){
+		$("main").children().fadeOut(function(){$(this).remove();});
+		
+		var href = $(this).attr("href");
+		var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
+		    return result.toUpperCase();
+		});
+		var method = "get"+model;  
+		
+		basicPage(model,method);
+		
+		e.preventDefault();
+	});
+	
+	$(document).on("click","nav#left a",function(e){
+		$("main").children().fadeOut(function(){$(this).remove();});
+		
+		var href = $(this).attr("href");
+		var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
+		    return result.toUpperCase();
+		});
+		var method = "get"+model;
+		
+		cardsPage(model,method,"Duration","duration");
+		
+		e.preventDefault();
 	});
 	
 	$(document).on("click","div#featuredPackages_section #controls a",function(e){
 		var page=$(this).attr("data-page");
-		packagesPaginate("Featured",page);
+		packagesPaginate("Featured",page,"4");
 		e.preventDefault();
 	});
 	
@@ -42,8 +67,10 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 	
+	basicJSON = {};
+	cardsJSON = {};
 	slideshow(9000,500);
-	//packagesPaginate("Featured","1");
+	packagesPaginate("Featured","1","4");
 });
 
 
@@ -79,46 +106,102 @@ function slideshow(interval,speed){
 	}
 }
 
-function packagesPaginate(state,page){
+function packagesPaginate(state,page,rows){
 	if(typeof packagesJSON !== "undefined" && packagesJSON.length){
-		packagesPaginateHandler(state,page);
+		packagesPaginateHandler(state,page,rows);
 	}else{
-		$.getJSON("/packages",function(data){
+		$.getJSON("queries.php",{model:"Packages",method:"getPackages"},function(data){
 			packagesJSON=data;
-			packagesPaginateHandler(state,page);
+			packagesPaginateHandler(state,page,rows);
 		});
 	}
 }
-function packagesPaginateHandler(state,page){
-	rows=4;
+function packagesPaginateHandler(state,page,rows){
 	start_key=((page-1)*rows);
 	end_key=start_key+rows-1;
+	
 	$("div#featured_packages .container").fadeOut().remove();
 	$.each(packagesJSON,function(key,value){
 		if(value.State == state && key>=start_key && key<=end_key){
-			$("div#featured_packages").append(
-				"<div class='container'>"
-				+	"<div>"
-				+		"<a href=#>"
-				+			"<div>"
-				+				"<img src='"+ value.Image +"'/>"
-				+				"<span class='emphasis_small'>From <b>USD "+ value.Price +"</b></span>"
-				+			"</div>"
-				+			"<div>"
-				+				"<span class='emphasis_large'>"+ value.Name +"</span>"
-				+				"<p class='summary'>"+ value.Overview +"</p>"
-				+			"</div>"
-				+		"</a>"
-				+		"<div>"
-				+		"<img src='assets/icons/duration.svg' height='15'/><span class='smallest'>"+ value.Duration +" days</span>"
-				+			"<div>"
-				+				"<a href=#><?php include('assets/icons/twitter.svg'); ?></a>"
-				+				"<a href=#><?php include('assets/icons/facebook.svg'); ?></a>"
-				+			"</div>"
-				+		"</div>"
-				+	"</div>"
-				+"</div>"
-			).children(".container").fadeIn();
+			cards("featured_packages",value.Image,value.Name,value.Price,value.Overview,value.Duration,"duration");
 		}
 	});
+}
+
+function basicPage(model,method){
+	if(typeof basicJSON[model] !== "undefined" && basicJSON[model].length){
+		basicPageHandler(model);
+	}else{
+		$.getJSON("queries.php",{model:model,method:method},function(data){
+			basicJSON[model]=data;
+			basicPageHandler(model);
+		});
+	}
+}
+
+function basicPageHandler(model){		
+	$.each(basicJSON[model],function(key,value){
+		var content = value.Text;
+		
+		title(value.Title,"alternate");
+		basicContent(content,"emphasis_small");
+	});
+}
+
+function cardsPage(model,method,variable,icon){
+	if(typeof cardsJSON[model] !== "undefined" && cardsJSON[model].length){
+		cardsPageHandler(model,variable,icon);
+	}else{
+		$.getJSON("queries.php",{model:model,method:method},function(data){
+			cardsJSON[model]=data;
+			cardsPageHandler(model,variable,icon);
+		});
+	}
+}
+
+function cardsPageHandler(model,variable,icon){
+	$("main").html("<div id='cards_container'></div>");
+	
+	title(model,"alternate");
+	$.each(cardsJSON[model],function(key,value){
+		cards("cards_container",value.Image,value.Name,value.Price,value.Overview,value.variable,icon);
+	});
+}
+
+function title(title,type){
+$("main").prepend('<div class="heading_strip '+ type +'">'
++	'<div class="heading_wrapper">'
++	'<h3 class="heading">'+ title +'</b></h3>'
++	'</div>'
++	'</div>');
+}
+
+function basicContent(content,type){
+$("main").append('<div class="gutter_space '+ type +'">'
++	'<div class="white_contain">'+ content +'</div>'
++	'</div>');
+}
+
+function cards(container,image,name,price,overview,variable,icon){
+$("div#"+container).append("<div class='container'>"
+	+	"<div>"
+	+		"<a href=#>"
+	+			"<div>"
+	+				"<img src='"+ image +"'/>"
+	+				"<span class='emphasis_small'>From <b>USD "+ price +"</b></span>"
+	+			"</div>"
+	+			"<div>"
+	+				"<span class='emphasis_large'>"+ name +"</span>"
+	+				"<p class='summary'>"+ overview +"</p>"
+	+			"</div>"
+	+		"</a>"
+	+		"<div>"
+	+		"<img src='assets/icons/"+ icon +".svg' height='15'/><span class='smallest'>"+ variable +" days</span>"
+	+			"<div>"
+	+				"<a href=#><?php include('assets/icons/twitter.svg'); ?></a>"
+	+				"<a href=#><?php include('assets/icons/facebook.svg'); ?></a>"
+	+			"</div>"
+	+		"</div>"
+	+	"</div>"
+	+"</div>").children(".container").fadeIn();
 }
