@@ -48,14 +48,14 @@ $(document).ready(function(){
 		var url = $(this).prop("href");
 		window.history.pushState("","Title",url);
 		
-		cardsPage(model,url,"Duration","duration");
+		href.indexOf("home") > -1 ? homePage(url) : cardsPage(model,url,"Duration","duration");
 		
 		e.preventDefault();
 	});
 	
 	$(document).on("click","div#featuredPackages_section #controls a",function(e){
 		var page=$(this).attr("data-page");
-		packagesPaginate("Featured",page,"4");
+		packagesCarousel("http://localhost/whatsup/home","Featured",page,"4");
 		e.preventDefault();
 	});
 	
@@ -71,22 +71,11 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 	
-	basicJSON = {};
-	cardsJSON = {};
+	JSONobj = {};
+	homePage("http://localhost/whatsup/home");
 	slideshow(9000,500);
 	
 });
-
-function home(){
-	if(typeof homeJSON !== "undefined" && homeJSON.length){
-		homePageHandler();
-	}else{
-		$.getJSON("JSONroute.php",{url:url},function(data){
-			homeJSON=data;
-			homePageHandler();
-		});
-	}
-}
 
 function slideshow(interval,speed){
 	var trigger_slide=setInterval(slide,interval);
@@ -120,54 +109,123 @@ function slideshow(interval,speed){
 	}
 }
 
-function packagesPaginate(state,page,rows){
-	if(typeof packagesJSON !== "undefined" && packagesJSON.length){
-		packagesPaginateHandler(state,page,rows);
+function packagesCarousel(url,state,page,rows){
+	if(typeof JSONobj['Packages'] !== "undefined" && JSONobj['Packages'].length){
+		packagesCarouselHandler(state,page,rows);
 	}else{
-		$.getJSON("queries.php",{model:"Packages",method:"getPackages"},function(data){
-			packagesJSON=data;
-			packagesPaginateHandler(state,page,rows);
+		$.getJSON("JSONroute.php",{url:url},function(data){
+			JSONobj['Packages']=data;
+			packagesCarouselHandler(state,page,rows);
 		});
 	}
 }
-function packagesPaginateHandler(state,page,rows){
+function packagesCarouselHandler(state,page,rows){
 	start_key=((page-1)*rows);
 	end_key=start_key+rows-1;
 	
 	$("div#featured_packages .container").fadeOut().remove();
-	$.each(packagesJSON,function(key,value){
+	$.each(JSONobj['Packages'],function(key,value){
 		if(value.State == state && key>=start_key && key<=end_key){
 			cards("featured_packages",value.Image,value.Name,value.Price,value.Overview,value.Duration,"duration");
+			
+			$()
 		}
 	});
 }
 
+function homePage(url){
+	if(typeof JSONobj['Slideshow'] !== "undefined" && JSONobj['Slideshow'].length && typeof JSONobj['Packages'] !== "undefined" && JSONobj['Packages'].length && typeof JSONobj['Quotes'] !== "undefined" && JSONobj['Quotes'].length){
+		homePageHandler(url);
+	}else{
+		$.getJSON("JSONroute.php",{url:url},function(data){
+			JSONobj=data;
+			homePageHandler(url);
+		});
+	}
+}
+
+function homePageHandler(url){
+	$("main").append("<div id='slideshow'><ul id='controls'></ul><ul id='slides'></ul><div>");
+	$("main").append("<div id='featuredPackages_section'><div id='featured_packages'></div><ul id='controls'><li><a href=# data-page='1'></a></li><li><a href=# data-page='2'></a></li></ul><div>");
+	$("main").append("<div id='customer_quote'><ul id='controls'></ul><div class='quote_container'></div></div>");
+	
+	
+	$.each(JSONobj["Slideshow"],function(key,value){
+		key == 0 ? state = "active" : state = "inactive";
+		
+		$("div#slideshow #controls").append(
+		"<li><a href=# data-id='"+ value.ID +"' class='"+ state +"'></a></li>"
+		);
+		
+		$("div#slideshow ul#slides").append(
+		"<li data-id='"+ value.ID +"' class='"+ state +"'>"
+	+	"<div class='slide' style='background:url(\""+ value.Image +"\")'></div>"
+	+	"<div class='text'>"
+	+	"<p class='emphasis_large'>"+ value.Title +"</p>"
+	+	"<p class='emphasis_small'>"+ value.Text +"</p>"
+	+	"<a href=# class='details'>Details</a>"
+	+	"</div>"
+	+	"</li>");
+	});
+	
+	$.each(JSONobj['Quotes'],function(key,value){
+		key == 0 ? state = "active" : state = "inactive";
+		
+		$("div#customer_quote #controls").append(
+		"<li><a href=# data-id='"+ value.ID +"' class='"+ state +"'></a></li>"
+		);
+		
+		$("div#customer_quote .quote_container").append(
+		"<div data-id='"+ value.ID +"' class='"+ state +"'>"
+	+	"<p class='emphasis_large'>"+ value.Text +"</p>"
+	+	"<p class='summary'>"+ value.Name +"</p>"
+	+	"</div>"
+		);
+	});
+	
+	$("div#customer_quote").before(
+		'<div class="heading_strip">'
+	+	'<div class="heading_wrapper">'
+	+	'<h3 class="heading">Customer <b>Feedback</b></h3>'
+	+	'</div>'
+	+	'</div>'
+	);
+	$("div#featuredPackages_section").before(
+		'<div class="heading_strip">'
+	+	'<div class="heading_wrapper">'
+	+	'<h3 class="heading">Featured <b>Packages</b></h3>'
+	+	'</div>'
+	+	'</div>'
+	);
+	
+	packagesCarousel(url,"Featured","1","4");
+}
+
 function basicPage(model,url){
-	if(typeof basicJSON[model] !== "undefined" && basicJSON[model].length){
+	if(typeof JSONobj[model] !== "undefined" && JSONobj[model].length){
 		basicPageHandler(model);
 	}else{
 		$.getJSON("JSONroute.php",{url:url},function(data){
-			basicJSON[model]=data;
+			JSONobj[model]=data;
 			basicPageHandler(model);
 		});
 	}
 }
 
 function basicPageHandler(model){	
-	$.each(basicJSON[model],function(key,value){
+	$.each(JSONobj[model],function(key,value){
 		var content = value.Text;
-		
 		title(value.Title,"alternate");
 		basicContent(content,"emphasis_small");
 	});
 }
 
 function cardsPage(model,url,variable,icon){
-	if(typeof cardsJSON[model] !== "undefined" && cardsJSON[model].length){
+	if(typeof JSONobj[model] !== "undefined" && JSONobj[model].length){
 		cardsPageHandler(model,variable,icon);
 	}else{
 		$.getJSON("JSONroute.php",{url:url},function(data){
-			cardsJSON[model]=data;
+			JSONobj[model]=data;
 			cardsPageHandler(model,variable,icon);
 		});
 	}
@@ -177,13 +235,13 @@ function cardsPageHandler(model,variable,icon){
 	$("main").html("<div id='cards_container'></div>");
 	
 	title(model,"alternate");
-	$.each(cardsJSON[model],function(key,value){
+	$.each(JSONobj[model],function(key,value){
 		cards("cards_container",value.Image,value.Name,value.Price,value.Overview,value.variable,icon);
 	});
 }
 
 function title(title,type){
-$("main").prepend('<div class="heading_strip '+ type +'">'
+	$("main").prepend('<div class="heading_strip '+ type +'">'
 +	'<div class="heading_wrapper">'
 +	'<h3 class="heading">'+ title +'</b></h3>'
 +	'</div>'
@@ -191,13 +249,15 @@ $("main").prepend('<div class="heading_strip '+ type +'">'
 }
 
 function basicContent(content,type){
-$("main").append('<div class="gutter_space '+ type +'">'
+	$("main").append(
+	'<div class="gutter_space '+ type +'">'
 +	'<div class="white_contain">'+ content +'</div>'
 +	'</div>');
 }
 
-function cards(container,image,name,price,overview,variable,icon){
-$("div#"+container).append("<div class='container'>"
+function cards(container,image,name,price,overview,variable,icon){	
+	$("div#"+container).append(
+	"<div class='container'>"
 +	"<div>"
 +	"<a href=#>"
 +	"<div>"
@@ -212,8 +272,8 @@ $("div#"+container).append("<div class='container'>"
 +	"<div>"
 +	"<img src='assets/icons/"+ icon +".svg' height='15'/><span class='smallest'>"+ variable +" days</span>"
 +	"<div>"
-+	"<a href=#><?php include('assets/icons/twitter.svg'); ?></a>"
-+	"<a href=#><?php include('assets/icons/facebook.svg'); ?></a>"
++	"<a href=#><?php include('../icons/facebook.svg') ?></a>"
++	"<a href=#><?php include('../icons/twitter.svg') ?></a>"
 +	"</div>"
 +	"</div>"
 +	"</div>"

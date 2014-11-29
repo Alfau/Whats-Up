@@ -17,7 +17,7 @@ class HomeController{
 		$quotes = new Quotes();
 		$quotes = $quotes->getQuotes("SELECT * FROM customer_quotes");
 		
-		$homeBundle = array("slideshow"=>$slideshow, "packages"=>$packages, "quotes"=>$quotes);
+		$homeBundle = array("Slideshow"=>$slideshow, "Packages"=>$packages, "Quotes"=>$quotes);
 		echo json_encode($homeBundle);
 	}
 	
