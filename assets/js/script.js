@@ -48,9 +48,30 @@ $(document).ready(function(){
 		var url = $(this).prop("href");
 		window.history.pushState("","Title",url);
 		
-		href.indexOf("home") > -1 ? homePage(url) : cardsPage(model,url,"Duration","duration");
+		if(href.indexOf("home") > -1){
+			// homePage(url,req_models['home']);
+			homePage(url);
+		}else{
+			cardsPage(model,href,url,"Duration","duration");
+		}
 		
 		e.preventDefault();
+	});
+	
+	$(document).on("click","div#cards_container a",function(){
+		var href = $(this).attr("href");
+		
+		// console.log(href); "stay/Sheraton Maldives"
+		
+		for(var pages in req_models){
+			if(href.indexOf(pages) > -1){
+				detailsPage(pages,req_models[pages]);
+			}
+		}
+		
+		var url = $(this).prop("href");
+		window.history.pushState("","Title",url);
+		// console.log(url); "http://localhost/whatsup/stay/Sheraton%20Maldives"
 	});
 	
 	$(document).on("click","div#featuredPackages_section #controls a",function(e){
@@ -71,11 +92,29 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 	
+	$(document).on("click","main a",function(e){
+		
+		
+		e.preventDefault();
+	});
+	
 	JSONobj = {};
 	homePage("http://localhost/whatsup/home");
 	slideshow(9000,500);
 	
 });
+
+var req_models = {
+	
+	home : ["Slideshow", "Quotes", "Packages"],
+	pacakges : ["Packages"],
+	stay : ["Resorts", "Rooms"]
+	
+};
+
+function changeURL(url){
+	window.history.pushState("","Title",url);
+}
 
 function slideshow(interval,speed){
 	var trigger_slide=setInterval(slide,interval);
@@ -126,14 +165,25 @@ function packagesCarouselHandler(state,page,rows){
 	$("div#featured_packages .container").fadeOut().remove();
 	$.each(JSONobj['Packages'],function(key,value){
 		if(value.State == state && key>=start_key && key<=end_key){
-			cards("featured_packages",value.Image,value.Name,value.Price,value.Overview,value.Duration,"duration");
-			
-			$()
+			cards("featured_packages",value.ID,"packages",value.Image,value.Name,value.Price,value.Overview,value.Duration,"duration");
 		}
 	});
 }
 
-function homePage(url){
+function homePage(url,model){
+	
+	// $.each(model,function(key,value){
+		// if(typeof JSONobj[value] === "undefined" || JSONobj[value].length < 1){
+			// $.getJSON("JSONroute.php",function(data){
+				// JSONobj[value]=data;
+			// });
+			// console.log("niey"+JSONobj[value]);
+		// }else{
+			// console.log("yeah"+JSONobj[value]);
+		// }
+	// });
+	// homePageHandler(url);
+	
 	if(typeof JSONobj['Slideshow'] !== "undefined" && JSONobj['Slideshow'].length && typeof JSONobj['Packages'] !== "undefined" && JSONobj['Packages'].length && typeof JSONobj['Quotes'] !== "undefined" && JSONobj['Quotes'].length){
 		homePageHandler(url);
 	}else{
@@ -216,27 +266,27 @@ function basicPageHandler(model){
 	$.each(JSONobj[model],function(key,value){
 		var content = value.Text;
 		title(value.Title,"alternate");
-		basicContent(content,"emphasis_small");
+		basic(content,"emphasis_small");
 	});
 }
 
-function cardsPage(model,url,variable,icon){
+function cardsPage(model,href,url,variable,icon){
 	if(typeof JSONobj[model] !== "undefined" && JSONobj[model].length){
-		cardsPageHandler(model,variable,icon);
+		cardsPageHandler(model,href,variable,icon);
 	}else{
 		$.getJSON("JSONroute.php",{url:url},function(data){
 			JSONobj[model]=data;
-			cardsPageHandler(model,variable,icon);
+			cardsPageHandler(model,href,variable,icon);
 		});
 	}
 }
 
-function cardsPageHandler(model,variable,icon){
+function cardsPageHandler(model,href,variable,icon){
 	$("main").html("<div id='cards_container'></div>");
 	
 	title(model,"alternate");
 	$.each(JSONobj[model],function(key,value){
-		cards("cards_container",value.Image,value.Name,value.Price,value.Overview,value.variable,icon);
+		cards("cards_container",value.ID,href,value.Image,value.Name,value.Price,value.Overview,value.Duration,icon);
 	});
 }
 
@@ -248,21 +298,21 @@ function title(title,type){
 +	'</div>');
 }
 
-function basicContent(content,type){
+function basic(content,type){
 	$("main").append(
 	'<div class="gutter_space '+ type +'">'
 +	'<div class="white_contain">'+ content +'</div>'
 +	'</div>');
 }
 
-function cards(container,image,name,price,overview,variable,icon){	
+function cards(container,ID,href,image,name,price,overview,variable,icon){	
 	$("div#"+container).append(
 	"<div class='container'>"
 +	"<div>"
-+	"<a href=#>"
++	"<a href='"+ href+"/"+name +"' data-id='"+ ID +"'>"
 +	"<div>"
 +	"<img src='"+ image +"'/>"
-+	"<span class='emphasis_small'>From <b>USD "+ price +"</b></span>"
++	(price == undefined ? "" : "<span class='emphasis_small'>From <b>USD "+ price +"</b></span>")
 +	"</div>"
 +	"<div>"
 +	"<span class='emphasis_large'>"+ name +"</span>"
@@ -278,4 +328,16 @@ function cards(container,image,name,price,overview,variable,icon){
 +	"</div>"
 +	"</div>"
 +	"</div>").children(".container").fadeIn();
+}
+
+function detailsPage(page,model){
+	$.each(model,function(key,value){
+		if(typeof JSONobj[model] === "undefined" || JSONobj[model].length < 1){
+			$.getJSON("JSONroute.php",function(data){
+				JSONobj[model]=data;
+			});
+		}
+		console.log(JSONobj[model]);
+	});
+	// detailsPageHandler(model,href,variable,icon);
 }
