@@ -132,7 +132,7 @@ h3 {
   background-color: #fff;
   box-shadow: 0 0 1px #c0c0c0;
   height: 30px;
-  margin-bottom: 2em;
+  margin: 2em 0;
   clear: both; }
   .heading_strip.alternate {
     margin-top: 90px; }
@@ -268,25 +268,25 @@ header#large {
 div#slideshow {
   display: none; }
 
-div#featured_packages, div#cards_container {
+div#featured_packages, div#small_cards_container {
   margin: 0 5.5555%; }
-  div#featured_packages div.container, div#cards_container div.container {
+  div#featured_packages div.container, div#small_cards_container div.container {
     width: 100%;
     padding: 0 0.5em;
     margin-bottom: 1em;
     display: none; }
-    div#featured_packages div.container > div, div#cards_container div.container > div {
+    div#featured_packages div.container > div, div#small_cards_container div.container > div {
       background-color: #fff;
       box-shadow: 0 0 1px #c0c0c0;
       border-radius: 3px; }
-      div#featured_packages div.container > div > a:hover span.emphasis_small, div#cards_container div.container > div > a:hover span.emphasis_small {
+      div#featured_packages div.container > div > a:hover span.emphasis_small, div#small_cards_container div.container > div > a:hover span.emphasis_small {
         padding-right: 4em !important; }
-      div#featured_packages div.container > div > a > div:first-child, div#cards_container div.container > div > a > div:first-child {
+      div#featured_packages div.container > div > a > div:first-child, div#small_cards_container div.container > div > a > div:first-child {
         position: relative; }
-        div#featured_packages div.container > div > a > div:first-child img, div#cards_container div.container > div > a > div:first-child img {
+        div#featured_packages div.container > div > a > div:first-child img, div#small_cards_container div.container > div > a > div:first-child img {
           width: 100%;
           border-radius: 3px 3px 0 0; }
-        div#featured_packages div.container > div > a > div:first-child span.emphasis_small, div#cards_container div.container > div > a > div:first-child span.emphasis_small {
+        div#featured_packages div.container > div > a > div:first-child span.emphasis_small, div#small_cards_container div.container > div > a > div:first-child span.emphasis_small {
           position: absolute;
           bottom: 0;
           right: 0;
@@ -295,18 +295,18 @@ div#featured_packages, div#cards_container {
           padding: 0.5em 1em;
           border-radius: 3px 0 0 3px;
           transition: padding-right 0.3s; }
-      div#featured_packages div.container > div > a > div:nth-child(2), div#cards_container div.container > div > a > div:nth-child(2) {
+      div#featured_packages div.container > div > a > div:nth-child(2), div#small_cards_container div.container > div > a > div:nth-child(2) {
         padding: 0.5em 1em; }
-      div#featured_packages div.container > div > div:last-child, div#cards_container div.container > div > div:last-child {
+      div#featured_packages div.container > div > div:last-child, div#small_cards_container div.container > div > div:last-child {
         padding: 0.5em 1em;
         border-top: solid 1px #ececec;
         padding-top: 0.5em; }
-        div#featured_packages div.container > div > div:last-child span.smallest, div#cards_container div.container > div > div:last-child span.smallest {
+        div#featured_packages div.container > div > div:last-child span.smallest, div#small_cards_container div.container > div > div:last-child span.smallest {
           vertical-align: top;
           margin-left: 0.5em; }
-        div#featured_packages div.container > div > div:last-child > div, div#cards_container div.container > div > div:last-child > div {
+        div#featured_packages div.container > div > div:last-child > div, div#small_cards_container div.container > div > div:last-child > div {
           float: right; }
-          div#featured_packages div.container > div > div:last-child > div svg, div#cards_container div.container > div > div:last-child > div svg {
+          div#featured_packages div.container > div > div:last-child > div svg, div#small_cards_container div.container > div > div:last-child > div svg {
             margin-left: 0.5em; }
 
 div#customer_quote {
@@ -392,7 +392,7 @@ form.contact table {
     /* Zoom baseline grid to 17/16 = 1.0625 */
     font-size: 0.9375em; }
 
-  div#featured_packages div.container, div#cards_container div.container {
+  div#featured_packages div.container, div#small_cards_container div.container {
     float: left;
     width: 50%; } }
 /*
@@ -411,7 +411,7 @@ form.contact table {
     /* Zoom baseline grid to 17/16 = 1.0625 */
     font-size: 1.0625em; }
 
-  div#featured_packages > div.container, div#cards_container > div.container {
+  div#featured_packages > div.container, div#small_cards_container > div.container {
     width: 25%; } }
 /* @media screen and (min-width: 984px) */
 @media screen and (min-width: 61.5em) {
@@ -608,32 +608,54 @@ form.contact table {
           height: 12px; }
       div#slideshow ul#controls a.active {
         background-color: #30bec1; } }
-div#featuredPackages_section, div#cards_container {
+div#featuredPackages_section, div#small_cards_container {
   position: relative;
   float: left;
   margin-bottom: 1em; }
-  div#featuredPackages_section ul#controls li, div#cards_container ul#controls li {
+  div#featuredPackages_section ul#controls li, div#small_cards_container ul#controls li {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     left: inherit;
     right: inherit;
     list-style: none; }
-    div#featuredPackages_section ul#controls li svg, div#cards_container ul#controls li svg {
+    div#featuredPackages_section ul#controls li svg, div#small_cards_container ul#controls li svg {
       height: 40px;
       transition: height 0.3s; }
-      div#featuredPackages_section ul#controls li svg path, div#cards_container ul#controls li svg path {
+      div#featuredPackages_section ul#controls li svg path, div#small_cards_container ul#controls li svg path {
         transition: fill 0.3s; }
-      div#featuredPackages_section ul#controls li svg:hover, div#cards_container ul#controls li svg:hover {
+      div#featuredPackages_section ul#controls li svg:hover, div#small_cards_container ul#controls li svg:hover {
         height: 50px; }
-      div#featuredPackages_section ul#controls li svg:hover path, div#cards_container ul#controls li svg:hover path {
+      div#featuredPackages_section ul#controls li svg:hover path, div#small_cards_container ul#controls li svg:hover path {
         fill: #30bec1; }
-    div#featuredPackages_section ul#controls li:first-child, div#cards_container ul#controls li:first-child {
+    div#featuredPackages_section ul#controls li:first-child, div#small_cards_container ul#controls li:first-child {
       right: 1em; }
-    div#featuredPackages_section ul#controls li:last-child, div#cards_container ul#controls li:last-child {
+    div#featuredPackages_section ul#controls li:last-child, div#small_cards_container ul#controls li:last-child {
       left: 1em; }
-      div#featuredPackages_section ul#controls li:last-child svg, div#cards_container ul#controls li:last-child svg {
+      div#featuredPackages_section ul#controls li:last-child svg, div#small_cards_container ul#controls li:last-child svg {
         transform: rotate(180deg); }
+
+div#large_cards_container, div#rooms_cards_container {
+  margin: 0 5.55555%; }
+  div#large_cards_container div.container, div#rooms_cards_container div.container {
+    width: 100%;
+    padding: 0 0.5em; }
+    div#large_cards_container div.container > div, div#rooms_cards_container div.container > div {
+      background-color: #FFF;
+      box-shadow: 0px 0px 1px #C0C0C0;
+      border-radius: 3px; }
+      div#large_cards_container div.container > div > div:first-child, div#rooms_cards_container div.container > div > div:first-child {
+        display: inline-block;
+        vertical-align: top;
+        width: 25%; }
+        div#large_cards_container div.container > div > div:first-child img, div#rooms_cards_container div.container > div > div:first-child img {
+          width: 100%;
+          border-radius: 3px 0px 0px 3px; }
+      div#large_cards_container div.container > div > div:last-child, div#rooms_cards_container div.container > div > div:last-child {
+        display: inline-block;
+        vertical-align: top;
+        padding: 1em;
+        width: 75%; }
 
 /* @media screen and (min-width: 1200px) */
 /* @media screen and (min-width: 1392px) */

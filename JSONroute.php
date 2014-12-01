@@ -15,6 +15,6 @@ if(is_readable($controllerFile)){
 	$controller = $controller."Controller";
 	
 	$controller = new $controller;
-	$controller = $controller -> index();
+	$controller = $controller -> $method();
 }
 ?>

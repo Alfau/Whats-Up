@@ -8,17 +8,26 @@ class StayController{
 	public function index(){
 		
 		$stay = new Stay();
-		$stay = $stay -> getStay("SELECT * FROM stay");
+		$stay = $stay -> getStay("SELECT * FROM resorts");
+		
+		// $rooms = new Rooms();
+		// $rooms = $rooms -> getRooms("SELECT * FROM rooms");
+		
+		$stayBundle = array("Resorts" => $stay);
+		
+		echo json_encode($stayBundle);
+		
+	}
+	
+	public function details(){
 		
 		$rooms = new Rooms();
 		$rooms = $rooms -> getRooms("SELECT * FROM rooms");
 		
-		$stayBundle = array("Stay" => $stay);
+		$stayBundle = array("Rooms" => $rooms);
 		
-		echo json_encode($stay);
-		
-	}
-	
+		echo json_encode($stayBundle);
+	} 
 }
 
 ?>

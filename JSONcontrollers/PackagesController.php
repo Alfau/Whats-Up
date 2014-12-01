@@ -9,7 +9,9 @@ class PackagesController{
 		$packages = new Packages();
 		$packages = $packages -> getPackages("SELECT * FROM packages");
 		
-		echo json_encode($packages);
+		$packagesBundle = array("Packages" => $packages);
+		
+		echo json_encode($packagesBundle);
 		
 	}
 	

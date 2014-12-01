@@ -9,7 +9,9 @@ class ContactController{
 		$contact = new Contact();
 		$contact = $contact -> getContact("SELECT * FROM contact");
 		
-		echo json_encode($contact);
+		$contactBundle = array("Contact" => $contact);
+		
+		echo json_encode($contactBundle);
 		
 	}
 	

@@ -9,6 +9,8 @@ class AboutController{
 		$about = new About();
 		$about = $about -> getAbout("SELECT * FROM about");
 		
+		$aboutBundle = array("About" => $about);
+		
 		echo json_encode($about);
 		
 	}

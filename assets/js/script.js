@@ -11,18 +11,10 @@ $(document).ready(function(){
 		}
 	});
 	
-	// if(window.innerWidth>=984){
-		// $(window).scroll(function(){
-			// if($(window).scrollTop()>300){
-				// $("header#small").slideDown(200);
-			// }else if($(window).scrollTop()<=300){
-				// $("header#small").slideUp("fast");
-			// }
-		// });
-	// }
-	
-	$(document).on("click","nav#right a",function(e){
-		$("main").children().fadeOut(function(){$(this).remove();});
+	$(document).on("click","nav a",function(e){
+		$("main").children().fadeOut(function(){
+			$(this).remove();
+		});
 		
 		var href = $(this).attr("href");
 		var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
@@ -30,53 +22,48 @@ $(document).ready(function(){
 		});
 		
 		var url = $(this).prop("href");
-		window.history.pushState("","Title",url);
+		window.history.pushState("","Title",baseURL+href);
 		
-		basicPage(model,url);
+		var req = $(this).attr("data-req");
 		
-		e.preventDefault();
-	});
-	
-	$(document).on("click","nav#left a",function(e){
-		$("main").children().fadeOut(function(){$(this).remove();});
-		
-		var href = $(this).attr("href");
-		var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
-		    return result.toUpperCase();
-		});
-		
-		var url = $(this).prop("href");
-		window.history.pushState("","Title",url);
-		
-		if(href.indexOf("home") > -1){
-			homePage(url,req_models['home']);
-			// homePage(url);
+		if($(this).parents("nav#right").length){
+			basicPage(model,url);
 		}else{
-			// console.log(req_models[href]+" / "+href);
-			cardsPage(req_models[href],href,url,"Duration","duration");
+			if(href.indexOf("home") > -1){
+				homePage(url,req_models['home']);
+			}else{
+				handle(req_models[req],url,href,"small_cards",null);
+			}
 		}
 		
 		e.preventDefault();
 	});
 	
-	$(document).on("click","div#cards_container a",function(e){
-		var href = $(this).attr("href");
-		// console.log(href); "stay/Sheraton Maldives"
+	$(document).on("click","div#small_cards_container a",function(e){
+		$("main").children().fadeOut(function(){
+			$(this).remove();
+		});
 		
-		var models = href.split("/")[0]+"_details";
+		var href = $(this).attr("href");
+		var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
+		    return result.toUpperCase();
+		});
 		
 		var url = $(this).prop("href");
-		window.history.pushState("","Title",url);
-		// console.log(url); "http://localhost/whatsup/stay/Sheraton%20Maldives"
-		console.log(req_models[models]);
-		detailsPage(req_models[models],url,href);
+		window.history.pushState("","Title",baseURL+href);
+		
+		var req = $(this).attr("data-req");
+		
+		object_ID = $(this).attr("data-id");
+		
+		handle(req_models[req],url,href,"large_cards",object_ID);
 		
 		e.preventDefault();
 	});
 	
 	$(document).on("click","div#featuredPackages_section #controls a",function(e){
 		var page=$(this).attr("data-page");
-		packagesCarousel("http://localhost/whatsup/home","Featured",page,"4");
+		packagesCarousel(baseURL+"/home","Featured",page,"4");
 		e.preventDefault();
 	});
 	
@@ -99,16 +86,18 @@ $(document).ready(function(){
 	});
 	
 	JSONobj = {};
-	homePage("http://localhost/whatsup/home",req_models['home']);
+	homePage(baseURL+"/home",req_models['home']);
 	slideshow(9000,500);
 	
 });
 
+var baseURL = getBaseURL();
+
 var req_models = {
-	home : ["Slideshow", "Packages", "Quotes"],
-	packages : ["Packages"],
-	stay : ["Resorts"],
-	stay_details : ["Resorts","Rooms"]
+	Home : ["Slideshow", "Packages", "Quotes"],
+	Packages : ["Packages"],
+	Stay : ["Resorts", "Packages"],
+	stay_details : ["Resorts", "Rooms"]
 };
 
 function changeURL(url){
@@ -247,70 +236,172 @@ function homePageHandler(url){
 	packagesCarousel(url,"Featured","1","4");
 }
 
-function basicPage(model,url){
-	if(typeof JSONobj[model] !== "undefined" && JSONobj[model].length){
-		basicPageHandler(model);
-	}else{
-		$.getJSON("JSONroute.php",{url:url},function(data){
-			JSONobj[model]=data;
-			basicPageHandler(model);
-		});
-	}
-}
-
-function basicPageHandler(model){	
-	$.each(JSONobj[model],function(key,value){
-		var content = value.Text;
-		title(value.Title,"alternate");
-		basic(content,"emphasis_small");
-	});
-}
-
-function cardsPage(model,href,url,variable,icon){
+function handle(model,url,href,type,object_ID){
+	this.model = model;
+	this.url = url;
+	this.href = href;
+	this.type = type;
+	this.object_ID = object_ID;
 	
-	function JSONconfirm(i){
+	this.JSONconfirm = function(i){
+		
+		// console.log(model);
+		
 		var key = i || 0;
 		if(key < model.length){
 			if(typeof JSONobj[model[key]] === "undefined" || JSONobj[model[key]].length < 1){
-				$.getJSON("JSONroute.php",{url:url},function(data){
-					JSONobj[model[key]]=data;
+				$.getJSON(baseURL+"/JSONroute.php",{url:url},function(data){
+					$.each(data,function(key,value){
+						JSONobj[key] = value;
+					});
 					JSONconfirm(key+1);
 				});
 			}else{
 				JSONconfirm(key+1);
 			}
 		}else{
-			cardsPageHandler(model,href,variable,icon);
+			render(this.type, this.href);
 		}
-	}
-	
+	};
 	JSONconfirm();
-	
-	// if(typeof JSONobj[model] !== "undefined" && JSONobj[model].length){
-		// cardsPageHandler(model,href,variable,icon);
-	// }else{
-		// $.getJSON("JSONroute.php",{url:url},function(data){
-			// JSONobj[model]=data;
-			// cardsPageHandler(model,href,variable,icon);
-		// });
-	// }
 }
 
-function cardsPageHandler(model,href,variable,icon){
-	$("main").html("<div id='cards_container'></div>");
-	
-	var heading = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
+function render(type,href){
+	switch(type){
+		case "small_cards" :
+			small_cards(href);
+			break;
+		case "large_cards" :
+			large_cards(href);
+			break;
+		case "basic_cards" :
+			basic_cards();
+			break;		
+	}
+}
+
+function small_cards( href ){
+	$("main").html("<div id='small_cards_container'></div>");
+
+	var heading = href.toLowerCase().replace(/\b[a-z]/g, function( result ) { //can be made to a function
 	    return result.toUpperCase();
 	});
 	
-	title(heading,"alternate");
-	$.each(JSONobj[model[0]],function(key,value){
-		cards("cards_container",value.ID,href,value.Image,value.Name,value.Price,value.Overview,value.Duration,icon);
+	title("div#small_cards_container",heading,"alternate");
+	
+	$.each(JSONobj[model[0]],function( key, value ){
+		render_small_cards("div#small_cards_container", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration);
 	});
 }
 
-function title(title,type){
-	$("main").prepend('<div class="heading_strip '+ type +'">'
+function render_small_cards( container, href, ID, image, name, price, overview, duration ){	
+	$(container).append(
+	"<div class='container'>"
++	"<div>"
++	"<a href='"+ href+"/"+name +"' data-id='"+ ID +"' data-req='"+href+"_details'>"
++	"<div>"
++	"<img src='"+ image +"'/>"
++	(price == undefined ? "" : "<span class='emphasis_small'>From <b>USD "+ price +"</b></span>")
++	"</div>"
++	"<div>"
++	"<span class='emphasis_large'>"+ name +"</span>"
++	"<p class='summary'>"+ overview +"</p>"
++	"</div>"
++	"</a>"
++	"<div>"
++	"<img src='assets/icons/Duration.svg' height='15'/><span class='smallest'>"+ duration +" days</span>"
++	"<div>"
++	"<a href=#><?php include('../icons/facebook.svg') ?></a>"
++	"<a href=#><?php include('../icons/twitter.svg') ?></a>"
++	"</div>"
++	"</div>"
++	"</div>"
++	"</div>").children(".container").fadeIn();
+}
+
+function large_cards( href ){
+	$("main").html("<div id='large_cards_container'></div>");
+
+	var heading = href.toLowerCase().replace(/\b[a-z]/g, function( result ) { //can be made to a function
+	    return result.toUpperCase();
+	});
+	
+	title("div#large_cards_container",heading.split("/")[1],"alternate");
+	
+	$.each(JSONobj[model[0]],function( key, value ){
+		if(value.ID === object_ID){
+			render_large_cards("div#large_cards_container", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration);
+		}
+	});
+}
+
+function render_large_cards( container, href, ID, image, name, price, overview, duration ){
+	$(container).append(
+	"<div class='container'>"
++		"<div>"
++			"<div>"
++				"<img src='"+ baseURL + image +"'/>"
++				(price == undefined ? "" : "<span class='emphasis_small'>From <b>USD "+ price +"</b></span>")
++			"</div>"
++			"<div>"
++				"<span class='emphasis_large'>"+ name +"</span>"
++				"<p class='summary'>"+ overview +"</p>"
++			"</div>"
++		"</div>"
++	"</div>").children(".container").fadeIn();
+
+	rooms_cards(ID);
+}
+
+function rooms_cards(ResortID){
+	$("main").append("<div id='rooms_cards_container'></div>");
+	
+	title("div#rooms_cards_container","Rooms","regular");
+	
+	$.each(JSONobj[model[1]],function( key, value ){
+		if(value.ID === ResortID){
+			render_rooms_cards("div#rooms_cards_container", value.Image, value.RoomType, value.Overview);
+		}
+	});
+}
+
+function render_rooms_cards(container,image,type,overview){
+	$(container).append(
+	"<div class='container'>"
++		"<div>"
++			"<div>"
++				"<img src='"+ baseURL + image +"'/>"
++			"</div>"
++			"<div>"
++				"<span class='emphasis_large'>"+ type +"</span>"
++				"<p class='summary'>"+ overview +"</p>"
++			"</div>"
++		"</div>"
++	"</div>").children(".container").fadeIn();
+}
+
+function basicPage(){
+	this.JSONconfirm();
+	
+	$.each(JSONobj[model],function(key,value){
+		var content = value.Text;
+		title(value.Title,"alternate");
+		basic(content,"emphasis_small");
+	});
+}
+basicPage.prototype = new handle();
+
+
+// function basicPageHandler(model){	
+	// $.each(JSONobj[model],function(key,value){
+		// var content = value.Text;
+		// title(value.Title,"alternate");
+		// basic(content,"emphasis_small");
+	// });
+// }
+
+function title(below,title,type){
+	$(below).before('<div class="heading_strip '+ type +'">'
 +	'<div class="heading_wrapper">'
 +	'<h3 class="heading">'+ title +'</b></h3>'
 +	'</div>'
@@ -322,31 +413,6 @@ function basic(content,type){
 	'<div class="gutter_space '+ type +'">'
 +	'<div class="white_contain">'+ content +'</div>'
 +	'</div>');
-}
-
-function cards(container,ID,href,image,name,price,overview,variable,icon){	
-	$("div#"+container).append(
-	"<div class='container'>"
-+	"<div>"
-+	"<a href='"+ href+"/"+name +"' data-id='"+ ID +"'>"
-+	"<div>"
-+	"<img src='"+ image +"'/>"
-+	(price == undefined ? "" : "<span class='emphasis_small'>From <b>USD "+ price +"</b></span>")
-+	"</div>"
-+	"<div>"
-+	"<span class='emphasis_large'>"+ name +"</span>"
-+	"<p class='summary'>"+ overview +"</p>"
-+	"</div>"
-+	"</a>"
-+	"<div>"
-+	"<img src='assets/icons/"+ icon +".svg' height='15'/><span class='smallest'>"+ variable +" days</span>"
-+	"<div>"
-+	"<a href=#><?php include('../icons/facebook.svg') ?></a>"
-+	"<a href=#><?php include('../icons/twitter.svg') ?></a>"
-+	"</div>"
-+	"</div>"
-+	"</div>"
-+	"</div>").children(".container").fadeIn();
 }
 
 function detailsPage(model,url,href){
@@ -383,6 +449,24 @@ function detailsPageHandler(model,href){
 	});
 }
 
-function details(){
-	
+function getBaseURL() {
+    var url = location.href;  // entire url including querystring - also: window.location.href;
+    var baseURL = url.substring(0, url.indexOf('/', 14));
+
+
+    if (baseURL.indexOf('http://localhost') != -1) {
+        // Base Url for localhost
+        var url = location.href;  // window.location.href;
+        var pathname = location.pathname;  // window.location.pathname;
+        var index1 = url.indexOf(pathname);
+        var index2 = url.indexOf("/", index1 + 1);
+        var baseLocalUrl = url.substr(0, index2);
+
+        return baseLocalUrl + "/";
+    }
+    else {
+        // Root Url for domain name
+        return baseURL + "/";
+    }
+
 }

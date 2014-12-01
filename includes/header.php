@@ -38,7 +38,7 @@
 						foreach($navLinks as $value){
 							if($value['HREF'] == "/book"){
 							?>
-								<li><a href=# class="book"><?php echo $value['Name'] ?></a></li>
+								<li><a href=# class="book" data-req="<?php echo $value['Name'] ?>"><?php echo $value['Name'] ?></a></li>
 							<?php
 							}
 							?>
@@ -74,11 +74,11 @@
 					foreach($navLinks as $value){
 						if($value['HREF'] == "book"){
 						?>
-							<li><a href="<?php echo $value['HREF'] ?>" class="book"><?php echo $value['Name'] ?></a></li>
+							<li><a href="<?php echo $value['HREF'] ?>" class="book" data-req="<?php echo $value['Name'] ?>"><?php echo $value['Name'] ?></a></li>
 						<?php
 						}else{
 						?>
-							<li><a href="<?php echo $value['HREF'] ?>"><?php echo $value['Name'] ?></a></li>
+							<li><a href="<?php echo $value['HREF'] ?>" data-req="<?php echo $value['Name'] ?>"><?php echo $value['Name'] ?></a></li>
 						<?php
 						}
 					}
