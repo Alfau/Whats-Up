@@ -329,7 +329,7 @@ div#slideshow{
   display:none;
 }
 
-div#featured_packages,div#small_cards_container{
+div#carousel,div#small_cards_container{
   margin:0 5.5555%;
   
   div.container{
@@ -502,7 +502,7 @@ form.contact{
     /* Zoom baseline grid to 17/16 = 1.0625 */
     font-size: #{($font-size - 1) / $em}em;
   }
-  div#featured_packages,div#small_cards_container{
+  div#carousel,div#small_cards_container{
     div.container{
       float:left;
       width:50%;
@@ -537,7 +537,7 @@ form.contact{
     /* Zoom baseline grid to 17/16 = 1.0625 */
     font-size: #{($font-size + 1) / $em}em;
   }
-  div#featured_packages,div#small_cards_container{
+  div#carousel,div#small_cards_container{
     &>div.container{
       width:25%;
     }
@@ -789,7 +789,7 @@ form.contact{
   }
 }
 
-div#featuredPackages_section,div#small_cards_container{
+div#carousel_section,div#small_cards_container{
   position:relative;
   float:left;
   margin-bottom:1em;
@@ -834,6 +834,7 @@ div#large_cards_container,div#rooms_cards_container{
       background-color: #FFF;
       box-shadow: 0px 0px 1px #C0C0C0;
       border-radius: 3px;
+      margin-bottom:1em;
       
       &>div:first-child{
         display:inline-block;
@@ -897,7 +898,7 @@ div#large_cards_container,div#rooms_cards_container{
 
 /* @media screen and (min-width: 1872px) */
 @media screen and (min-width: 117em) {
-   div#featured_packages{
+   div#carousel{
     &>div{
       width:25%;
     }

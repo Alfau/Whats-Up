@@ -29,11 +29,7 @@ $(document).ready(function(){
 		if($(this).parents("nav#right").length){
 			basicPage(model,url);
 		}else{
-			if(href.indexOf("home") > -1){
-				homePage(url,req_models['home']);
-			}else{
-				handle(req_models[req],url,href,"small_cards",null);
-			}
+			href.indexOf("home") > -1 ? handle(req_models[req],url,href,"render_home",null) : handle(req_models[req],url,href,"small_cards",null);	
 		}
 		
 		e.preventDefault();
@@ -86,7 +82,7 @@ $(document).ready(function(){
 	});
 	
 	JSONobj = {};
-	homePage(baseURL+"/home",req_models['home']);
+	handle(req_models["Home"],baseURL+"home","home","render_home",null);
 	slideshow(9000,500);
 	
 });
@@ -136,104 +132,40 @@ function slideshow(interval,speed){
 	}
 }
 
-function packagesCarousel(url,state,page,rows){
-	if(typeof JSONobj['Packages'] !== "undefined" && JSONobj['Packages'].length){
-		packagesCarouselHandler(state,page,rows);
-	}else{
-		$.getJSON("JSONroute.php",{url:url},function(data){
-			JSONobj['Packages']=data;
-			packagesCarouselHandler(state,page,rows);
-		});
-	}
-}
-function packagesCarouselHandler(state,page,rows){
-	start_key=((page-1)*rows);
-	end_key=start_key+rows-1;
+function handle_carousel(model,url,href,state,page,rows){
+	this.model = model;
+	this.url = url;
+	this.href = href;
 	
-	$("div#featured_packages .container").fadeOut().remove();
-	$.each(JSONobj['Packages'],function(key,value){
-		if(value.State == state && key>=start_key && key<=end_key){
-			cards("featured_packages",value.ID,"packages",value.Image,value.Name,value.Price,value.Overview,value.Duration,"duration");
-		}
-	});
-}
-
-function homePage(url,model){
-	
-	function JSONconfirm(i){
+	this.JSONconfirm = function(i){
 		var key = i || 0;
 		if(key < model.length){
 			if(typeof JSONobj[model[key]] === "undefined" || JSONobj[model[key]].length < 1){
-				$.getJSON("JSONroute.php",{url:url},function(data){
-					JSONobj=data;
+				$.getJSON(baseURL+"/JSONroute.php",{url:url},function(data){
+					$.each(data,function(key,value){
+						JSONobj[key] = value;
+					});
 					JSONconfirm(key+1);
 				});
 			}else{
 				JSONconfirm(key+1);
 			}
 		}else{
-			homePageHandler(url);
+			carousel(state,page,rows);
 		}
-	}
-	
+	};
 	JSONconfirm();
 }
-
-function homePageHandler(url){
-	$("main").append("<div id='slideshow'><ul id='controls'></ul><ul id='slides'></ul><div>");
-	$("main").append("<div id='featuredPackages_section'><div id='featured_packages'></div><ul id='controls'><li><a href=# data-page='1'></a></li><li><a href=# data-page='2'></a></li></ul><div>");
-	$("main").append("<div id='customer_quote'><ul id='controls'></ul><div class='quote_container'></div></div>");
+function carousel(state,page,rows){
+	start_key=((page-1)*rows);
+	end_key=start_key+rows-1;
 	
-	
-	$.each(JSONobj["Slideshow"],function(key,value){
-		key == 0 ? state = "active" : state = "inactive";
-		
-		$("div#slideshow #controls").append(
-		"<li><a href=# data-id='"+ value.ID +"' class='"+ state +"'></a></li>"
-		);
-		
-		$("div#slideshow ul#slides").append(
-		"<li data-id='"+ value.ID +"' class='"+ state +"'>"
-	+	"<div class='slide' style='background:url(\""+ value.Image +"\")'></div>"
-	+	"<div class='text'>"
-	+	"<p class='emphasis_large'>"+ value.Title +"</p>"
-	+	"<p class='emphasis_small'>"+ value.Text +"</p>"
-	+	"<a href=# class='details'>Details</a>"
-	+	"</div>"
-	+	"</li>");
+	$("div#carousel .container").fadeOut().remove();
+	$.each(JSONobj[model[0]],function(key,value){
+		if(value.State == state && key>=start_key && key<=end_key){
+			render_small_cards("div#carousel", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration);
+		}
 	});
-	
-	$.each(JSONobj['Quotes'],function(key,value){
-		key == 0 ? state = "active" : state = "inactive";
-		
-		$("div#customer_quote #controls").append(
-		"<li><a href=# data-id='"+ value.ID +"' class='"+ state +"'></a></li>"
-		);
-		
-		$("div#customer_quote .quote_container").append(
-		"<div data-id='"+ value.ID +"' class='"+ state +"'>"
-	+	"<p class='emphasis_large'>"+ value.Text +"</p>"
-	+	"<p class='summary'>"+ value.Name +"</p>"
-	+	"</div>"
-		);
-	});
-	
-	$("div#customer_quote").before(
-		'<div class="heading_strip">'
-	+	'<div class="heading_wrapper">'
-	+	'<h3 class="heading">Customer <b>Feedback</b></h3>'
-	+	'</div>'
-	+	'</div>'
-	);
-	$("div#featuredPackages_section").before(
-		'<div class="heading_strip">'
-	+	'<div class="heading_wrapper">'
-	+	'<h3 class="heading">Featured <b>Packages</b></h3>'
-	+	'</div>'
-	+	'</div>'
-	);
-	
-	packagesCarousel(url,"Featured","1","4");
 }
 
 function handle(model,url,href,type,object_ID){
@@ -244,9 +176,6 @@ function handle(model,url,href,type,object_ID){
 	this.object_ID = object_ID;
 	
 	this.JSONconfirm = function(i){
-		
-		// console.log(model);
-		
 		var key = i || 0;
 		if(key < model.length){
 			if(typeof JSONobj[model[key]] === "undefined" || JSONobj[model[key]].length < 1){
@@ -276,7 +205,10 @@ function render(type,href){
 			break;
 		case "basic_cards" :
 			basic_cards();
-			break;		
+			break;	
+		case "render_home" :
+			render_home();
+			break;
 	}
 }
 
@@ -359,7 +291,7 @@ function rooms_cards(ResortID){
 	title("div#rooms_cards_container","Rooms","regular");
 	
 	$.each(JSONobj[model[1]],function( key, value ){
-		if(value.ID === ResortID){
+		if(value.ResortID === ResortID){
 			render_rooms_cards("div#rooms_cards_container", value.Image, value.RoomType, value.Overview);
 		}
 	});
@@ -378,6 +310,63 @@ function render_rooms_cards(container,image,type,overview){
 +			"</div>"
 +		"</div>"
 +	"</div>").children(".container").fadeIn();
+}
+
+function render_home(url){
+	$("main").append("<div id='slideshow'><ul id='controls'></ul><ul id='slides'></ul><div>");
+	$("main").append("<div id='carousel_section'><div id='carousel'></div><ul id='controls'><li><a href=# data-page='1'><?php include('assets/icons/arrow.svg') ?></a></li><li><a href=# data-page='2'><?php include('assets/icons/arrow.svg') ?></a></li></ul><div>");
+	$("main").append("<div id='customer_quote'><ul id='controls'></ul><div class='quote_container'></div></div>");
+	
+	
+	$.each(JSONobj["Slideshow"],function(key,value){
+		key == 0 ? state = "active" : state = "inactive";
+		
+		$("div#slideshow #controls").append(
+		"<li><a href=# data-id='"+ value.ID +"' class='"+ state +"'></a></li>"
+		);
+		
+		$("div#slideshow ul#slides").append(
+		"<li data-id='"+ value.ID +"' class='"+ state +"'>"
+	+	"<div class='slide' style='background:url(\""+ value.Image +"\")'></div>"
+	+	"<div class='text'>"
+	+	"<p class='emphasis_large'>"+ value.Title +"</p>"
+	+	"<p class='emphasis_small'>"+ value.Text +"</p>"
+	+	"<a href=# class='details'>Details</a>"
+	+	"</div>"
+	+	"</li>");
+	});
+	
+	$.each(JSONobj['Quotes'],function(key,value){
+		key == 0 ? state = "active" : state = "inactive";
+		
+		$("div#customer_quote #controls").append(
+		"<li><a href=# data-id='"+ value.ID +"' class='"+ state +"'></a></li>"
+		);
+		
+		$("div#customer_quote .quote_container").append(
+		"<div data-id='"+ value.ID +"' class='"+ state +"'>"
+	+	"<p class='emphasis_large'>"+ value.Text +"</p>"
+	+	"<p class='summary'>"+ value.Name +"</p>"
+	+	"</div>"
+		);
+	});
+	
+	$("div#customer_quote").before(
+		'<div class="heading_strip">'
+	+	'<div class="heading_wrapper">'
+	+	'<h3 class="heading">Customer <b>Feedback</b></h3>'
+	+	'</div>'
+	+	'</div>'
+	);
+	$("div#carousel_section").before(
+		'<div class="heading_strip">'
+	+	'<div class="heading_wrapper">'
+	+	'<h3 class="heading">Featured <b>Packages</b></h3>'
+	+	'</div>'
+	+	'</div>'
+	);
+	
+	handle_carousel(["Packages"],baseURL+"packages","packages","Featured","1","4");
 }
 
 function basicPage(){
