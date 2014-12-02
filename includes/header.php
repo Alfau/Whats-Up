@@ -7,7 +7,7 @@
 	<title>What's Up? Maldives</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
-	<script src="assets/js/script.js"></script>
+	<script src="assets/js/script.php"></script>
 	<!-- <script src="assets/js/GGS.js"></script> -->
 </head>
 <body>	

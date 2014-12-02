@@ -242,13 +242,16 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 +	"</a>"
 +	"<div>"
 +	"<img src='assets/icons/Duration.svg' height='15'/><span class='smallest'>"+ duration +" days</span>"
-+	"<div>"
-+	"<a href=#><?php include('../icons/facebook.svg') ?></a>"
-+	"<a href=#><?php include('../icons/twitter.svg') ?></a>"
++	"<div class='social'>"
++	"<a href=# class='facebook'><?php //include('../icons/facebook.svg') ?></a>"
++	"<a href=# class='twitter'><?php //include('../icons/twitter.svg') ?></a>"
 +	"</div>"
 +	"</div>"
 +	"</div>"
 +	"</div>").children(".container").fadeIn();
+
+	getSVG("assets/icons/facebook.svg",container+" .social a.facebook");
+	getSVG("assets/icons/twitter.svg",container+" .social a.twitter");
 }
 
 function large_cards( href ){
@@ -314,9 +317,10 @@ function render_rooms_cards(container,image,type,overview){
 
 function render_home(url){
 	$("main").append("<div id='slideshow'><ul id='controls'></ul><ul id='slides'></ul><div>");
-	$("main").append("<div id='carousel_section'><div id='carousel'></div><ul id='controls'><li><a href=# data-page='1'><?php include('assets/icons/arrow.svg') ?></a></li><li><a href=# data-page='2'><?php include('assets/icons/arrow.svg') ?></a></li></ul><div>");
+	$("main").append("<div id='carousel_section'><div id='carousel'></div><ul id='controls'><li><a href=# data-page='1'></a></li><li><a href=# data-page='2'></a></li></ul><div>");
 	$("main").append("<div id='customer_quote'><ul id='controls'></ul><div class='quote_container'></div></div>");
 	
+	getSVG("assets/icons/arrow.svg","div#carousel_section #controls a");
 	
 	$.each(JSONobj["Slideshow"],function(key,value){
 		key == 0 ? state = "active" : state = "inactive";
@@ -458,4 +462,10 @@ function getBaseURL() {
         return baseURL + "/";
     }
 
+}
+
+function getSVG(location,target){
+	$.get(baseURL+location,function(data){
+		$(target).html(data);
+	},"text");
 }
