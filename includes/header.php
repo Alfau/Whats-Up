@@ -114,5 +114,6 @@
 				?>
 			</ul>
 		</div>
+		<a href=# id="menu"><?php include("assets/icons/menu.svg") ?></a>
 	</header>
 		<main>

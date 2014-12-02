@@ -251,9 +251,6 @@ body {
   font-size: #{(($font-size - 2) / $em)}em;
 }
 header#small{
-  // display:none;
-}
-header#large{
   position:relative;
   z-index:2;
   height:75px;
@@ -261,46 +258,39 @@ header#large{
   box-shadow:0 0 1px #c0c0c0;
   background-color:#fff;
   
-  div#header_top{
-    position:relative;
-    height:100%;
+  &>a img{
+    margin:0 0.5em;
+    height:50%;
+    @include vertical_center(5.555%,inherit);
+  }
+  &>a:last-child{
+    @include vertical_center(inherit,5.555%);
+    display:block;
+    width:30px;
+    margin:0 0.5em;
     
-    ul{
-      display:none;
-    }
-    &>a:first-child img{
-        margin:0 0.5em;
-        height:50%;
-        @include vertical_center(5.555%,inherit);
-    }
-    &>a:last-child{
-      @include vertical_center(inherit,5.555%);
-      display:block;
-      width:30px;
-      margin:0 0.5em;
+    &.active svg{
+      transition:fill 0.2s;
       
-      &.active svg{
-        transition:fill 0.2s;
-        
-        circle:nth-child(2){
-          fill:$accent_color;
-        }
+      circle:nth-child(odd){
+        fill:$accent_color;
       }
     }
   }
-  
-  div#header_bottom{
+  &>nav, &>div{
     box-shadow:0 1px 1px #ccc;
     margin-left:100%;
+    position:relative;
+    top:75px;
     transition:margin-left 0.5s;
-    
-    li{
+     
+     li{
       background-color:#fff;
       text-align:right;
       border-bottom:solid 1px $border_color;
       list-style:none;
       padding:#{(($font-size/$em))}em 0;
-      padding-right:5.555%;
+      padding-right:5.5555%;
     }
     li:first-child{
       border-top:solid 1px $border_color;
@@ -323,13 +313,18 @@ header#large{
       }
     }
   }
-  nav#right li{
-    text-align:left;
-    padding-left:#{($font-size/$em)}em;
+  div#header_right{
+    &>ul{
+      display:none;
+    }
+    nav#right li{
+      text-align:left;
+      padding-left:5.5555%;
+    }
   }
 }
 
-div#slideshow{
+div#slideshow,div#customer_quote,header#large{
   display:none;
 }
 
@@ -390,89 +385,6 @@ div#carousel,div#small_cards_container{
         }
       }
     }
-  }
-}
-
-div#customer_quote{
-  position:relative;
-  height:200px;
-  margin:0 5.5555%;
-  padding:0 0.5em;
-  
-  ul#controls{
-    z-index:5;
-    position:absolute;
-    bottom:1em;
-    left:50%;
-    transform:translateX(-50%);
-    
-    li{
-      display:inline-block;
-      width:10px;
-      margin-right:3px;
-    }
-    
-    a{
-      height:10px;
-      width:10px;
-      background-color:#BFC0C2;
-      border-radius:100px;
-      display:block;
-      transition:width 0.2s,height 0.2s,background-color 0.9s;
-      
-      &.active{
-        background-color:$accent_color;
-      }
-      &:hover{
-        width:12px;
-        height:12px;
-      }
-    }
-  }
-  
-  &>div{
-    width:100%;
-    height:100%;
-    background-color:#fff;
-    box-shadow:0 0 1px #c0c0c0;
-    border-radius:3px;
-    
-   &>div{
-      opacity:0;
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      text-align:center;
-      
-      &.active{
-        opacity:1;
-      }
-    } 
-  }
-  .quote_text{
-    color:#515151;
-    margin-bottom:1em;
-  }
-  .quote_name{
-    color:$primary_color;
-    font-style:italic;
-  }
-  svg{
-    width:65px;
-    transition:width 0.3s;
-  }
-  svg:first-child{
-    margin-left:1em;
-  }
-  svg:last-child{
-    position:absolute;
-    right:1.5em;
-    bottom:0;
-    transform:rotate(180deg);
-  }
-  &:hover svg{
-    width:75px;
   }
 }
 
@@ -557,83 +469,10 @@ form.contact{
     /* Reset baseline grid to 16/16 = 1.0 */
     font-size: #{($font-size) / $em}em;
   }
-
   header#large{
     display:none;
-    // position:fixed;
-    top:0;
-    height:120px;
-    
-    li{
-      display:inline-block !important;
-      border:none !important;
-    }
-    div#header_top{
-      height:70%;
-      
-      &>a:first-child img{
-        left:5.55555%;
-      }
-      &>a:last-child{
-        display:none;
-      }
-      ul{
-        display:block;
-        padding-right:0.5em;
-        @include vertical_center(inherit,5.55555%);
-        
-        svg{
-          margin-left:1em;
-        }
-      }
-    }
-    div#header_bottom{
-      box-shadow:none;
-      margin-left:0;
-      position:relative;
-      height:30%;
-      border-top:solid 1px $border_color;
-      box-sizing:content-box;
-      
-      a{
-        font-size:0.9em !important;
-        line-height:35px;
-        padding:0 !important;
-      }
-      li{
-        padding:0 !important;
-        background:none !important;
-        margin-right:2em;
-      }
-      nav#left{
-        @include vertical_center(5.55555%,inherit);
-        height:100%;
-        padding-left:0.5em;
-        ul{
-          height:100%;
-        }
-        li.nav_book{
-          margin-left:-1em;
-          // padding-bottom:7px !important;
-          // border-radius:0 0 3px 3px;
-          
-          a{
-            padding:0 1em !important;
-          }
-        }
-      }
-      nav#right{
-        @include vertical_center(inherit,5.55555%);
-        padding-right:0.5em;
-        ul li:last-child{
-          margin:0;
-        }
-      }
-    }
   }
-  
   header#small{
-    // display:none;
     background-color:#fff;
     box-shadow:0 0 2px #888;
     height:60px;
@@ -641,11 +480,20 @@ form.contact{
     position:fixed;
     top:0;
     z-index:10;
-    
+
+    &>nav, &>div{
+      margin-left:0;
+      box-shadow:none;
+    }
+    a#menu{
+      display:none !important;
+    }
     a{
       color:$primary_color;
       font-size:0.8em;
       transition:color 0.2s;
+      padding:0 !important;
+      display:inline !important;
       
       &:hover{
         color:$accent_color;
@@ -653,12 +501,13 @@ form.contact{
       &.book{
         background-color:$accent_color;
         color:#fff;
-        padding:0.5em 1em;
+        padding:0.5em 1em !important;
         border-radius:3px;
       }
     }
     &>a img{
       width:13%;
+      height:auto;
       position:absolute;
       top:50%;
       left:50%;
@@ -668,18 +517,23 @@ form.contact{
       display:inline-block !important;
       border:none !important;
       list-style:none;
-      padding:#{(($font-size/$em)*.5)}em 0;
-      padding-right:#{(($font-size/$em)*2)}em;
+      padding:#{(($font-size/$em)*.5)}em 0 !important;
+      padding-right:#{(($font-size/$em)*2)}em !important;
     }
     div#header_right{
       @include vertical_center(inherit,5.555%);
       padding:0 0.5em;
       
       nav,ul{
+        display:block;
         float:left;
       }
       &>ul{
         margin-top:3px;
+        
+        li:last-child{
+          padding-right:0 !important;
+        }
       }
       &>ul{
         padding-left:2em;
@@ -790,6 +644,89 @@ form.contact{
       a.active{
         background-color:$accent_color;
       }
+    }
+  }
+  div#customer_quote{
+    display:block;
+    position:relative;
+    height:200px;
+    margin:0 5.5555% 5.5555% 5.5555%;
+    padding:0 0.5em;
+    
+    ul#controls{
+      z-index:5;
+      position:absolute;
+      bottom:1em;
+      left:50%;
+      transform:translateX(-50%);
+      
+      li{
+        display:inline-block;
+        width:10px;
+        margin-right:3px;
+      }
+      
+      a{
+        height:10px;
+        width:10px;
+        background-color:#BFC0C2;
+        border-radius:100px;
+        display:block;
+        transition:width 0.2s,height 0.2s,background-color 0.9s;
+        
+        &.active{
+          background-color:$accent_color;
+        }
+        &:hover{
+          width:12px;
+          height:12px;
+        }
+      }
+    }
+    
+    &>div{
+      width:100%;
+      height:100%;
+      background-color:#fff;
+      box-shadow:0 0 1px #c0c0c0;
+      border-radius:3px;
+      
+     &>div{
+        opacity:0;
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        text-align:center;
+        
+        &.active{
+          opacity:1;
+        }
+      } 
+    }
+    .quote_text{
+      color:#515151;
+      margin-bottom:1em;
+    }
+    .quote_name{
+      color:$primary_color;
+      font-style:italic;
+    }
+    svg{
+      width:65px;
+      transition:width 0.3s;
+    }
+    svg:first-child{
+      margin-left:1em;
+    }
+    svg:last-child{
+      position:absolute;
+      right:1.5em;
+      bottom:0;
+      transform:rotate(180deg);
+    }
+    &:hover svg{
+      width:75px;
     }
   }
 }

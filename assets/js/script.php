@@ -2,12 +2,12 @@ $(document).ready(function(){
 	$(document).on("click","a#menu",function(){
 		if($(this).hasClass("active")){
 			$(this).removeClass("active").children("svg").attr("class","");
-			// $("header#large div#header_bottom").slideUp();
-			 $("header#large div#header_bottom").css({"margin-left":"100%"});
+			 // $("header#large div#header_bottom").css({"margin-left":"100%"});
+			 $("header#small div#header_right, header#small nav#left").css({"margin-left":"100%"});
 		}else{
 			$(this).addClass("active").children("svg").attr("class","active");
-			// $("header#large div#header_bottom").slideDown();
-			$("header#large div#header_bottom").css({"margin-left":"0"});
+			// $("header#large div#header_bottom").css({"margin-left":"0"});
+			$("header#small div#header_right, header#small nav#left").css({"margin-left":"0"});
 		}
 	});
 	
@@ -205,7 +205,7 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 +	"</div>"
 +	"<div>"
 +	"<span class='emphasis_large'>"+ name +"</span>"
-+	"<p class='summary'>"+ overview +"</p>"
++	"<p class='summary'>"+ overview.substr(0,150) +"...</p>"
 +	"</div>"
 +	"</a>"
 +	"<div>"
