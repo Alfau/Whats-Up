@@ -95,7 +95,7 @@
 						
 						foreach($navLinks as $value){
 							?>
-								<li><a href="<?php echo $value['HREF'] ?>"><?php echo $value['Name'] ?></a></li>
+								<li><a href="<?php echo $value['HREF'] ?>" data-req="<?php echo $value['Name'] ?>"><?php echo $value['Name'] ?></a></li>
 							<?php
 						}
 					?>

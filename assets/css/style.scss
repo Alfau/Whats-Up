@@ -195,6 +195,10 @@ h3{
   font-size:#{($font-size/$em)}em;
   color:$primary_color;
 }
+.emphasis_medium{
+  font-size:0.9em;
+  color:#505050;
+}
 .emphasis_small{
   font-size:0.8em;
   color:#505050;
@@ -472,18 +476,19 @@ div#customer_quote{
   }
 }
 
-div.gutter_space{
+div.basic_cards_container{
   padding:0 0.5em;
   margin:0 5.55555%;
   
-  &.emphasis_small p{
-    margin-bottom:1em;
-  }
   &>div{
     background-color:#fff;
     border-radius:3px;
     box-shadow:0 0 1px #c0c0c0;
     padding:1em;
+    
+    &.emphasis_small p{
+      margin-bottom:1em;
+    }
   }
 }
 
@@ -823,7 +828,7 @@ div#carousel_section,div#small_cards_container{
     }
   }
 }
-div#large_cards_container,div#rooms_cards_container{
+div#large_cards_container,div#rooms_cards_container,div#includes_cards_container{
   margin:0 5.55555%;
   
   div.container{
@@ -851,9 +856,19 @@ div#large_cards_container,div#rooms_cards_container{
         vertical-align:top;
         padding:1em;
         width:75%;
+        
+        .emphasis_medium{
+          color: $accent_color;
+          margin-left:1em;
+        }
       }
     }
   }
+}
+div#includes_cards_container li{
+  list-style:square;
+  margin:0 0 0.5em 2em ;
+  padding-left:1em;
 }
 /* @media screen and (min-width: 1200px) */
 // @media screen and (min-width: 75em) {

@@ -27,7 +27,8 @@ $(document).ready(function(){
 		var req = $(this).attr("data-req");
 		
 		if($(this).parents("nav#right").length){
-			basicPage(model,url);
+			// basicPage(model,url);
+			handle(req_models[req],url,href,"basic_cards",null);
 		}else{
 			href.indexOf("home") > -1 ? handle(req_models[req],url,href,"render_home",null) : handle(req_models[req],url,href,"small_cards",null);	
 		}
@@ -57,9 +58,9 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 	
-	$(document).on("click","div#featuredPackages_section #controls a",function(e){
+	$(document).on("click","div.carousel_packages #controls a",function(e){
 		var page=$(this).attr("data-page");
-		packagesCarousel(baseURL+"/home","Featured",page,"4");
+		handle_carousel(["Packages"],baseURL+"packages","packages","Featured",page,"4");
 		e.preventDefault();
 	});
 	
@@ -93,7 +94,10 @@ var req_models = {
 	Home : ["Slideshow", "Packages", "Quotes"],
 	Packages : ["Packages"],
 	Stay : ["Resorts", "Packages"],
-	stay_details : ["Resorts", "Rooms"]
+	About : ["About"],
+	Contact : ["Contact"],
+	stay_details : ["Resorts", "Rooms"],
+	packages_details : ["Packages"]
 };
 
 function changeURL(url){
@@ -130,42 +134,6 @@ function slideshow(interval,speed){
 		$(control_active).css({"background-color":"#fff"}).removeClass("active");
 		$("div#slideshow #controls a[data-id=" + active_id + "]").css({"background-color":"#30bec1"}).addClass("active");
 	}
-}
-
-function handle_carousel(model,url,href,state,page,rows){
-	this.model = model;
-	this.url = url;
-	this.href = href;
-	
-	this.JSONconfirm = function(i){
-		var key = i || 0;
-		if(key < model.length){
-			if(typeof JSONobj[model[key]] === "undefined" || JSONobj[model[key]].length < 1){
-				$.getJSON(baseURL+"/JSONroute.php",{url:url},function(data){
-					$.each(data,function(key,value){
-						JSONobj[key] = value;
-					});
-					JSONconfirm(key+1);
-				});
-			}else{
-				JSONconfirm(key+1);
-			}
-		}else{
-			carousel(state,page,rows);
-		}
-	};
-	JSONconfirm();
-}
-function carousel(state,page,rows){
-	start_key=((page-1)*rows);
-	end_key=start_key+rows-1;
-	
-	$("div#carousel .container").fadeOut().remove();
-	$.each(JSONobj[model[0]],function(key,value){
-		if(value.State == state && key>=start_key && key<=end_key){
-			render_small_cards("div#carousel", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration);
-		}
-	});
 }
 
 function handle(model,url,href,type,object_ID){
@@ -276,16 +244,25 @@ function render_large_cards( container, href, ID, image, name, price, overview, 
 +		"<div>"
 +			"<div>"
 +				"<img src='"+ baseURL + image +"'/>"
-+				(price == undefined ? "" : "<span class='emphasis_small'>From <b>USD "+ price +"</b></span>")
 +			"</div>"
 +			"<div>"
 +				"<span class='emphasis_large'>"+ name +"</span>"
++				(price == undefined ? "" : "<span class='emphasis_medium'>From <b>USD "+ price +"</b></span>")
 +				"<p class='summary'>"+ overview +"</p>"
 +			"</div>"
 +		"</div>"
 +	"</div>").children(".container").fadeIn();
 
-	rooms_cards(ID);
+	console.log(ID);
+
+	switch(href.split("/")[0]){
+		case "stay" :
+			rooms_cards(ID);
+			break;
+		case "packages" :
+			includes_cards(ID);
+			break;	
+	}
 }
 
 function rooms_cards(ResortID){
@@ -315,9 +292,30 @@ function render_rooms_cards(container,image,type,overview){
 +	"</div>").children(".container").fadeIn();
 }
 
+function includes_cards(ID){
+	$("main").append("<div id='includes_cards_container'></div>");
+	
+	title("div#includes_cards_container","Includes","regular");
+	
+	$.each(JSONobj[model[0]],function( key, value ){
+		if(value.ID === ID){
+			render_includes_cards("div#includes_cards_container", value.Includes);
+		}
+	});
+}
+
+function render_includes_cards(container,includes){
+	$(container).append(
+	"<div class='container'>"
++		"<div>"
++			"<div class='emphasis_medium'>"+ includes +"</div>"
++		"</div>"
++	"</div>").children(".container").fadeIn();
+}
+
 function render_home(url){
 	$("main").append("<div id='slideshow'><ul id='controls'></ul><ul id='slides'></ul><div>");
-	$("main").append("<div id='carousel_section'><div id='carousel'></div><ul id='controls'><li><a href=# data-page='1'></a></li><li><a href=# data-page='2'></a></li></ul><div>");
+	$("main").append("<div id='carousel_section' class='carousel_packages'><div id='carousel'></div><ul id='controls'><li><a href=# data-page='1'></a></li><li><a href=# data-page='2'></a></li></ul><div>");
 	$("main").append("<div id='customer_quote'><ul id='controls'></ul><div class='quote_container'></div></div>");
 	
 	getSVG("assets/icons/arrow.svg","div#carousel_section #controls a");
@@ -373,25 +371,55 @@ function render_home(url){
 	handle_carousel(["Packages"],baseURL+"packages","packages","Featured","1","4");
 }
 
-function basicPage(){
-	this.JSONconfirm();
+function basic_cards(){
+	$("main").html("<div class='basic_cards_container'></div>");
 	
-	$.each(JSONobj[model],function(key,value){
-		var content = value.Text;
-		title(value.Title,"alternate");
-		basic(content,"emphasis_small");
+	$.each(JSONobj[model[0]],function( key, value ){
+		title("div.basic_cards_container", value.Title, "alternate");
+		render_basic_cards(value.Text, "emphasis_small");
 	});
 }
-basicPage.prototype = new handle();
 
+function render_basic_cards(content,type){
+	$("div.basic_cards_container").append('<div class="basic_cards '+ type +'">'+ content +'</div>');
+}
 
-// function basicPageHandler(model){	
-	// $.each(JSONobj[model],function(key,value){
-		// var content = value.Text;
-		// title(value.Title,"alternate");
-		// basic(content,"emphasis_small");
-	// });
-// }
+function handle_carousel(model,url,href,state,page,rows){
+	this.model = model;
+	this.url = url;
+	this.href = href;
+	
+	this.JSONconfirm = function(i){
+		var key = i || 0;
+		if(key < model.length){
+			if(typeof JSONobj[model[key]] === "undefined" || JSONobj[model[key]].length < 1){
+				$.getJSON(baseURL+"/JSONroute.php",{url:url},function(data){
+					$.each(data,function(key,value){
+						JSONobj[key] = value;
+					});
+					JSONconfirm(key+1);
+				});
+			}else{
+				JSONconfirm(key+1);
+			}
+		}else{
+			carousel(state,page,rows);
+		}
+	};
+	JSONconfirm();
+}
+
+function carousel(state,page,rows){
+	start_key=((page-1)*rows);
+	end_key=start_key+rows-1;
+	
+	$("div#carousel .container").fadeOut().remove();
+	$.each(JSONobj[model[0]],function(key,value){
+		if(value.State == state && key>=start_key && key<=end_key){
+			render_small_cards("div#carousel", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration);
+		}
+	});
+}
 
 function title(below,title,type){
 	$(below).before('<div class="heading_strip '+ type +'">'
@@ -399,47 +427,6 @@ function title(below,title,type){
 +	'<h3 class="heading">'+ title +'</b></h3>'
 +	'</div>'
 +	'</div>');
-}
-
-function basic(content,type){
-	$("main").append(
-	'<div class="gutter_space '+ type +'">'
-+	'<div class="white_contain">'+ content +'</div>'
-+	'</div>');
-}
-
-function detailsPage(model,url,href){
-	function JSONconfirm(i){
-		var key = i || 0;
-		if(key < model.length){
-			if(typeof JSONobj[model[key]] === "undefined" || JSONobj[model[key]].length < 1){
-				$.getJSON("../JSONroute.php",{url:url},function(data){
-					JSONobj[model[key]] = data;
-					JSONconfirm(key+1);
-				});
-			}else{
-				JSONconfirm(key+1);
-			}
-		}else{
-			detailsPageHandler(model,href);
-		}
-	}
-	
-	JSONconfirm();
-}
-
-function detailsPageHandler(model,href){
-	$("main").html("<div id='stay_details'></div>");
-	
-	var heading = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
-	    return result.toUpperCase();
-	});
-	
-	title("Overview","alternate");
-	
-	$.each(JSONobj[model[0]],function(key,value){
-		//cards("cards_container",value.ID,href,value.Image,value.Name,value.Price,value.Overview,value.Duration,icon);
-	});
 }
 
 function getBaseURL() {

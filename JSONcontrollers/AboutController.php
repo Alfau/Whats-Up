@@ -11,7 +11,7 @@ class AboutController{
 		
 		$aboutBundle = array("About" => $about);
 		
-		echo json_encode($about);
+		echo json_encode($aboutBundle);
 		
 	}
 	
