@@ -402,9 +402,46 @@ div.basic_cards_container{
     }
   }
 }
-
+div#large_cards_container,div#rooms_cards_container,div#includes_cards_container{
+  margin:0 5.55555%;
+  
+  div.container{
+    width:100%;
+    padding:0 0.5em;
+    
+    &>div{
+      background-color: #FFF;
+      box-shadow: 0px 0px 1px #C0C0C0;
+      border-radius: 3px;
+      margin-bottom:1em;
+      
+      &>div:first-child{
+        width:100%;
+        
+        img{
+          width:100%;
+          border-radius: 3px 3px 0 0;
+        }
+      }
+      &>div:last-child{
+        padding:1em;
+        // width:100%;
+        
+        .emphasis_medium{
+          color: $accent_color;
+          margin-left:1em;
+        }
+      }
+    }
+  }
+}
+div#includes_cards_container li{
+  list-style:square;
+  margin:0 0 0.5em 2em ;
+  padding-left:1em;
+}
 .heading_strip.alternate{
-    margin-top:2em;
+    margin-top:2em !important;
 }
 
 form.contact{
@@ -770,18 +807,8 @@ div#carousel_section,div#small_cards_container{
   }
 }
 div#large_cards_container,div#rooms_cards_container,div#includes_cards_container{
-  margin:0 5.55555%;
-  
   div.container{
-    width:100%;
-    padding:0 0.5em;
-    
     &>div{
-      background-color: #FFF;
-      box-shadow: 0px 0px 1px #C0C0C0;
-      border-radius: 3px;
-      margin-bottom:1em;
-      
       &>div:first-child{
         display:inline-block;
         vertical-align:top;
@@ -795,24 +822,13 @@ div#large_cards_container,div#rooms_cards_container,div#includes_cards_container
       &>div:last-child{
         display:inline-block;
         vertical-align:top;
-        padding:1em;
         width:75%;
-        
-        .emphasis_medium{
-          color: $accent_color;
-          margin-left:1em;
-        }
       }
     }
   }
 }
-div#includes_cards_container li{
-  list-style:square;
-  margin:0 0 0.5em 2em ;
-  padding-left:1em;
-}
 .heading_strip.alternate{
-    margin-top:90px;
+    margin-top:90px !important;
 }
 
 /* @media screen and (min-width: 1200px) */

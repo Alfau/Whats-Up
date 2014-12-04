@@ -323,8 +323,34 @@ div.basic_cards_container {
     div.basic_cards_container > div.emphasis_small p {
       margin-bottom: 1em; }
 
+div#large_cards_container, div#rooms_cards_container, div#includes_cards_container {
+  margin: 0 5.55555%; }
+  div#large_cards_container div.container, div#rooms_cards_container div.container, div#includes_cards_container div.container {
+    width: 100%;
+    padding: 0 0.5em; }
+    div#large_cards_container div.container > div, div#rooms_cards_container div.container > div, div#includes_cards_container div.container > div {
+      background-color: #FFF;
+      box-shadow: 0px 0px 1px #C0C0C0;
+      border-radius: 3px;
+      margin-bottom: 1em; }
+      div#large_cards_container div.container > div > div:first-child, div#rooms_cards_container div.container > div > div:first-child, div#includes_cards_container div.container > div > div:first-child {
+        width: 100%; }
+        div#large_cards_container div.container > div > div:first-child img, div#rooms_cards_container div.container > div > div:first-child img, div#includes_cards_container div.container > div > div:first-child img {
+          width: 100%;
+          border-radius: 3px 3px 0 0; }
+      div#large_cards_container div.container > div > div:last-child, div#rooms_cards_container div.container > div > div:last-child, div#includes_cards_container div.container > div > div:last-child {
+        padding: 1em; }
+        div#large_cards_container div.container > div > div:last-child .emphasis_medium, div#rooms_cards_container div.container > div > div:last-child .emphasis_medium, div#includes_cards_container div.container > div > div:last-child .emphasis_medium {
+          color: #30bec1;
+          margin-left: 1em; }
+
+div#includes_cards_container li {
+  list-style: square;
+  margin: 0 0 0.5em 2em;
+  padding-left: 1em; }
+
 .heading_strip.alternate {
-  margin-top: 2em; }
+  margin-top: 2em !important; }
 
 form.contact table {
   width: 100%; }
@@ -595,39 +621,20 @@ div#carousel_section, div#small_cards_container {
       div#carousel_section ul#controls li:last-child svg, div#small_cards_container ul#controls li:last-child svg {
         transform: rotate(180deg); }
 
-div#large_cards_container, div#rooms_cards_container, div#includes_cards_container {
-  margin: 0 5.55555%; }
-  div#large_cards_container div.container, div#rooms_cards_container div.container, div#includes_cards_container div.container {
+div#large_cards_container div.container > div > div:first-child, div#rooms_cards_container div.container > div > div:first-child, div#includes_cards_container div.container > div > div:first-child {
+  display: inline-block;
+  vertical-align: top;
+  width: 25%; }
+  div#large_cards_container div.container > div > div:first-child img, div#rooms_cards_container div.container > div > div:first-child img, div#includes_cards_container div.container > div > div:first-child img {
     width: 100%;
-    padding: 0 0.5em; }
-    div#large_cards_container div.container > div, div#rooms_cards_container div.container > div, div#includes_cards_container div.container > div {
-      background-color: #FFF;
-      box-shadow: 0px 0px 1px #C0C0C0;
-      border-radius: 3px;
-      margin-bottom: 1em; }
-      div#large_cards_container div.container > div > div:first-child, div#rooms_cards_container div.container > div > div:first-child, div#includes_cards_container div.container > div > div:first-child {
-        display: inline-block;
-        vertical-align: top;
-        width: 25%; }
-        div#large_cards_container div.container > div > div:first-child img, div#rooms_cards_container div.container > div > div:first-child img, div#includes_cards_container div.container > div > div:first-child img {
-          width: 100%;
-          border-radius: 3px 0px 0px 3px; }
-      div#large_cards_container div.container > div > div:last-child, div#rooms_cards_container div.container > div > div:last-child, div#includes_cards_container div.container > div > div:last-child {
-        display: inline-block;
-        vertical-align: top;
-        padding: 1em;
-        width: 75%; }
-        div#large_cards_container div.container > div > div:last-child .emphasis_medium, div#rooms_cards_container div.container > div > div:last-child .emphasis_medium, div#includes_cards_container div.container > div > div:last-child .emphasis_medium {
-          color: #30bec1;
-          margin-left: 1em; }
-
-div#includes_cards_container li {
-  list-style: square;
-  margin: 0 0 0.5em 2em;
-  padding-left: 1em; }
+    border-radius: 3px 0px 0px 3px; }
+div#large_cards_container div.container > div > div:last-child, div#rooms_cards_container div.container > div > div:last-child, div#includes_cards_container div.container > div > div:last-child {
+  display: inline-block;
+  vertical-align: top;
+  width: 75%; }
 
 .heading_strip.alternate {
-  margin-top: 90px; }
+  margin-top: 90px !important; }
 
 /* @media screen and (min-width: 1200px) */
 /* @media screen and (min-width: 1392px) */

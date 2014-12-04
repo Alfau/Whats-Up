@@ -211,8 +211,6 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 +	"<div>"
 +	"<img src='assets/icons/Duration.svg' height='15'/><span class='smallest'>"+ duration +" days</span>"
 +	"<div class='social'>"
-+	"<a href=# class='facebook'><?php //include('../icons/facebook.svg') ?></a>"
-+	"<a href=# class='twitter'><?php //include('../icons/twitter.svg') ?></a>"
 +	"</div>"
 +	"</div>"
 +	"</div>"
@@ -361,7 +359,7 @@ function render_home(url){
 	+	'</div>'
 	);
 	$("div#carousel_section").before(
-		'<div class="heading_strip">'
+		'<div class="heading_strip" style="margin-top:0">'
 	+	'<div class="heading_wrapper">'
 	+	'<h3 class="heading">Featured <b>Packages</b></h3>'
 	+	'</div>'
