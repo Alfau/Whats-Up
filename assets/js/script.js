@@ -84,7 +84,7 @@ $(document).ready(function(){
 	
 	JSONobj = {};
 	handle(req_models["Home"],baseURL+"home","home","render_home",null);
-	slideshow(9000,500);
+	// slideshow(9000,500);
 	
 });
 
@@ -104,37 +104,71 @@ function changeURL(url){
 	window.history.pushState("","Title",url);
 }
 
-function slideshow(interval,speed){
-	var trigger_slide=setInterval(slide,interval);
+
+var slideshow = function(container, slides, interval, speed){
+	var self = this;
+	var content = "";
+	var controls = "";
 	
-	function slide(){
-		var active_id=$("div#slideshow li.active").attr("data-id");
-		action(active_id,"interval");
-	}
+	this.container = container;
+	this.slides = slides;
+	this.interval = interval;
+	this.speed = speed;
 	
-	$(document).on("click","div#slideshow #controls a",function(e){
-		var active_id=$(this).attr("data-id");
-		action(active_id,"control");
+	this.init = function(){
+		self.render();
 		
-		clearInterval(trigger_slide);
-		trigger_slide=setInterval(slide,interval);
+		var slide_interval = setInterval(self.trigger, self.interval);
 		
-		e.preventDefault();
-	});
+		$(document).on("click", self.container + " #controls a", function(e){
+			var slide = $( this ).attr( "data-id" );
+			self.slide( slide );
+			
+			clearInterval(slide_interval);
+			slide_interval = setInterval(self.trigger, self.interval);
+			e.preventDefault();
+		});
+	};
 	
-	function action(active_id,execute){
-		var active=$("div#slideshow li.active");
-		var control_active=$("div#slideshow #controls a.active");
-		if(execute=="interval"){
-			$(active).is(":last-child") ? active_id=1 : active_id++;
-		}
+	this.trigger = function(){
+		var current_active = $( "div#slideshow #slides li.active" );
+		$( current_active ).is( ":last-child" ) ? next = 1 : next = parseInt( current_active.attr( "data-id" ) ) + 1;
+	
+		self.slide(next);
+	};
+	
+	this.slide = function(id){
+		$( self.container + " #slides li" ).animate({ "opacity" : 0 }, self.speed ).removeClass( "active" );
+		$( self.container + " #slides li[ data-id = " + id + "]" ).animate({ "opacity" : 1 }, self.speed ).addClass( "active" );
 		
-		$(active).animate({"opacity":0},speed).removeClass("active").children(".text").animate({"opacity":0},speed/2);
-		$("div#slideshow li[data-id=" + active_id + "]").animate({"opacity":1},speed).addClass("active").children(".text").animate({"opacity":1},speed/2);
-		$(control_active).css({"background-color":"#fff"}).removeClass("active");
-		$("div#slideshow #controls a[data-id=" + active_id + "]").css({"background-color":"#30bec1"}).addClass("active");
-	}
-}
+		$( self.container + " #controls a").removeClass( "active" );
+		$( self.container + " #controls a[ data-id = " + id + "]" ).addClass( "active" );
+	};
+	
+	this.render = function(){
+		$.each( self.slides, function(key, value){
+			key === 0 ? state = "active" : state = "inactive";
+			
+			controls += "<li>"
+			+	"<a href=# data-id='" + value.ID + "' class='" + state + "'></a>"
+			+	"</li>";
+			
+			content += "<li data-id='" + value.ID + "' class='" + state + "'>"
+			+	"<div class='slide' style='background:url(\"" + value.Image + "\")'></div>"
+			+	"<div class='text'>"
+			+	"<p class='emphasis_large'>" + value.Title + "</p>"
+			+	"<p class='emphasis_small'>" + value.Text + "</p>"
+			+	"<a href=# class='details'>Details</a>"
+			+	"</div>"
+			+	"</li>";
+		});
+		
+		$( self.container + " #controls" ).append( controls );
+		$( self.container + " #slides" ).append( content );
+	};
+	
+	this.init();
+};
 
 function handle(model,url,href,type,object_ID){
 	this.model = model;
@@ -318,23 +352,7 @@ function render_home(url){
 	
 	getSVG("assets/icons/arrow.svg","div#carousel_section #controls a");
 	
-	$.each(JSONobj["Slideshow"],function(key,value){
-		key == 0 ? state = "active" : state = "inactive";
-		
-		$("div#slideshow #controls").append(
-		"<li><a href=# data-id='"+ value.ID +"' class='"+ state +"'></a></li>"
-		);
-		
-		$("div#slideshow ul#slides").append(
-		"<li data-id='"+ value.ID +"' class='"+ state +"'>"
-	+	"<div class='slide' style='background:url(\""+ value.Image +"\")'></div>"
-	+	"<div class='text'>"
-	+	"<p class='emphasis_large'>"+ value.Title +"</p>"
-	+	"<p class='emphasis_small'>"+ value.Text +"</p>"
-	+	"<a href=# class='details'>Details</a>"
-	+	"</div>"
-	+	"</li>");
-	});
+	var home_slideshow = new slideshow("div#slideshow", JSONobj["Slideshow"], 9000, 500);
 	
 	$.each(JSONobj['Quotes'],function(key,value){
 		key == 0 ? state = "active" : state = "inactive";
