@@ -27,7 +27,6 @@ $(document).ready(function(){
 		var req = $(this).attr("data-req");
 		
 		if($(this).parents("nav#right").length){
-			// basicPage(model,url);
 			handle(req_models[req],url,href,"basic_cards",null);
 		}else{
 			href.indexOf("home") > -1 ? handle(req_models[req],url,href,"render_home",null) : handle(req_models[req],url,href,"small_cards",null);	
@@ -58,12 +57,6 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 	
-	$(document).on("click","div.carousel_packages #controls a",function(e){
-		var page=$(this).attr("data-page");
-		handle_carousel(["Packages"],baseURL+"packages","packages","Featured",page,"4");
-		e.preventDefault();
-	});
-	
 	$(document).on("click","div#customer_quote #controls a",function(e){
 		var active=$("div#customer_quote .quote_container .active");
 		var active_id=$(this).attr("data-id");
@@ -76,16 +69,8 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 	
-	$(document).on("click","main a",function(e){
-		
-		
-		e.preventDefault();
-	});
-	
 	JSONobj = {};
 	handle(req_models["Home"],baseURL+"home","home","render_home",null);
-	// slideshow(9000,500);
-	
 });
 
 var baseURL = getBaseURL();
@@ -99,11 +84,6 @@ var req_models = {
 	stay_details : ["Resorts", "Rooms"],
 	packages_details : ["Packages"]
 };
-
-function changeURL(url){
-	window.history.pushState("","Title",url);
-}
-
 
 var slideshow = function(container, slides, interval, speed){
 	var self = this;
@@ -165,6 +145,58 @@ var slideshow = function(container, slides, interval, speed){
 		
 		$( self.container + " #controls" ).append( controls );
 		$( self.container + " #slides" ).append( content );
+	};
+	
+	this.init();
+};
+
+var carousel_obj = function(container, data, num_rows, filter_key, filter_val){
+	var self = this;
+	
+	this.container = container;
+	this.data = data;
+	this.num_rows = num_rows;
+	this.filter_key = filter_key;
+	this.filter_val = filter_val;
+	this.page = 1;	
+	
+	this.state = "State";
+	
+	this.init = function(){
+		self.render_handle();
+		self.control();
+	};
+	
+	this.control = function(){
+		var total_pages = self.data.length / self.num_rows;
+		
+		$( document ).on( "click", self.container + " #controls a", function(e){
+			if( $(this).attr("data-func") === "next" ){
+				if(self.page < ( total_pages )){
+					self.page++;
+					self.render_handle();
+				}
+			}else{
+				if( self.page > 1 ){
+					self.page--;
+					self.render_handle();
+				}
+			}
+			e.preventDefault();
+		});
+	};
+	
+	this.render_handle = function(){
+		start_key = ((self.page - 1) * self.num_rows);
+		end_key = start_key + self.num_rows - 1;
+		
+		$( self.container + " div#carousel .container" ).fadeOut().remove();
+		
+		$.each( self.data, function( key, value ){
+			if( value[self.filter_key] === self.filter_val && key >= start_key && key <= end_key ){
+				render_small_cards( "div#carousel", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration );
+			}
+		});
 	};
 	
 	this.init();
@@ -285,8 +317,6 @@ function render_large_cards( container, href, ID, image, name, price, overview, 
 +		"</div>"
 +	"</div>").children(".container").fadeIn();
 
-	console.log(ID);
-
 	switch(href.split("/")[0]){
 		case "stay" :
 			rooms_cards(ID);
@@ -347,12 +377,13 @@ function render_includes_cards(container,includes){
 
 function render_home(url){
 	$("main").append("<div id='slideshow'><ul id='controls'></ul><ul id='slides'></ul><div>");
-	$("main").append("<div id='carousel_section' class='carousel_packages'><div id='carousel'></div><ul id='controls'><li><a href=# data-page='1'></a></li><li><a href=# data-page='2'></a></li></ul><div>");
+	$("main").append("<div id='carousel_section' class='carousel_packages'><div id='carousel'></div><ul id='controls'><li><a href=# data-func='next'></a></li><li><a href=# data-func='prev'></a></li></ul><div>");
 	$("main").append("<div id='customer_quote'><ul id='controls'></ul><div class='quote_container'></div></div>");
 	
 	getSVG("assets/icons/arrow.svg","div#carousel_section #controls a");
 	
 	var home_slideshow = new slideshow("div#slideshow", JSONobj["Slideshow"], 9000, 500);
+	var set = new carousel_obj( "div#carousel_section", JSONobj["Packages"], 4, "State", "Featured" );
 	
 	$.each(JSONobj['Quotes'],function(key,value){
 		key == 0 ? state = "active" : state = "inactive";
@@ -376,6 +407,7 @@ function render_home(url){
 	+	'</div>'
 	+	'</div>'
 	);
+	
 	$("div#carousel_section").before(
 		'<div class="heading_strip" style="margin-top:0">'
 	+	'<div class="heading_wrapper">'
@@ -383,8 +415,6 @@ function render_home(url){
 	+	'</div>'
 	+	'</div>'
 	);
-	
-	handle_carousel(["Packages"],baseURL+"packages","packages","Featured","1","4");
 }
 
 function basic_cards(){
@@ -398,43 +428,6 @@ function basic_cards(){
 
 function render_basic_cards(content,type){
 	$("div.basic_cards_container").append('<div class="basic_cards '+ type +'">'+ content +'</div>');
-}
-
-function handle_carousel(model,url,href,state,page,rows){
-	this.model = model;
-	this.url = url;
-	this.href = href;
-	
-	this.JSONconfirm = function(i){
-		var key = i || 0;
-		if(key < model.length){
-			if(typeof JSONobj[model[key]] === "undefined" || JSONobj[model[key]].length < 1){
-				$.getJSON(baseURL+"/JSONroute.php",{url:url},function(data){
-					$.each(data,function(key,value){
-						JSONobj[key] = value;
-					});
-					JSONconfirm(key+1);
-				});
-			}else{
-				JSONconfirm(key+1);
-			}
-		}else{
-			carousel(state,page,rows);
-		}
-	};
-	JSONconfirm();
-}
-
-function carousel(state,page,rows){
-	start_key=((page-1)*rows);
-	end_key=start_key+rows-1;
-	
-	$("div#carousel .container").fadeOut().remove();
-	$.each(JSONobj[model[0]],function(key,value){
-		if(value.State == state && key>=start_key && key<=end_key){
-			render_small_cards("div#carousel", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration);
-		}
-	});
 }
 
 function title(below,title,type){
