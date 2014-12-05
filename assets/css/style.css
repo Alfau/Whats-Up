@@ -277,7 +277,7 @@ div#carousel, div#small_cards_container {
     width: 100%;
     padding: 0 0.5em;
     margin-bottom: 1em;
-    display: none; }
+    opacity: 0; }
     div#carousel div.container > div, div#small_cards_container div.container > div {
       background-color: #fff;
       box-shadow: 0 0 1px #c0c0c0;

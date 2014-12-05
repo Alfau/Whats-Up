@@ -150,7 +150,7 @@ var slideshow = function(container, slides, interval, speed){
 	this.init();
 };
 
-var carousel_obj = function(container, data, num_rows, filter_key, filter_val){
+var carousel_obj = function(container, data, num_rows, filter_key, filter_val, href){
 	var self = this;
 	
 	this.container = container;
@@ -158,6 +158,7 @@ var carousel_obj = function(container, data, num_rows, filter_key, filter_val){
 	this.num_rows = num_rows;
 	this.filter_key = filter_key;
 	this.filter_val = filter_val;
+	this.href = href;
 	this.page = 1;	
 	
 	this.state = "State";
@@ -165,6 +166,7 @@ var carousel_obj = function(container, data, num_rows, filter_key, filter_val){
 	this.init = function(){
 		self.render_handle();
 		self.control();
+		self.anchor();
 	};
 	
 	this.control = function(){
@@ -174,19 +176,19 @@ var carousel_obj = function(container, data, num_rows, filter_key, filter_val){
 			if( $(this).attr("data-func") === "next" ){
 				if(self.page < ( total_pages )){
 					self.page++;
-					self.render_handle();
+					self.render_handle("left");
 				}
 			}else{
-				if( self.page > 1 ){
+				if(self.page > 1){
 					self.page--;
-					self.render_handle();
+					self.render_handle("right");
 				}
 			}
 			e.preventDefault();
 		});
 	};
 	
-	this.render_handle = function(){
+	this.render_handle = function(direction){
 		start_key = ((self.page - 1) * self.num_rows);
 		end_key = start_key + self.num_rows - 1;
 		
@@ -194,8 +196,32 @@ var carousel_obj = function(container, data, num_rows, filter_key, filter_val){
 		
 		$.each( self.data, function( key, value ){
 			if( value[self.filter_key] === self.filter_val && key >= start_key && key <= end_key ){
-				render_small_cards( "div#carousel", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration );
+				render_small_cards( "div#carousel", self.href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration, direction );
 			}
+		});
+	};
+	
+	this.anchor = function(){
+		$(document).on("click", this.container + " #carousel a",function(e){
+			$("main").children().fadeOut(function(){
+				$(this).remove();
+			});
+			
+			var href = $(this).attr("href");
+			var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
+			    return result.toUpperCase();
+			});
+			
+			var url = $(this).prop("href");
+			window.history.pushState("","Title",baseURL+href);
+			
+			var req = $(this).attr("data-req");
+			
+			object_ID = $(this).attr("data-id");
+			
+			handle(req_models[req],url,href,"large_cards",object_ID);
+			
+			e.preventDefault();
 		});
 	};
 	
@@ -260,7 +286,14 @@ function small_cards( href ){
 	});
 }
 
-function render_small_cards( container, href, ID, image, name, price, overview, duration ){	
+function render_small_cards( container, href, ID, image, name, price, overview, duration, direction ){
+	
+	if(direction === "rightt"){
+		var margin = "100px";
+	}else{
+		var margin = "-100px";
+	}
+		
 	$(container).append(
 	"<div class='container'>"
 +	"<div>"
@@ -280,7 +313,7 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 +	"</div>"
 +	"</div>"
 +	"</div>"
-+	"</div>").children(".container").fadeIn();
++	"</div>").children(':last').css("margin-left", margin).animate({"opacity" : "1","margin-left" : "0"},700);
 
 	getSVG("assets/icons/facebook.svg",container+" .social a.facebook");
 	getSVG("assets/icons/twitter.svg",container+" .social a.twitter");
@@ -383,7 +416,7 @@ function render_home(url){
 	getSVG("assets/icons/arrow.svg","div#carousel_section #controls a");
 	
 	var home_slideshow = new slideshow("div#slideshow", JSONobj["Slideshow"], 9000, 500);
-	var set = new carousel_obj( "div#carousel_section", JSONobj["Packages"], 4, "State", "Featured" );
+	var featured_packages = new carousel_obj( "div#carousel_section", JSONobj["Packages"], 4, "State", "Featured", "packages" );
 	
 	$.each(JSONobj['Quotes'],function(key,value){
 		key == 0 ? state = "active" : state = "inactive";
