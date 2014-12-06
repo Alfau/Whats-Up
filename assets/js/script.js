@@ -293,7 +293,7 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 	}else{
 		var margin = "-100px";
 	}
-		
+	
 	$(container).append(
 	"<div class='container'>"
 +	"<div>"
@@ -304,7 +304,7 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 +	"</div>"
 +	"<div>"
 +	"<span class='emphasis_large'>"+ name +"</span>"
-+	"<p class='summary'>"+ overview.substr(0,150) +"...</p>"
++	"<p class='summary'>"+ overview +"</p>"
 +	"</div>"
 +	"</a>"
 +	"<div>"
@@ -498,3 +498,21 @@ function getSVG(location,target){
 		$(target).html(data);
 	},"text");
 }
+
+// function ellipsis(container, lines){
+	// var width = $(container).width(); 
+	// var height = $(container).height();
+	// var line_height = parseFloat($(container).css("line-height"));
+//   
+	// var text = $(container).text();
+	// var text_length = text.length;
+//   
+	// var total_lines = height / line_height;
+//   
+	// if(total_lines > lines){
+		// var split = text_length / (total_lines / lines);
+		// $(container).html(text.substr(0,split)+"...");
+	// }
+	// console.log(total_lines);
+	// console.log(width+" / "+height+" / "+line_height+" / "+text_length+" / "+total_lines);
+// }
