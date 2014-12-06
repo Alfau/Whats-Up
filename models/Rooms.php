@@ -1,5 +1,5 @@
 <?php  
-require_once "includes/connect.php";
+// require_once "includes/connect.php";
 
 class Rooms{
 	protected $table = "rooms";

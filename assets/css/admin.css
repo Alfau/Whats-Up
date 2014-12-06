@@ -220,6 +220,27 @@ header {
   header div#logo {
     background-color: #30bec1; }
 
+main {
+  margin: 0 5.5555%; }
+  main .wrapper {
+    padding: 0 0.5em;
+    margin: 2em 0; }
+  main table {
+    background-color: #fff;
+    box-shadow: 0 0 1px #888;
+    border-radius: 3px;
+    width: 100%;
+    font-size: 0.9em;
+    color: #808285; }
+    main table tr {
+      border-bottom: solid 1px #dadada; }
+      main table tr:nth-child(odd) {
+        background-color: #f5f5f5; }
+    main table td {
+      padding: 0.5em 1em;
+      vertical-align: top;
+      min-width: 75px; }
+
 /* @media screen and (min-width: 500px) */
 @media screen and (min-width: 31.25em) {
   body {
