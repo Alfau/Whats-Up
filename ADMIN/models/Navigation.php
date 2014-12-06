@@ -1,7 +1,7 @@
 <?php 
 require_once("../includes/connect.php");
 
-class Navigation{
+class AdminNavigation{
 	public function getNavigation(){
 		$table = "admin_navigation";
 		

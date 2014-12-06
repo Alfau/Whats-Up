@@ -3,11 +3,16 @@
 
 class Navigation{
 	public function getNavigation($position){
-		$table = "nav";
+		$table = "navigation";
 		
 		$con=new Connection();
 		$con=$con->setCon();
-		$query=$con -> prepare("SELECT * FROM $table WHERE Position=$position");//order by order asc
+		
+		if($position === "All"){
+			$query=$con -> prepare("SELECT * FROM $table");//order by order asc
+		}else{
+			$query=$con -> prepare("SELECT * FROM $table WHERE Position=$position");//order by order asc
+		}
 		
 		$array=array();
 		

@@ -11,11 +11,12 @@
     <!-- <script src="GGS.js"></script> -->
   </head>
   <body>
+  	<a href=# id="add_anchor">Add</a>
     <header>
     	<div id="logo"><a href=# id="logo">Admin Dashboard</a></div>
     	<ul>
 		<?php
-			$MainNav=new Navigation();
+			$MainNav=new AdminNavigation();
 			$navLinks=$MainNav->getNavigation();
 			
 			foreach($navLinks as $value){

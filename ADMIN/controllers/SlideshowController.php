@@ -3,7 +3,7 @@ require_once("../includes/connect.php");
 require_once("../models/Slideshow.php");
 require_once("../includes/view.php");
 
-class AboutController{
+class SlideshowController{
 	
 	function index(){
 		

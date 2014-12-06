@@ -1,10 +1,10 @@
 <?php  
 // require_once "includes/connect.php";
 
-class Stay{
-	protected $table = "stay";
+class Resorts{
+	protected $table = "resorts";
 	
-	function getStay($stmt){
+	function getResorts($stmt){
 		
 		$con=new Connection();
 		$con=$con->setCon();

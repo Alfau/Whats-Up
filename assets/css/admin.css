@@ -199,9 +199,19 @@ input[type=submit] {
 body {
   font-size: 0.875em; }
 
+a#add_anchor {
+  position: fixed;
+  right: 0.7em;
+  bottom: 0;
+  color: #fff;
+  background-color: #4183D7;
+  padding: 1em;
+  border-radius: 3px 3px 0 0; }
+
 header {
   background-color: #fff;
-  box-shadow: 0 0 1px #888; }
+  box-shadow: 0 0 1px #888;
+  height: 100px; }
   header ul {
     margin: 0 5.5555%; }
   header li {
@@ -238,8 +248,16 @@ main {
         background-color: #f5f5f5; }
     main table td {
       padding: 0.5em 1em;
-      vertical-align: top;
-      min-width: 75px; }
+      vertical-align: top; }
+    main table a {
+      color: #fff;
+      padding: 0.3em 0.5em;
+      border-radius: 3px;
+      font-size: 0.9em; }
+    main table .delete {
+      background-color: #CF000F; }
+    main table .edit {
+      background-color: #4183D7; }
 
 /* @media screen and (min-width: 500px) */
 @media screen and (min-width: 31.25em) {
