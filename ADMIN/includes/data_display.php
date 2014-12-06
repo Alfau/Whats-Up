@@ -33,10 +33,10 @@
 		}
 		?>
 			<td>
-				<a href="edit/<?php echo $id ?>" class="edit">Edit</a>
+				<a href="<?php echo $_SERVER['REQUEST_URI'];?>/edit/<?php echo $id ?>" class="edit">Edit</a>
 			</td>
 			<td>
-				<a href="delete/<?php echo $id ?>" class="delete" id="<?php echo $id ?>">Delete</a>
+				<a href="<?php echo $_SERVER['REQUEST_URI'];?>/delete/<?php echo $id ?>" class="delete" id="<?php echo $id ?>">Delete</a>
 			</td>
 		</tr>
 		<?php

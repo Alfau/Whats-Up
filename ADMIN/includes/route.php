@@ -8,7 +8,7 @@ class Route{
 		
 		$controller = (isset($url_segments[3]) && !empty($url_segments[3])) ? $url_segments[3] : "about";
 		$method = (isset($url_segments[4]) && !empty($url_segments[4])) ? $url_segments[4] : "index";
-		$params = (isset($url_segments[5]) && !empty($url_segments[5])) ? $url_segments[5] : "";
+		$param = (isset($url_segments[5]) && !empty($url_segments[5])) ? $url_segments[5] : "";
 		
 		$controller_file = "controllers/".$controller."Controller.php";
 		
@@ -18,7 +18,7 @@ class Route{
 			$controller = $controller."Controller";
 			
 			$controller = new $controller;
-			$controller = $controller -> $method();
+			$controller = $controller -> $method($param);
 			
 		}
 	}

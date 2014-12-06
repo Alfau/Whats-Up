@@ -15,6 +15,11 @@ class AboutController{
 
 	}
 	
+	function edit($id){
+		$view = new View();
+		$view = $view -> render("about_edit",array("data" => $id));
+	}
+	
 }
 
 ?>
