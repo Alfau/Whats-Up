@@ -49,6 +49,33 @@ class About{
 		return $array=array($this->getAbout("All"), $status);
 	}
 	
+	public function addAbout($post_data){
+		
+		$stmt = "INSERT INTO ".$this->table." (";
+		foreach($post_data as $key => $value){
+			$stmt .= "$key,";
+		}
+		$stmt = rtrim($stmt, ",");
+		$stmt .= ") VALUES(";
+		foreach($post_data as $key => $value){
+			$value = addslashes($value);
+			$stmt .= "'$value',";
+		}
+		$stmt = rtrim($stmt, ",").")";
+		
+		$con=new Connection();
+		$con=$con->setCon();
+		$query=$con -> prepare($stmt);
+		
+		if($query->execute()){
+			$status = "<p class='success_strip'>Entry added successfully</p>";
+		}else{
+			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
+		}
+		
+		return $array=array($this->getAbout("All"), $status);
+	}
+	
 	public function deleteAbout($id){
 		
 		$con=new Connection();

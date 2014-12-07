@@ -33,6 +33,15 @@ class RoomsController{
 		$view = $view -> render("rooms",array("data" => $rooms[0], "update_status" => $rooms[1]));
 	}
 	
+	function add(){
+		
+		$rooms = new Rooms();
+		$rooms = $rooms -> addRooms($_POST);
+		
+		$view = new View();
+		$view = $view -> render("rooms",array("data" => $rooms[0], "add_status" => $rooms[1]));
+	}
+	
 	function delete($id){
 		$rooms = new Rooms();
 		$rooms = $rooms -> deleteRooms($id);

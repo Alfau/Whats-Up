@@ -5,6 +5,9 @@ if(isset($delete_status)){
 if(isset($update_status)){
 	echo $update_status;
 }
+if(isset($add_status)){
+	echo $add_status;
+}
 ?>
 <table>
 	<tr>

@@ -33,6 +33,15 @@ class PackagesController{
 		$view = $view -> render("packages",array("data" => $packages[0], "update_status" => $packages[1]));
 	}
 	
+	function add(){
+		
+		$packages = new Packages();
+		$packages = $packages -> addPackages($_POST);
+		
+		$view = new View();
+		$view = $view -> render("packages",array("data" => $packages[0], "add_status" => $packages[1]));
+	}
+	
 	function delete($id){
 		$packages = new Packages();
 		$packages = $packages -> deletePackages($id);

@@ -33,6 +33,15 @@ class AboutController{
 		$view = $view -> render("about",array("data" => $about[0], "update_status" => $about[1]));
 	}
 	
+	function add(){
+		
+		$about = new About();
+		$about = $about -> addAbout($_POST);
+		
+		$view = new View();
+		$view = $view -> render("about",array("data" => $about[0], "add_status" => $about[1]));
+	}
+	
 	function delete($id){
 		
 		$about = new About();

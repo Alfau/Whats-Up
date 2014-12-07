@@ -33,6 +33,15 @@ class NavigationController{
 		$view = $view -> render("navigation",array("data" => $navigation[0], "update_status" => $navigation[1]));
 	}
 	
+	function add(){
+		
+		$navigation = new Navigation();
+		$navigation = $navigation -> addNavigation($_POST);
+		
+		$view = new View();
+		$view = $view -> render("navigation",array("data" => $navigation[0], "add_status" => $navigation[1]));
+	}
+	
 	function delete($id){
 		
 		$navigation = new Navigation();
