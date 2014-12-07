@@ -12,7 +12,6 @@ class Customer_QuotesController{
 		
 		$view = new View();
 		$view = $view -> render("customer_quotes",array("data" => $customer_quotes));
-
 	}
 	
 	function edit($id){
@@ -22,6 +21,15 @@ class Customer_QuotesController{
 		
 		$view = new View();
 		$view = $view -> render("customer_quotes_edit",array("data" => $customer_quotes));
+	}
+		
+	function update(){
+		
+		$customer_quotes = new Quotes();
+		$customer_quotes = $customer_quotes -> updateQuotes($_POST);
+		
+		$view = new View();
+		$view = $view -> render("customer_quotes",array("data" => $customer_quotes[0], "update_status" => $customer_quotes[1]));
 	}
 	
 	function delete($id){

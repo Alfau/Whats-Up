@@ -25,6 +25,30 @@ class Slideshow{
 		}
 	}
 	
+	public function updateSlideshow($post_data){
+		
+		$stmt = "UPDATE ".$this->table." SET";
+		foreach($post_data as $key => $value){
+			if($key !== "ID"){
+				$stmt .= " $key = '$value',";
+			}
+		}
+		$stmt = rtrim($stmt, ",");
+		$stmt .= " WHERE ID = '".$post_data['ID']."'";
+		
+		$con=new Connection();
+		$con=$con->setCon();
+		$query=$con -> prepare($stmt);
+		
+		if($query->execute()){
+			$status = "<p class='success_strip'>Entry updated successfully</p>";
+		}else{
+			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
+		}
+		
+		return $array=array($this->getSlideshow("All"), $status);
+	}	
+	
 	public function deleteSlideshow($id){
 		
 		$con=new Connection();

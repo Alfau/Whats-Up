@@ -24,6 +24,15 @@ class PackagesController{
 		$view = $view -> render("packages_edit",array("data" => $packages));
 	}
 	
+	function update(){
+		
+		$packages = new Packages();
+		$packages = $packages -> updatePackages($_POST);
+		
+		$view = new View();
+		$view = $view -> render("packages",array("data" => $packages[0], "update_status" => $packages[1]));
+	}
+	
 	function delete($id){
 		$packages = new Packages();
 		$packages = $packages -> deletePackages($id);

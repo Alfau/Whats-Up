@@ -3,6 +3,7 @@ include("includes/header.php");
 ?>
 <div class="wrapper">
 
+<form method="POST" action="../update">
 <table>
 	<?php
 	foreach($data[0] as $key => $value){
@@ -14,10 +15,11 @@ include("includes/header.php");
 			if($key === "ID"){
 				?>
 				<td><input type='text' value='<?php echo strip_tags($value) ?>' disabled/></td>
+				<input type="hidden" name='<?php echo $key ?>' value='<?php echo strip_tags($value) ?>'/>
 				<?php
 			}else{
 				?>
-				<td><input type='text' value='<?php echo strip_tags($value) ?>'/></td>
+				<td><input type='text' name='<?php echo $key ?>' value='<?php echo strip_tags($value) ?>'/></td>
 				<?php
 			}
 			?>
@@ -30,6 +32,7 @@ include("includes/header.php");
 		<td><input type="submit" value="Submit"/></td><td></td>
 	</tr>
 </table>
+</form>
 
 </div>
 <?php

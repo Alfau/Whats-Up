@@ -24,6 +24,15 @@ class ResortsController{
 		$view = $view -> render("resorts_edit",array("data" => $resorts));
 	}
 	
+	function update(){
+		
+		$resorts = new Resorts();
+		$resorts = $resorts -> updateResorts($_POST);
+		
+		$view = new View();
+		$view = $view -> render("resorts",array("data" => $resorts[0], "update_status" => $resorts[1]));
+	}
+	
 	function delete($id){
 		$resorts = new Resorts();
 		$resorts = $resorts -> deleteResorts($id);

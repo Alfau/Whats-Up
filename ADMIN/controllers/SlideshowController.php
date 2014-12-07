@@ -23,6 +23,15 @@ class SlideshowController{
 		$view = new View();
 		$view = $view -> render("slideshow_edit",array("data" => $slideshow));
 	}
+		
+	function update(){
+		
+		$slideshow = new Slideshow();
+		$slideshow = $slideshow -> updateSlideshow($_POST);
+		
+		$view = new View();
+		$view = $view -> render("slideshow",array("data" => $slideshow[0], "update_status" => $slideshow[1]));
+	}
 	
 	function delete($id){
 		$slideshow = new Slideshow();

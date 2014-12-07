@@ -2,6 +2,9 @@
 if(isset($delete_status)){
 	echo $delete_status;
 }
+if(isset($update_status)){
+	echo $update_status;
+}
 ?>
 <table>
 	<tr>
