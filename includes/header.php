@@ -17,7 +17,7 @@
 			<ul>
 				<?php
 					$SocialNav=new Navigation();
-					$navLinks=$SocialNav->getNavigation("3");
+					$navLinks=$SocialNav->getNavigation("SELECT * FROM navigation WHERE Position = '3'");
 					
 					foreach($navLinks as $value){
 						?>
@@ -33,7 +33,7 @@
 				<ul>
 					<?php
 						$MainNav=new Navigation();
-						$navLinks=$MainNav->getNavigation("1");
+						$navLinks=$MainNav->getNavigation("SELECT * FROM navigation WHERE Position = '1'");
 						
 						foreach($navLinks as $value){
 							if($value['HREF'] == "/book"){
@@ -52,7 +52,7 @@
 				<ul>
 					<?php
 						$SideNav=new Navigation();
-						$navLinks=$SideNav->getNavigation("2");
+						$navLinks=$SideNav->getNavigation("SELECT * FROM navigation WHERE Position = '2'");
 						
 						foreach($navLinks as $value){
 							?>

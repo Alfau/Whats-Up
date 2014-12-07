@@ -4,15 +4,15 @@
 class Navigation{
 	protected $table = "navigation";
 	
-	public function getNavigation($position){
+	public function getNavigation($stmt){
 		
 		$con=new Connection();
 		$con=$con->setCon();
 		
-		if($position === "All"){
+		if($stmt === "All"){
 			$query=$con -> prepare("SELECT * FROM ".$this->table);//order by order asc
 		}else{
-			$query=$con -> prepare("SELECT * FROM ".$this->table." WHERE Position=$position");//order by order asc
+			$query=$con -> prepare($stmt);//order by order asc
 		}
 		
 		$array=array();
@@ -45,7 +45,7 @@ class Navigation{
 			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 		}
 		
-		return $array=array($this->getAbout("All"), $status);
+		return $array=array($this->getNavigation("All"), $status);
 	}
 		
 	public function deleteNavigation($id){
