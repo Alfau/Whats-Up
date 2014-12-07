@@ -7,7 +7,7 @@ class AboutController{
 	public function index(){
 		
 		$about = new About();
-		$about = $about -> getAbout("SELECT * FROM about");
+		$about = $about -> getAbout("All");
 		
 		$aboutBundle = array("About" => $about);
 		

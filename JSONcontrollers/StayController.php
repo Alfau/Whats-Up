@@ -8,10 +8,7 @@ class StayController{
 	public function index(){
 		
 		$stay = new Resorts();
-		$stay = $stay -> getResorts("SELECT * FROM resorts");
-		
-		// $rooms = new Rooms();
-		// $rooms = $rooms -> getRooms("SELECT * FROM rooms");
+		$stay = $stay -> getResorts("All");
 		
 		$stayBundle = array("Resorts" => $stay);
 		

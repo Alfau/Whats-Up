@@ -23,6 +23,14 @@ class SlideshowController{
 		$view = new View();
 		$view = $view -> render("slideshow_edit",array("data" => $slideshow));
 	}
+	
+	function delete($id){
+		$slideshow = new Slideshow();
+		$slideshow = $slideshow -> deleteSlideshow($id);
+		
+		$view = new View();
+		$view = $view -> render("resorts",array("data" => $slideshow[0], "delete_status" => $slideshow[1]));
+	}
 }
 
 ?>

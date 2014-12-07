@@ -8,7 +8,7 @@ class PackagesController{
 	public function index(){
 		
 		$packages = new Packages();
-		$packages = $packages -> getPackages("SELECT * FROM packages");
+		$packages = $packages -> getPackages("All");
 		
 		$view = new View();
 		$view = $view -> render("packages",array("data" => $packages));
@@ -22,6 +22,14 @@ class PackagesController{
 		
 		$view = new View();
 		$view = $view -> render("packages_edit",array("data" => $packages));
+	}
+	
+	function delete($id){
+		$packages = new Packages();
+		$packages = $packages -> deletePackages($id);
+		
+		$view = new View();
+		$view = $view -> render("packages",array("data" => $packages[0], "delete_status" => $packages[1]));
 	}
 }
 

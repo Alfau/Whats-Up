@@ -2,12 +2,18 @@
 // require_once("includes/connect.php");
 
 class Contact{
+	protected $table = "contact";
+	
 	public function getContact($stmt){
-		$table = "contact";
 		
 		$con=new Connection();
 		$con=$con->setCon();
-		$query=$con -> prepare($stmt);//order by order asc
+		
+		if($stmt === "All"){
+			$query=$con->prepare("SELECT * FROM ".$this->table);
+		}else{
+			$query=$con->prepare($stmt);
+		}
 		
 		$array=array();
 		

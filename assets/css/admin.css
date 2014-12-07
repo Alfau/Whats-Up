@@ -246,7 +246,7 @@ main {
     box-shadow: 0 0 1px #888;
     border-radius: 3px;
     width: 100%;
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: #808285; }
     main table tr {
       border-bottom: solid 1px #dadada; }
@@ -268,6 +268,15 @@ main {
     margin-bottom: 1em;
     color: #808285;
     font-weight: normal; }
+  main p.success_strip, main p.failed_strip {
+    color: white;
+    background-color: #4183D7;
+    padding: 0.5em 1em;
+    margin-bottom: 1em;
+    font-size: 0.8em;
+    border-radius: 3px; }
+  main p.failed_strip {
+    background-color: #CF000F; }
 
 /* @media screen and (min-width: 500px) */
 @media screen and (min-width: 31.25em) {

@@ -7,7 +7,7 @@ class PackagesController{
 	public function index(){
 		
 		$packages = new Packages();
-		$packages = $packages -> getPackages("SELECT * FROM packages");
+		$packages = $packages -> getPackages("All");
 		
 		$packagesBundle = array("Packages" => $packages);
 		

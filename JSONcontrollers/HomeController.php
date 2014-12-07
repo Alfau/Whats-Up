@@ -9,13 +9,13 @@ class HomeController{
 	function index(){
 		
 		$slideshow = new Slideshow();
-		$slideshow = $slideshow->getSlideshow("SELECT * FROM slideshow");
+		$slideshow = $slideshow->getSlideshow("All");
 		
 		$packages = new Packages();
-		$packages = $packages->getPackages("SELECT * FROM packages");
+		$packages = $packages->getPackages("All");
 		
 		$quotes = new Quotes();
-		$quotes = $quotes->getQuotes("SELECT * FROM customer_quotes");
+		$quotes = $quotes->getQuotes();
 		
 		$homeBundle = array("Slideshow"=>$slideshow, "Packages"=>$packages, "Quotes"=>$quotes);
 		echo json_encode($homeBundle);

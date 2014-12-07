@@ -299,7 +299,7 @@ main{
     box-shadow:0 0 1px #888;
     border-radius:3px;
     width:100%;
-    font-size:0.9em;
+    font-size:0.8em;
     color:$primary_color;
     
     tr{
@@ -334,6 +334,18 @@ main{
     span{
       
     }
+  }
+  p.success_strip{
+    color: rgb(255, 255, 255);
+    background-color: #4183D7;
+    padding: 0.5em 1em;
+    margin-bottom:1em;
+    font-size: 0.8em;
+    border-radius: 3px;
+  }
+  p.failed_strip{
+    @extend .success_strip;
+    background-color:#CF000F;
   }
 }
 

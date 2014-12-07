@@ -7,7 +7,7 @@ class ContactController{
 	public function index(){
 		
 		$contact = new Contact();
-		$contact = $contact -> getContact("SELECT * FROM contact");
+		$contact = $contact -> getContact("All");
 		
 		$contactBundle = array("Contact" => $contact);
 		

@@ -8,7 +8,7 @@ class Customer_QuotesController{
 	function index(){
 		
 		$customer_quotes = new Quotes();
-		$customer_quotes = $customer_quotes -> getQuotes("SELECT * FROM customer_quotes");
+		$customer_quotes = $customer_quotes -> getQuotes();
 		
 		$view = new View();
 		$view = $view -> render("customer_quotes",array("data" => $customer_quotes));
@@ -22,6 +22,14 @@ class Customer_QuotesController{
 		
 		$view = new View();
 		$view = $view -> render("customer_quotes_edit",array("data" => $customer_quotes));
+	}
+	
+	function delete($id){
+		$customer_quotes = new Quotes();
+		$customer_quotes = $customer_quotes -> deleteQuotes($id);
+		
+		$view = new View();
+		$view = $view -> render("customer_quotes",array("data" => $customer_quotes[0], "delete_status" => $customer_quotes[1]));
 	}
 	
 }

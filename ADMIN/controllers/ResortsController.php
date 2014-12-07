@@ -8,7 +8,7 @@ class ResortsController{
 	public function index(){
 		
 		$resorts = new Resorts();
-		$resorts = $resorts -> getResorts("SELECT * FROM resorts");
+		$resorts = $resorts -> getResorts("All");
 		
 		$view = new View();
 		$view = $view -> render("resorts",array("data" => $resorts));
@@ -22,6 +22,14 @@ class ResortsController{
 		
 		$view = new View();
 		$view = $view -> render("resorts_edit",array("data" => $resorts));
+	}
+	
+	function delete($id){
+		$resorts = new Resorts();
+		$resorts = $resorts -> deleteResorts($id);
+		
+		$view = new View();
+		$view = $view -> render("resorts",array("data" => $resorts[0], "delete_status" => $resorts[1]));
 	}
 }
 

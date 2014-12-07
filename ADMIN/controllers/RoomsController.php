@@ -23,6 +23,14 @@ class RoomsController{
 		$view = new View();
 		$view = $view -> render("rooms_edit",array("data" => $rooms));
 	}
+	
+	function delete($id){
+		$rooms = new Rooms();
+		$rooms = $rooms -> deleteRooms($id);
+		
+		$view = new View();
+		$view = $view -> render("resorts",array("data" => $rooms[0], "delete_status" => $rooms[1]));
+	}
 }
 
 ?>

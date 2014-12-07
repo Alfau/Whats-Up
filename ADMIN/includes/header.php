@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Admin Dashboard</title>
     <link rel="stylesheet" type="text/css" href="/whatsup/assets/css/admin.css"/>
-    <!-- <script src="script.js"></script> -->
+    <script src="/whatsup/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/whatsup/assets/js/admin.js"></script>
     <!-- <script src="GGS.js"></script> -->
   </head>
   <body>
