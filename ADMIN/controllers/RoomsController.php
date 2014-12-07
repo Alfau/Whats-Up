@@ -15,6 +15,14 @@ class RoomsController{
 		
 	}
 	
+	function edit($id){
+		
+		$rooms = new Rooms();
+		$rooms = $rooms -> getRooms("SELECT * FROM rooms WHERE ID = $id");
+		
+		$view = new View();
+		$view = $view -> render("rooms_edit",array("data" => $rooms));
+	}
 }
 
 ?>

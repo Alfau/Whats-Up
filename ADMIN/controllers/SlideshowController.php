@@ -15,6 +15,14 @@ class SlideshowController{
 
 	}
 	
+	function edit($id){
+		
+		$slideshow = new Slideshow();
+		$slideshow = $slideshow -> getSlideshow("SELECT * FROM slideshow WHERE ID = $id");
+		
+		$view = new View();
+		$view = $view -> render("slideshow_edit",array("data" => $slideshow));
+	}
 }
 
 ?>

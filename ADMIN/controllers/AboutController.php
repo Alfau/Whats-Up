@@ -16,8 +16,12 @@ class AboutController{
 	}
 	
 	function edit($id){
+		
+		$about = new About();
+		$about = $about -> getAbout("SELECT * FROM about WHERE ID = $id");
+		
 		$view = new View();
-		$view = $view -> render("about_edit",array("data" => $id));
+		$view = $view -> render("about_edit",array("data" => $about));
 	}
 	
 }

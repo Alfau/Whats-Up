@@ -11,7 +11,7 @@ include("includes/header.php");
 		<tr>
 			<td><?php echo $key ?></td>
 			<?php
-			if($key === "ID"){
+			if($key === "ID" || $key === "ResortID" || $key === "Resort"){
 				?>
 				<td><input type='text' value='<?php echo strip_tags($value) ?>' disabled/></td>
 				<?php

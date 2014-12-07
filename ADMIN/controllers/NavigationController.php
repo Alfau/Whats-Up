@@ -15,6 +15,15 @@ class NavigationController{
 
 	}
 	
+	function edit($id){
+		
+		$navigation = new Navigation();
+		$navigation = $navigation -> getNavigation("SELECT * FROM navigation WHERE ID = $id");
+		
+		$view = new View();
+		$view = $view -> render("navigation_edit",array("data" => $navigation));
+	}
+	
 }
 
 ?>

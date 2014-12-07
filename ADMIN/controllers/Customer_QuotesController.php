@@ -15,6 +15,15 @@ class Customer_QuotesController{
 
 	}
 	
+	function edit($id){
+		
+		$customer_quotes = new Quotes();
+		$customer_quotes = $customer_quotes -> getQuotes("SELECT * FROM customer_quotes WHERE ID = $id");
+		
+		$view = new View();
+		$view = $view -> render("customer_quotes_edit",array("data" => $customer_quotes));
+	}
+	
 }
 
 ?>

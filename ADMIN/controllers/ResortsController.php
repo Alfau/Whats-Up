@@ -15,6 +15,14 @@ class ResortsController{
 		
 	}
 	
+	function edit($id){
+		
+		$resorts = new Resorts();
+		$resorts = $resorts -> getResorts("SELECT * FROM resorts WHERE ID = $id");
+		
+		$view = new View();
+		$view = $view -> render("resorts_edit",array("data" => $resorts));
+	}
 }
 
 ?>
