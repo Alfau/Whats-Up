@@ -475,10 +475,21 @@ div#large_cards_container,div#rooms_cards_container,div#includes_cards_container
     }
   }
 }
-div#includes_cards_container li{
-  list-style:square;
-  margin:0 0 0.5em 2em ;
-  padding-left:1em;
+div#includes_cards_container{ 
+  
+  ul{
+    margin-bottom:2em;
+  }
+  li{
+    list-style: outside none circle;
+    margin: 0px 0px 0em 1em;
+    padding-left: 1em;
+    color: #888;
+    font-size: 0.9em;
+  }
+  a{
+    font-size:0.9em !important;
+  }
 }
 .heading_strip.alternate{
     margin-top:2em !important;

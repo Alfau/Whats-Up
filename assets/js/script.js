@@ -423,7 +423,9 @@ function render_includes_cards(container,includes){
 	$(container).append(
 	"<div class='container'>"
 +		"<div>"
-+			"<div class='emphasis_medium'>"+ includes +"</div>"
++			"<div class='emphasis_medium'>"+ includes
++			"<div class='fade'><a href=# class='more'>Expand</a></div>"
++			"</div>"
 +		"</div>"
 +	"</div>").children(".container").fadeIn();
 }
@@ -449,7 +451,6 @@ function render_home(url){
 		"<div data-id='"+ value.ID +"' class='"+ state +"'>"
 	+	"<p class='emphasis_large'>"+ value.Text +"</p>"
 	+	"<p class='summary'>"+ value.Name +"</p>"
-	+	"<div class='fade'><a href=# class='more'>Expand</a></div>"
 	+	"</div>"
 		);
 	});
