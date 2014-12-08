@@ -1,36 +1,6 @@
 $(document).ready(function(){
 	
-	
-	$("main").children().fadeOut(function(){
-		$(this).remove();
-	});
-	
-	var href = window.location.pathname;
-	var href = href.split("/")[2];
-	
-	var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
-		return result.toUpperCase();
-	});
-	if(!model){
-		model = "Home";
-	}
-	
-	var url = window.location.href;
-	window.history.pushState("","Title",baseURL+href);
-
-	var req = model;
-	
-	console.log(url+" -- "+href+" -- "+req);
-	
-	href.indexOf("home") > -1 ? handle(req_models[req],url,href,"render_home",null) : handle(req_models[req],url,href,"small_cards",null);
-	
-	// if($(this).parents("nav#right").length){
-		// handle(req_models[req],url,href,"basic_cards",null);
-	// }else{
-		// href.indexOf("home") > -1 ? handle(req_models[req],url,href,"render_home",null) : handle(req_models[req],url,href,"small_cards",null);	
-	// }
-	
-	
+	pageLoad();
 	
 	$(document).on("click","a#menu",function(){
 		if($(this).hasClass("active")){
@@ -120,7 +90,6 @@ $(document).ready(function(){
 	});
 	
 	// JSONobj = {};
-	// handle(req_models["Home"],baseURL+"home","home","render_home",null);
 });
 
 JSONobj = {};
@@ -527,6 +496,37 @@ function title(below,title,type){
 +	'<h3 class="heading">'+ title +'</b></h3>'
 +	'</div>'
 +	'</div>');
+}
+
+function pageLoad(){
+	$("main").children().fadeOut(function(){
+		$(this).remove();
+	});
+	
+	var href = window.location.pathname;
+	var href = href.split("/")[2];
+	
+	var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
+		return result.toUpperCase();
+	});
+	if(!model){
+		model = "Home";
+	}
+	
+	var url = window.location.href;
+	window.history.pushState("","Title",baseURL+href);
+
+	var req = model;
+	
+	console.log(url+" -- "+href+" -- "+req);
+	
+	if(href.indexOf("home") > -1){
+		handle(req_models[req],url,href,"render_home",null);
+	}else if(href.indexOf("about") > -1 || href.indexOf("contact") > -1){
+		handle(req_models[req],url,href,"basic_cards",null);
+	}else{
+		handle(req_models[req],url,href,"small_cards",null);
+	}
 }
 
 function getBaseURL() {

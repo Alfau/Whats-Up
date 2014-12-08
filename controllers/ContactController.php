@@ -1,5 +1,6 @@
 <?php 
 require_once("includes/connect.php");
+require_once("includes/view.php");
 require_once("models/Contact.php");
 
 class ContactController{

@@ -3,12 +3,12 @@ require_once("includes/connect.php");
 require_once("models/About.php");
 require_once("includes/view.php");
 
-class PackagesController{
+class AboutController{
 	
 	function index(){
 		
 		$about=new About();
-		$about=$about->getAbout("SELECT * FROM packages");
+		$about=$about->getAbout("SELECT * FROM about");
 		
 		$aboutBundle = array("About" => $about);
 		
