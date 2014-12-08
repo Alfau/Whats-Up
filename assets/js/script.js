@@ -69,6 +69,21 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 	
+	$(document).on("click","div#large_cards_container a,div#rooms_cards_container a,div#includes_cards_container a",function(e){
+		if($(this).attr("class")==="more"){
+			$(this).parent().parent().closest("div").css({"height":"auto"},200);
+			$(this).html("Minimize").attr("class","less");
+			
+			$(this).parent().css({"height":"40px"});
+		}else{
+			$(this).parent().parent().closest("div").css({"height":"200px"},200);
+			$(this).html("Expand").attr("class","more");
+			
+			$(this).parent().css({"height":"70px"});
+		}
+		e.preventDefault();
+	});
+	
 	JSONobj = {};
 	handle(req_models["Home"],baseURL+"home","home","render_home",null);
 });
@@ -349,6 +364,7 @@ function render_large_cards( container, href, ID, image, name, price, overview, 
 +				"<span class='emphasis_large'>"+ name +"</span>"
 +				(price == undefined ? "" : "<span class='emphasis_medium'>From <b>USD "+ price +"</b></span>")
 +				"<p class='summary'>"+ overview +"</p>"
++				"<div class='fade'><a href=# class='more'>Expand</a></div>"
 +			"</div>"
 +		"</div>"
 +	"</div>").children(".container").fadeIn();
@@ -385,6 +401,7 @@ function render_rooms_cards(container,image,type,overview){
 +			"<div>"
 +				"<span class='emphasis_large'>"+ type +"</span>"
 +				"<p class='summary'>"+ overview +"</p>"
++				"<div class='fade'><a href=# class='more'>Expand</a></div>"
 +			"</div>"
 +		"</div>"
 +	"</div>").children(".container").fadeIn();
@@ -432,6 +449,7 @@ function render_home(url){
 		"<div data-id='"+ value.ID +"' class='"+ state +"'>"
 	+	"<p class='emphasis_large'>"+ value.Text +"</p>"
 	+	"<p class='summary'>"+ value.Name +"</p>"
+	+	"<div class='fade'><a href=# class='more'>Expand</a></div>"
 	+	"</div>"
 		);
 	});
@@ -498,7 +516,6 @@ function getBaseURL() {
 function getSVG(location,target){
 	$.get(baseURL+location,function(data){
 		$(target).html(data);
-		console.log(target);
 	},"text");
 }
 

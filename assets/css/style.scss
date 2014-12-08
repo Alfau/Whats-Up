@@ -440,12 +440,36 @@ div#large_cards_container,div#rooms_cards_container,div#includes_cards_container
         }
       }
       &>div:last-child{
-        padding:1em;
-        // width:100%;
+        padding: 1em 3em 1em 1.5em;
+        height:200px;
+        overflow:hidden;
+        position:relative;
+        transition:height 0.4s;
         
+        .fade{
+          width: 100%;
+          height: 70px;
+          background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 30%) repeat scroll 0% 0% transparent;
+          position: absolute;
+          bottom: 0px;
+          
+          a{
+            font-size: 0.8em;
+            color: $accent_color;
+            position:absolute;
+            bottom:1em;
+            transition:height 0.4s;
+          }
+        }
         .emphasis_medium{
-          color: $accent_color;
-          margin-left:1em;
+          color: rgb(255, 255, 255);
+          margin-left: 1em;
+          background-color: rgb(48, 190, 193);
+          padding: 0.3em 1em;
+          border-radius: 3px 0 0 3px;
+          font-size: 0.8em;
+          position: absolute;
+          right: 0;
         }
       }
     }

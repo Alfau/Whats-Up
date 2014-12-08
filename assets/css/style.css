@@ -352,10 +352,32 @@ div#large_cards_container, div#rooms_cards_container, div#includes_cards_contain
           width: 100%;
           border-radius: 3px 3px 0 0; }
       div#large_cards_container div.container > div > div:last-child, div#rooms_cards_container div.container > div > div:last-child, div#includes_cards_container div.container > div > div:last-child {
-        padding: 1em; }
+        padding: 1em 3em 1em 1.5em;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+        transition: height 0.4s; }
+        div#large_cards_container div.container > div > div:last-child .fade, div#rooms_cards_container div.container > div > div:last-child .fade, div#includes_cards_container div.container > div > div:last-child .fade {
+          width: 100%;
+          height: 70px;
+          background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 30%) repeat scroll 0% 0% transparent;
+          position: absolute;
+          bottom: 0px; }
+          div#large_cards_container div.container > div > div:last-child .fade a, div#rooms_cards_container div.container > div > div:last-child .fade a, div#includes_cards_container div.container > div > div:last-child .fade a {
+            font-size: 0.8em;
+            color: #30bec1;
+            position: absolute;
+            bottom: 1em;
+            transition: height 0.4s; }
         div#large_cards_container div.container > div > div:last-child .emphasis_medium, div#rooms_cards_container div.container > div > div:last-child .emphasis_medium, div#includes_cards_container div.container > div > div:last-child .emphasis_medium {
-          color: #30bec1;
-          margin-left: 1em; }
+          color: white;
+          margin-left: 1em;
+          background-color: #30bec1;
+          padding: 0.3em 1em;
+          border-radius: 3px 0 0 3px;
+          font-size: 0.8em;
+          position: absolute;
+          right: 0; }
 
 div#includes_cards_container li {
   list-style: square;
