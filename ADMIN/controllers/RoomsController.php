@@ -8,7 +8,7 @@ class RoomsController{
 	public function index(){
 		
 		$rooms = new Rooms();
-		$rooms = $rooms -> getRooms("SELECT * FROM rooms");
+		$rooms = $rooms -> getRooms("All", "Resort");
 		
 		$view = new View();
 		$view = $view -> render("rooms",array("data" => $rooms));

@@ -1,3 +1,10 @@
+<?php 
+include("includes/array.php");
+?>
+<pre>
+<?php 
+//echo print_r_tree($data);
+?>
 </pre>
 <form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>/add" id="add">
 <table>
@@ -15,12 +22,14 @@
 							<td>
 								<select name="<?php echo $key ?>">
 									<?php
-									$array_length = count($data[1]);
+									$array_length = count($data[1][0]);
 									for ($i=0; $i < $array_length; $i++) {
-										foreach($data[1][$i] as $resort){
-										?>	
-											<option value="<?php echo $resort ?>"><?php echo $resort ?></option>
-										<?php
+										foreach($data[1][0][$i] as $key => $resort){
+											if(!is_numeric($key)){
+											?>	
+												<option value="<?php echo $resort ?>"><?php echo $resort ?></option>
+											<?php
+											}
 										}
 									}
 									?>

@@ -1,10 +1,11 @@
 <?php  
 // require_once "includes/connect.php";
+include_once("Resorts.php");
 
 class Rooms{
 	protected $table = "rooms";
 	
-	function getRooms($stmt){
+	function getRooms($stmt, $rst){
 		
 		$con=new Connection();
 		$con=$con->setCon();
@@ -17,11 +18,21 @@ class Rooms{
 		
 		$array=array();
 		
-		if($query->execute()){
-			while($row=$query->fetch()){
-				$array[]=$row;
+		if(empty($rst)){
+			if($query->execute()){
+				while($row=$query->fetch()){
+					$array[]=$row;
+				}
+				return $array=array($array);
 			}
-			return $array=array($array);
+		}else{
+			if($query->execute()){
+				while($row=$query->fetch()){
+					$array[]=$row;
+				}
+				$resorts = new Resorts();
+				return $array=array($array, $resorts->getResorts("SELECT Name FROM resorts"));
+			}
 		}
 	}
 	
