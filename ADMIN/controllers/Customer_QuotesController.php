@@ -20,7 +20,7 @@ class Customer_QuotesController{
 		$customer_quotes = $customer_quotes -> getQuotes("SELECT * FROM customer_quotes WHERE ID = $id");
 		
 		$view = new View();
-		$view = $view -> render("customer_quotes_edit",array("data" => $customer_quotes));
+		$view = $view -> render("_edit",array("data" => $customer_quotes));
 	}
 		
 	function update(){

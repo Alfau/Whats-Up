@@ -21,7 +21,7 @@ class ResortsController{
 		$resorts = $resorts -> getResorts("SELECT * FROM resorts WHERE ID = $id");
 		
 		$view = new View();
-		$view = $view -> render("resorts_edit",array("data" => $resorts));
+		$view = $view -> render("_edit",array("data" => $resorts));
 	}
 	
 	function update(){

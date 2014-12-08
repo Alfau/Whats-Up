@@ -21,7 +21,7 @@ class NavigationController{
 		$navigation = $navigation -> getNavigation("All");
 		
 		$view = new View();
-		$view = $view -> render("navigation_edit",array("data" => $navigation));
+		$view = $view -> render("_edit",array("data" => $navigation));
 	}
 	
 	function update(){

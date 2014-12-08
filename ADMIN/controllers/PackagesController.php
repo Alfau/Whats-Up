@@ -20,7 +20,7 @@ class PackagesController{
 		$packages = $packages -> getPackages("SELECT * FROM packages WHERE ID = $id", null);
 		
 		$view = new View();
-		$view = $view -> render("packages_edit",array("data" => $packages));
+		$view = $view -> render("_edit",array("data" => $packages));
 	}
 	
 	function update(){

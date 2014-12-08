@@ -21,7 +21,7 @@ class RoomsController{
 		$rooms = $rooms -> getRooms("SELECT * FROM rooms WHERE ID = $id", null);
 		
 		$view = new View();
-		$view = $view -> render("rooms_edit",array("data" => $rooms));
+		$view = $view -> render("_edit",array("data" => $rooms));
 	}
 		
 	function update(){

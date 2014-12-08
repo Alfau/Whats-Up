@@ -21,7 +21,7 @@ class SlideshowController{
 		$slideshow = $slideshow -> getSlideshow("SELECT * FROM slideshow WHERE ID = $id");
 		
 		$view = new View();
-		$view = $view -> render("slideshow_edit",array("data" => $slideshow));
+		$view = $view -> render("_edit",array("data" => $slideshow));
 	}
 		
 	function update(){

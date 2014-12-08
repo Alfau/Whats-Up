@@ -21,7 +21,7 @@ class AboutController{
 		$about = $about -> getAbout("SELECT * FROM about WHERE ID = $id");
 		
 		$view = new View();
-		$view = $view -> render("about_edit",array("data" => $about));
+		$view = $view -> render("_edit",array("data" => $about));
 	}
 	
 	function update(){
