@@ -1,13 +1,40 @@
-<form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>/add">
+
+<?php 
+include("includes/array.php");
+include("includes/console.php"); 
+?>
+<pre>
+<?php 
+echo print_r_tree($data);
+?>
+</pre>
+<form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>/add" id="add">
 <table>
 	<?php
-	if(isset($data) && !empty($data)){
+	if(isset($data)){
 		foreach($data[0] as $key => $value){
 			if(!is_numeric($key)){
-				if($key !== "ID"){
+				if($key !== "ID" && $key !== "ResortID"){
 			?>
 				<tr><td><?php echo $key ?> :</td></tr>
-				<tr><td><input type="text" name="<?php echo $key ?>"/></td></tr>
+				<?php
+					if($key === "Resort"){
+						?>
+						<tr>
+							<td>
+								<select name="<?php echo $key ?>">
+									<option value="<?php echo $value ?>">Resorts</option>
+								</select>
+							</td>
+							
+						</tr>
+						<?php
+					}else{
+						?>
+						<tr><td><input type="text" name="<?php echo $key ?>"/></td></tr>
+						<?php
+					}
+				?>
 			<?php
 				}
 			}
@@ -19,10 +46,6 @@
 			<td><input type="submit" value="Submit"/></td>
 		</tr>
 	<?php	
-	}else{
-		?>
-		<h4>This table is currently empty.</h4>
-		<?php
 	}
 	?>
 </table>

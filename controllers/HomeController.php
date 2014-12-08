@@ -11,13 +11,13 @@ class HomeController extends PackagesController{
 	function index(){
 		
 		$slideshow = new Slideshow();
-		$slideshow = $slideshow->getSlideshow("SELECT * FROM slideshow");
+		$slideshow = $slideshow->getSlideshow("All");
 		
 		$packages = new Packages();
-		$packages = $packages->getPackages("SELECT * FROM packages");
+		$packages = $packages->getPackages("All", null);
 		
 		$quotes = new Quotes();
-		$quotes = $quotes->getQuotes("SELECT * FROM customer_quotes");
+		$quotes = $quotes->getQuotes();
 		
 		$view = new View();
 		$view = $view -> render("home",array("slideshow" => $slideshow, "packages" => $packages, "quotes" => $quotes));

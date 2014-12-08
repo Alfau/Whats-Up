@@ -1,10 +1,11 @@
 <?php  
 // require_once "includes/connect.php";
+include_once("Resorts.php");
 
 class Packages{
 	protected $table = "packages";
 	
-	function getPackages($stmt){
+	public function getPackages($stmt, $rst){ //stmt = statement, rst = resort
 		
 		$con=new Connection();
 		$con=$con->setCon();
@@ -17,11 +18,21 @@ class Packages{
 		
 		$array=array();
 		
-		if($query->execute()){
-			while($row=$query->fetch()){
-				$array[]=$row;
+		if(empty($rst)){
+			if($query->execute()){
+				while($row=$query->fetch()){
+					$array[]=$row;
+				}
+				return $array;
 			}
-			return $array;
+		}else{
+			if($query->execute()){
+				while($row=$query->fetch()){
+					$array[]=$row;
+				}
+				$resorts = new Resorts();
+				return $array=array($array, $resorts->getResorts("SELECT Name FROM resorts"));
+			}
 		}
 	}
 	

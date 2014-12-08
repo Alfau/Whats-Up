@@ -4,7 +4,7 @@
 class Resorts{
 	protected $table = "resorts";
 	
-	function getResorts($stmt){
+	public function getResorts($stmt){
 		
 		$con=new Connection();
 		$con=$con->setCon();

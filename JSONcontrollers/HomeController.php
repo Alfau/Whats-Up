@@ -12,7 +12,7 @@ class HomeController{
 		$slideshow = $slideshow->getSlideshow("All");
 		
 		$packages = new Packages();
-		$packages = $packages->getPackages("All");
+		$packages = $packages->getPackages("All", null);
 		
 		$quotes = new Quotes();
 		$quotes = $quotes->getQuotes();

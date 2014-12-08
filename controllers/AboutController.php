@@ -14,9 +14,9 @@ class PackagesController{
 		
 		$view = new View();
 		$view = $view -> render("packages",$about);
-			
+		
+		
+		
 	}
-	
 }
-
 ?>

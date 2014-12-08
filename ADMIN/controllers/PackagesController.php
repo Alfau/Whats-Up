@@ -5,14 +5,13 @@ require_once("../includes/view.php");
 
 class PackagesController{
 	
-	public function index(){
+	function index(){
 		
 		$packages = new Packages();
-		$packages = $packages -> getPackages("All");
+		$packages = $packages -> getPackages("All",null);
 		
 		$view = new View();
-		$view = $view -> render("packages",array("data" => $packages));
-		
+		$view = $view -> render("packages",array("data" => $packages));	
 	}
 	
 	function edit($id){
