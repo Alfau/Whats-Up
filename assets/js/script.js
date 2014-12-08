@@ -311,6 +311,8 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 +	"<div>"
 +	"<img src='assets/icons/Duration.svg' height='15'/><span class='smallest'>"+ duration +" days</span>"
 +	"<div class='social'>"
++	"<a href=# class='facebook'></a>"
++	"<a href=# class='twitter'></a>"
 +	"</div>"
 +	"</div>"
 +	"</div>"
@@ -496,7 +498,7 @@ function getBaseURL() {
 function getSVG(location,target){
 	$.get(baseURL+location,function(data){
 		$(target).html(data);
-		
+		console.log(target);
 	},"text");
 }
 
