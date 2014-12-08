@@ -10,10 +10,11 @@ class PackagesController{
 		$packages=new Packages();
 		$packages=$packages->getPackages("All", null);
 		
-		$packages = json_encode($packages);
+		$packagesBundle = array("Packages" => $packages);
+		$packagesBundle = json_encode($packagesBundle);
 		
 		$view = new View();
-		$view = $view -> render("packages",$packages);
+		$view = $view -> render("_views",array("Packages" => $packagesBundle));
 			
 	}
 	

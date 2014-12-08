@@ -10,13 +10,12 @@ class PackagesController{
 		$about=new About();
 		$about=$about->getAbout("SELECT * FROM packages");
 		
-		$about = json_encode($about);
+		$aboutBundle = array("About" => $about);
+		
+		$aboutBundle = json_encode($aboutBundle);
 		
 		$view = new View();
-		$view = $view -> render("packages",$about);
-		
-		
-		
+		$view = $view -> render("_views",array("About" => $about));
 	}
 }
 ?>

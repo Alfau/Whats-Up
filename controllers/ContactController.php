@@ -11,7 +11,10 @@ class ContactController{
 		
 		$contactBundle = array("Contact" => $contact);
 		
-		echo json_encode($contactBundle);
+		$contactBundle = json_encode($contactBundle);
+		
+		$view = new View();
+		$view = $view -> render("_views",array("Contact" => $contactBundle));
 	}
 	
 }
