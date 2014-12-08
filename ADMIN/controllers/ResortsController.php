@@ -11,7 +11,7 @@ class ResortsController{
 		$resorts = $resorts -> getResorts("All");
 		
 		$view = new View();
-		$view = $view -> render("resorts",array("data" => $resorts));
+		$view = $view -> render("_view",array("data" => $resorts));
 		
 	}
 	
@@ -30,7 +30,7 @@ class ResortsController{
 		$resorts = $resorts -> updateResorts($_POST);
 		
 		$view = new View();
-		$view = $view -> render("resorts",array("data" => $resorts[0], "update_status" => $resorts[1]));
+		$view = $view -> render("_view",array("data" => $resorts[0], "update_status" => $resorts[1]));
 	}
 	
 	function add(){
@@ -39,7 +39,7 @@ class ResortsController{
 		$resorts = $resorts -> addResorts($_POST);
 		
 		$view = new View();
-		$view = $view -> render("resorts",array("data" => $resorts[0], "add_status" => $resorts[1]));
+		$view = $view -> render("_view",array("data" => $resorts[0], "add_status" => $resorts[1]));
 	}
 	
 	function delete($id){
@@ -47,7 +47,7 @@ class ResortsController{
 		$resorts = $resorts -> deleteResorts($id);
 		
 		$view = new View();
-		$view = $view -> render("resorts",array("data" => $resorts[0], "delete_status" => $resorts[1]));
+		$view = $view -> render("_view",array("data" => $resorts[0], "delete_status" => $resorts[1]));
 	}
 }
 

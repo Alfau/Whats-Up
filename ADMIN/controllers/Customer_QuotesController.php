@@ -11,7 +11,7 @@ class Customer_QuotesController{
 		$customer_quotes = $customer_quotes -> getQuotes();
 		
 		$view = new View();
-		$view = $view -> render("customer_quotes",array("data" => $customer_quotes));
+		$view = $view -> render("_view",array("data" => $customer_quotes));
 	}
 	
 	function edit($id){
@@ -29,7 +29,7 @@ class Customer_QuotesController{
 		$customer_quotes = $customer_quotes -> updateQuotes($_POST);
 		
 		$view = new View();
-		$view = $view -> render("customer_quotes",array("data" => $customer_quotes[0], "update_status" => $customer_quotes[1]));
+		$view = $view -> render("_view",array("data" => $customer_quotes[0], "update_status" => $customer_quotes[1]));
 	}
 	
 	function add(){
@@ -38,7 +38,7 @@ class Customer_QuotesController{
 		$customer_quotes = $customer_quotes -> addQuotes($_POST);
 		
 		$view = new View();
-		$view = $view -> render("customer_quotes",array("data" => $customer_quotes[0], "add_status" => $customer_quotes[1]));
+		$view = $view -> render("_view",array("data" => $customer_quotes[0], "add_status" => $customer_quotes[1]));
 	}
 	
 	function delete($id){
@@ -46,7 +46,7 @@ class Customer_QuotesController{
 		$customer_quotes = $customer_quotes -> deleteQuotes($id);
 		
 		$view = new View();
-		$view = $view -> render("customer_quotes",array("data" => $customer_quotes[0], "delete_status" => $customer_quotes[1]));
+		$view = $view -> render("_view",array("data" => $customer_quotes[0], "delete_status" => $customer_quotes[1]));
 	}
 	
 }

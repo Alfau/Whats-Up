@@ -11,7 +11,7 @@ class RoomsController{
 		$rooms = $rooms -> getRooms("All", "Resort");
 		
 		$view = new View();
-		$view = $view -> render("rooms",array("data" => $rooms));
+		$view = $view -> render("_view",array("data" => $rooms));
 		
 	}
 	
@@ -30,7 +30,7 @@ class RoomsController{
 		$rooms = $rooms -> updateRooms($_POST);
 		
 		$view = new View();
-		$view = $view -> render("rooms",array("data" => $rooms[0], "update_status" => $rooms[1]));
+		$view = $view -> render("_view",array("data" => $rooms[0], "update_status" => $rooms[1]));
 	}
 	
 	function add(){
@@ -39,7 +39,7 @@ class RoomsController{
 		$rooms = $rooms -> addRooms($_POST);
 		
 		$view = new View();
-		$view = $view -> render("rooms",array("data" => $rooms[0], "add_status" => $rooms[1]));
+		$view = $view -> render("_view",array("data" => $rooms[0], "add_status" => $rooms[1]));
 	}
 	
 	function delete($id){
@@ -47,7 +47,7 @@ class RoomsController{
 		$rooms = $rooms -> deleteRooms($id);
 		
 		$view = new View();
-		$view = $view -> render("resorts",array("data" => $rooms[0], "delete_status" => $rooms[1]));
+		$view = $view -> render("_view",array("data" => $rooms[0], "delete_status" => $rooms[1]));
 	}
 }
 

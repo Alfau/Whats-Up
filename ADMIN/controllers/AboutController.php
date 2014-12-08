@@ -11,7 +11,7 @@ class AboutController{
 		$about = $about -> getAbout("All");
 		
 		$view = new View();
-		$view = $view -> render("about",array("data" => $about));
+		$view = $view -> render("_view",array("data" => $about));
 
 	}
 	
@@ -30,7 +30,7 @@ class AboutController{
 		$about = $about -> updateAbout($_POST);
 		
 		$view = new View();
-		$view = $view -> render("about",array("data" => $about[0], "update_status" => $about[1]));
+		$view = $view -> render("_view",array("data" => $about[0], "update_status" => $about[1]));
 	}
 	
 	function add(){
@@ -39,7 +39,7 @@ class AboutController{
 		$about = $about -> addAbout($_POST);
 		
 		$view = new View();
-		$view = $view -> render("about",array("data" => $about[0], "add_status" => $about[1]));
+		$view = $view -> render("_view",array("data" => $about[0], "add_status" => $about[1]));
 	}
 	
 	function delete($id){
@@ -48,7 +48,7 @@ class AboutController{
 		$about = $about -> deleteAbout($id);
 		
 		$view = new View();
-		$view = $view -> render("about",array("data" => $about[0], "delete_status" => $about[1]));
+		$view = $view -> render("_view",array("data" => $about[0], "delete_status" => $about[1]));
 	}
 	
 }

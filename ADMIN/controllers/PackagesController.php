@@ -11,7 +11,7 @@ class PackagesController{
 		$packages = $packages -> getPackages("All","Resorts");
 		
 		$view = new View();
-		$view = $view -> render("packages",array("data" => $packages));	
+		$view = $view -> render("_view",array("data" => $packages));	
 	}
 	
 	function edit($id){
@@ -29,7 +29,7 @@ class PackagesController{
 		$packages = $packages -> updatePackages($_POST);
 		
 		$view = new View();
-		$view = $view -> render("packages",array("data" => $packages[0], "update_status" => $packages[1]));
+		$view = $view -> render("_view",array("data" => $packages[0], "update_status" => $packages[1]));
 	}
 	
 	function add(){
@@ -38,7 +38,7 @@ class PackagesController{
 		$packages = $packages -> addPackages($_POST);
 		
 		$view = new View();
-		$view = $view -> render("packages",array("data" => $packages[0], "add_status" => $packages[1]));
+		$view = $view -> render("_view",array("data" => $packages[0], "add_status" => $packages[1]));
 	}
 	
 	function delete($id){
@@ -47,7 +47,7 @@ class PackagesController{
 		$packages = $packages -> deletePackages($id);
 		
 		$view = new View();
-		$view = $view -> render("packages",array("data" => $packages[0], "delete_status" => $packages[1]));
+		$view = $view -> render("_view",array("data" => $packages[0], "delete_status" => $packages[1]));
 	}
 }
 

@@ -11,7 +11,7 @@ class SlideshowController{
 		$slideshow = $slideshow->getSlideshow("SELECT * FROM slideshow");
 		
 		$view = new View();
-		$view = $view -> render("slideshow",array("data" => $slideshow));
+		$view = $view -> render("_view",array("data" => $slideshow));
 
 	}
 	
@@ -30,7 +30,7 @@ class SlideshowController{
 		$slideshow = $slideshow -> updateSlideshow($_POST);
 		
 		$view = new View();
-		$view = $view -> render("slideshow",array("data" => $slideshow[0], "update_status" => $slideshow[1]));
+		$view = $view -> render("_view",array("data" => $slideshow[0], "update_status" => $slideshow[1]));
 	}
 	
 	function add(){
@@ -39,7 +39,7 @@ class SlideshowController{
 		$slideshow = $slideshow -> addSlideshow($_POST);
 		
 		$view = new View();
-		$view = $view -> render("slideshow",array("data" => $slideshow[0], "add_status" => $slideshow[1]));
+		$view = $view -> render("_view",array("data" => $slideshow[0], "add_status" => $slideshow[1]));
 	}
 	
 	function delete($id){
@@ -47,7 +47,7 @@ class SlideshowController{
 		$slideshow = $slideshow -> deleteSlideshow($id);
 		
 		$view = new View();
-		$view = $view -> render("resorts",array("data" => $slideshow[0], "delete_status" => $slideshow[1]));
+		$view = $view -> render("_view",array("data" => $slideshow[0], "delete_status" => $slideshow[1]));
 	}
 }
 

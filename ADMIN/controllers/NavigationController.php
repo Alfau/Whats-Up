@@ -11,7 +11,7 @@ class NavigationController{
 		$navigation = $navigation -> getNavigation("All");
 		
 		$view = new View();
-		$view = $view -> render("navigation",array("data" => $navigation));
+		$view = $view -> render("_view",array("data" => $navigation));
 
 	}
 	
@@ -30,7 +30,7 @@ class NavigationController{
 		$navigation = $navigation -> updateNavigation($_POST);
 		
 		$view = new View();
-		$view = $view -> render("navigation",array("data" => $navigation[0], "update_status" => $navigation[1]));
+		$view = $view -> render("_view",array("data" => $navigation[0], "update_status" => $navigation[1]));
 	}
 	
 	function add(){
@@ -39,7 +39,7 @@ class NavigationController{
 		$navigation = $navigation -> addNavigation($_POST);
 		
 		$view = new View();
-		$view = $view -> render("navigation",array("data" => $navigation[0], "add_status" => $navigation[1]));
+		$view = $view -> render("_view",array("data" => $navigation[0], "add_status" => $navigation[1]));
 	}
 	
 	function delete($id){
@@ -48,7 +48,7 @@ class NavigationController{
 		$navigation = $navigation -> deleteNavigation($id);
 		
 		$view = new View();
-		$view = $view -> render("navigation",array("data" => $navigation[0], "delete_status" => $navigation[1]));
+		$view = $view -> render("_view",array("data" => $navigation[0], "delete_status" => $navigation[1]));
 	}
 }
 
