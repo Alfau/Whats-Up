@@ -62,17 +62,24 @@ class Rooms{
 	
 	public function addRooms($post_data){
 		
-		$stmt = "INSERT INTO ".$this->table." (";
+		$resort_name = $post_data['Resort'];
+		
+		$resort = new Resorts();
+		$ResortID = $resort->getResorts("SELECT ID FROM resorts WHERE Name = '$resort_name'");
+		$ResortID = $ResortID[0][0][0];
+		
+		$stmt = "INSERT INTO ".$this->table." (ResortID,";
 		foreach($post_data as $key => $value){
 			$stmt .= "$key,";
 		}
 		$stmt = rtrim($stmt, ",");
-		$stmt .= ") VALUES(";
+		$stmt .= ") VALUES('$ResortID',";
 		foreach($post_data as $key => $value){
 			$value = addslashes($value);
 			$stmt .= "'$value',";
 		}
 		$stmt = rtrim($stmt, ",").")";
+		
 		
 		$con=new Connection();
 		$con=$con->setCon();
@@ -84,7 +91,7 @@ class Rooms{
 			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 		}
 		
-		return $array=array($this->getRooms("All"), $status);
+		return $array=array($this->getRooms("All", null), $status);
 	}
 	
 	public function deleteRooms($id){
@@ -101,7 +108,7 @@ class Rooms{
 			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 		}
 		
-		return $array=array($this->getRooms("All"), $status);
+		return $array=array($this->getRooms("All", null), $status);
 	}
 }
 

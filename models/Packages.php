@@ -57,17 +57,23 @@ class Packages{
 			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 		}
 		
-		return $array=array($this->getPackages("All"), $status);
+		return $array=array($this->getPackages("All", null), $status);
 	}
 	
 	public function addPackages($post_data){
 		
-		$stmt = "INSERT INTO ".$this->table." (";
+		$resort_name = $post_data['Resort'];
+		
+		$resort = new Resorts();
+		$ResortID = $resort->getResorts("SELECT ID FROM resorts WHERE Name = '$resort_name'");
+		$ResortID = $ResortID[0][0][0];
+		
+		$stmt = "INSERT INTO ".$this->table." (ResortID,";
 		foreach($post_data as $key => $value){
 			$stmt .= "$key,";
 		}
 		$stmt = rtrim($stmt, ",");
-		$stmt .= ") VALUES(";
+		$stmt .= ") VALUES('$ResortID',";
 		foreach($post_data as $key => $value){
 			$value = addslashes($value);
 			$stmt .= "'$value',";
@@ -84,7 +90,7 @@ class Packages{
 			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 		}
 		
-		return $array=array($this->getPackages("All"), $status);
+		return $array=array($this->getPackages("All", null), $status);
 	}
 		
 	public function deletePackages($id){
@@ -101,7 +107,7 @@ class Packages{
 			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 		}
 		
-		return $array=array($this->getPackages("All"), $status);
+		return $array=array($this->getPackages("All", null), $status);
 	}
 }
 
