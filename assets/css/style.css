@@ -281,14 +281,19 @@ div#carousel, div#small_cards_container {
     div#carousel div.container > div, div#small_cards_container div.container > div {
       background-color: #fff;
       box-shadow: 0 0 1px #c0c0c0;
-      border-radius: 3px; }
+      border-radius: 3px;
+      height: 375px; }
       div#carousel div.container > div > a:hover span.emphasis_small, div#small_cards_container div.container > div > a:hover span.emphasis_small {
         padding-right: 4em !important; }
       div#carousel div.container > div > a > div:first-child, div#small_cards_container div.container > div > a > div:first-child {
-        position: relative; }
+        position: relative;
+        height: 50%;
+        border-radius: 3px 3px 0 0;
+        overflow: hidden; }
         div#carousel div.container > div > a > div:first-child img, div#small_cards_container div.container > div > a > div:first-child img {
           width: 100%;
-          border-radius: 3px 3px 0 0; }
+          position: relative;
+          bottom: 0.5em; }
         div#carousel div.container > div > a > div:first-child span.emphasis_small, div#small_cards_container div.container > div > a > div:first-child span.emphasis_small {
           position: absolute;
           bottom: 0;
@@ -299,11 +304,19 @@ div#carousel, div#small_cards_container {
           border-radius: 3px 0 0 3px;
           transition: padding-right 0.3s; }
       div#carousel div.container > div > a > div:nth-child(2), div#small_cards_container div.container > div > a > div:nth-child(2) {
-        padding: 0.5em 1em; }
+        padding: 0.5em 1em;
+        height: 39%;
+        overflow: hidden;
+        position: relative; }
+        div#carousel div.container > div > a > div:nth-child(2) div.fade, div#small_cards_container div.container > div > a > div:nth-child(2) div.fade {
+          width: 100%;
+          height: 40px;
+          background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 59%) repeat scroll 0% 0% transparent;
+          position: absolute;
+          bottom: 0px; }
       div#carousel div.container > div > div:last-child, div#small_cards_container div.container > div > div:last-child {
         padding: 0.5em 1em;
-        border-top: solid 1px #ececec;
-        padding-top: 0.5em; }
+        border-top: solid 1px #ececec; }
         div#carousel div.container > div > div:last-child span.smallest, div#small_cards_container div.container > div > div:last-child span.smallest {
           vertical-align: top;
           margin-left: 0.5em; }

@@ -238,7 +238,7 @@ function handle(model,url,href,type,object_ID){
 	this.JSONconfirm = function(i){
 		var key = i || 0;
 		if(key < model.length){
-			if(typeof JSONobj[model[key][0]] === "undefined" || JSONobj[model[key][0]].length < 1){
+			if(typeof JSONobj[model[key]] === "undefined" || JSONobj[model[key]].length < 1){
 				$.getJSON(baseURL+"/JSONroute.php",{url:url},function(data){
 					$.each(data,function(key,value){
 						JSONobj[key] = value;
@@ -305,6 +305,7 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 +	"<div>"
 +	"<span class='emphasis_large'>"+ name +"</span>"
 +	"<p class='summary'>"+ overview +"</p>"
++	"<div class='fade'></div>"
 +	"</div>"
 +	"</a>"
 +	"<div>"
@@ -495,6 +496,7 @@ function getBaseURL() {
 function getSVG(location,target){
 	$.get(baseURL+location,function(data){
 		$(target).html(data);
+		
 	},"text");
 }
 

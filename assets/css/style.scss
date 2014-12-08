@@ -342,16 +342,21 @@ div#carousel,div#small_cards_container{
       background-color:#fff;
       box-shadow:0 0 1px #c0c0c0;
       border-radius:3px;
+      height:375px;
       
       &>a:hover span.emphasis_small{
         padding-right:4em !important;
       }
       &>a>div:first-child{
         position:relative;
+        height:50%;
+        border-radius: 3px 3px 0 0;
+        overflow:hidden;
         
         img{
           width:100%;
-          border-radius:3px 3px 0 0;
+          position: relative;
+          bottom: 0.5em;
         }
         span.emphasis_small{
           position:absolute;
@@ -366,11 +371,21 @@ div#carousel,div#small_cards_container{
       }
       &>a>div:nth-child(2){
         padding:0.5em 1em;
+        height:39%;
+        overflow:hidden;
+        position:relative;
+        
+        div.fade{
+          width: 100%;
+          height: 40px;
+          background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 59%) repeat scroll 0% 0% transparent;
+          position: absolute;
+          bottom: 0px;
+        }
       }
       &>div:last-child{
         padding:0.5em 1em;
         border-top:solid 1px $border_color;
-        padding-top:0.5em;
           
         span.smallest{
           vertical-align:top;

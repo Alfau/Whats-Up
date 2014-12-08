@@ -20,7 +20,7 @@ class HomeController extends PackagesController{
 		$quotes = $quotes->getQuotes();
 		
 		$view = new View();
-		$view = $view -> render("home",array("Slideshow" => $slideshow, "Packages" => $packages, "Quotes" => $quotes));
+		$view = $view -> render("home",array("Slideshow"=>$slideshow, "Packages"=>$packages, "Quotes"=>$quotes));
 		
 	}
 	

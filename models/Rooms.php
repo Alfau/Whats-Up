@@ -57,7 +57,7 @@ class Rooms{
 			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 		}
 		
-		return $array=array($this->getRooms("All"), $status);
+		return $array=array($this->getRooms("All", null), $status);
 	}
 	
 	public function addRooms($post_data){
