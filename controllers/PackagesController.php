@@ -8,7 +8,7 @@ class PackagesController{
 	function index(){
 		
 		$packages=new Packages();
-		$packages=$packages->getPackages("SELECT * FROM packages");
+		$packages=$packages->getPackages("All", null);
 		
 		$packages = json_encode($packages);
 		

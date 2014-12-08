@@ -21,7 +21,7 @@ class Contact{
 			while($row=$query->fetch()){
 				$array[]=$row;
 			}
-			return $array;
+			return $array=array($array);
 		}
 	}
 }

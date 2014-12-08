@@ -6,7 +6,7 @@ include("includes/header.php");
 <form method="POST" action="../update">
 <table>
 	<?php
-	foreach($data[0] as $key => $value){
+	foreach($data[0][0] as $key => $value){
 		if(!is_numeric($key)){
 		?>
 		<tr>

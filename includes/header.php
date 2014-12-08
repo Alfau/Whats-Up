@@ -19,7 +19,7 @@
 					$SocialNav=new Navigation();
 					$navLinks=$SocialNav->getNavigation("SELECT * FROM navigation WHERE Position = '3'");
 					
-					foreach($navLinks as $value){
+					foreach($navLinks[0] as $value){
 						?>
 							<li><a href=#><?php include($value['Image']) ?></a></li>
 						<?php
@@ -35,7 +35,7 @@
 						$MainNav=new Navigation();
 						$navLinks=$MainNav->getNavigation("SELECT * FROM navigation WHERE Position = '1'");
 						
-						foreach($navLinks as $value){
+						foreach($navLinks[0] as $value){
 							if($value['HREF'] == "/book"){
 							?>
 								<li><a href=# class="book" data-req="<?php echo $value['Name'] ?>"><?php echo $value['Name'] ?></a></li>
@@ -54,7 +54,7 @@
 						$SideNav=new Navigation();
 						$navLinks=$SideNav->getNavigation("SELECT * FROM navigation WHERE Position = '2'");
 						
-						foreach($navLinks as $value){
+						foreach($navLinks[0] as $value){
 							?>
 								<li><a href=#><?php echo $value['Name'] ?></a></li>
 							<?php
@@ -71,7 +71,7 @@
 					$MainNav=new Navigation();
 					$navLinks=$MainNav->getNavigation("SELECT * FROM navigation WHERE Position = '1'");
 					
-					foreach($navLinks as $value){
+					foreach($navLinks[0] as $value){
 						if($value['HREF'] == "book"){
 						?>
 							<li><a href="<?php echo $value['HREF'] ?>" class="book" data-req="<?php echo $value['Name'] ?>"><?php echo $value['Name'] ?></a></li>
@@ -93,7 +93,7 @@
 						$SideNav=new Navigation();
 						$navLinks=$SideNav->getNavigation("SELECT * FROM navigation WHERE Position = '2'");
 						
-						foreach($navLinks as $value){
+						foreach($navLinks[0] as $value){
 							?>
 								<li><a href="<?php echo $value['HREF'] ?>" data-req="<?php echo $value['Name'] ?>"><?php echo $value['Name'] ?></a></li>
 							<?php
@@ -106,7 +106,7 @@
 					$SocialNav=new Navigation();
 					$navLinks=$SocialNav->getNavigation("SELECT * FROM navigation WHERE Position = '3'");
 					
-					foreach($navLinks as $value){
+					foreach($navLinks[0] as $value){
 						?>
 							<li><a href=#><?php include($value['Image']) ?></a></li>
 						<?php

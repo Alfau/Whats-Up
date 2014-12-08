@@ -1,18 +1,9 @@
-
-<?php 
-include("includes/array.php");
-include("includes/console.php"); 
-?>
-<pre>
-<?php 
-echo print_r_tree($data);
-?>
 </pre>
 <form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>/add" id="add">
 <table>
 	<?php
 	if(isset($data)){
-		foreach($data[0] as $key => $value){
+		foreach($data[0][0] as $key => $value){
 			if(!is_numeric($key)){
 				if($key !== "ID" && $key !== "ResortID"){
 			?>
@@ -23,10 +14,18 @@ echo print_r_tree($data);
 						<tr>
 							<td>
 								<select name="<?php echo $key ?>">
-									<option value="<?php echo $value ?>">Resorts</option>
+									<?php
+									$array_length = count($data[1]);
+									for ($i=0; $i < $array_length; $i++) {
+										foreach($data[1][$i] as $resort){
+										?>	
+											<option value="<?php echo $resort ?>"><?php echo $resort ?></option>
+										<?php
+										}
+									}
+									?>
 								</select>
 							</td>
-							
 						</tr>
 						<?php
 					}else{

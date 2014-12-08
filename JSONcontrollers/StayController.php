@@ -19,7 +19,7 @@ class StayController{
 	public function details(){
 		
 		$rooms = new Rooms();
-		$rooms = $rooms -> getRooms("SELECT * FROM rooms");
+		$rooms = $rooms -> getRooms("All");
 		
 		$stayBundle = array("Rooms" => $rooms);
 		

@@ -7,7 +7,7 @@ class PackagesController{
 	public function index(){
 		
 		$packages = new Packages();
-		$packages = $packages -> getPackages("All");
+		$packages = $packages -> getPackages("All", null);
 		
 		$packagesBundle = array("Packages" => $packages);
 		
@@ -15,6 +15,15 @@ class PackagesController{
 		
 	}
 	
+	public function details(){
+		
+		$packages = new Packages();
+		$packages = $packages -> getPackages("All", null);
+		
+		$packagesBundle = array("Packages" => $packages);
+		
+		echo json_encode($packagesBundle);
+	} 
 }
 
 ?>

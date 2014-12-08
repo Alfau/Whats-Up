@@ -21,9 +21,10 @@ class Navigation{
 			while($row=$query->fetch()){
 				$array[]=$row;
 			}
-			return $array;
+			return $array=array($array);
 		}
 	}
+	
 	public function updateNavigation($post_data){
 		
 		$stmt = "UPDATE ".$this->table." SET";

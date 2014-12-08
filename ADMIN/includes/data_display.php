@@ -13,7 +13,7 @@ if(isset($add_status)){
 	<tr>
 	<?php
 	if(isset($data) && !empty($data)){
-		foreach($data[0] as $key => $value){
+		foreach($data[0][0]as $key => $value){
 			if(!is_numeric($key)){
 			?>
 				<td><?php echo $key ?></td>
@@ -27,13 +27,13 @@ if(isset($add_status)){
 			<td>Delete</td>
 		</tr>
 		<?php
-		$array_length = count($data);
+		$array_length = count($data[0]);
 		
 		for($i=0;$i<$array_length;$i++){
 			?>
 			<tr>
 			<?php
-			foreach($data[$i] as $key => $value){
+			foreach($data[0][$i] as $key => $value){
 				if(!is_numeric($key)){
 				?>
 					<td><?php echo $value ?></td>
@@ -41,7 +41,7 @@ if(isset($add_status)){
 				}
 				?>
 				<?php
-				$id = $data[$i]['ID'];
+				$id = $data[0][$i]['ID'];
 			}
 			?>
 				<td>

@@ -238,7 +238,7 @@ function handle(model,url,href,type,object_ID){
 	this.JSONconfirm = function(i){
 		var key = i || 0;
 		if(key < model.length){
-			if(typeof JSONobj[model[key]] === "undefined" || JSONobj[model[key]].length < 1){
+			if(typeof JSONobj[model[key][0]] === "undefined" || JSONobj[model[key][0]].length < 1){
 				$.getJSON(baseURL+"/JSONroute.php",{url:url},function(data){
 					$.each(data,function(key,value){
 						JSONobj[key] = value;
@@ -281,7 +281,7 @@ function small_cards( href ){
 	
 	title("div#small_cards_container",heading,"alternate");
 	
-	$.each(JSONobj[model[0]],function( key, value ){
+	$.each(JSONobj[model[0]][0],function( key, value ){
 		render_small_cards("div#small_cards_container", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration);
 	});
 }
@@ -328,7 +328,7 @@ function large_cards( href ){
 	
 	title("div#large_cards_container",heading.split("/")[1],"alternate");
 	
-	$.each(JSONobj[model[0]],function( key, value ){
+	$.each(JSONobj[model[0]][0],function( key, value ){
 		if(value.ID === object_ID){
 			render_large_cards("div#large_cards_container", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration);
 		}
@@ -365,7 +365,7 @@ function rooms_cards(ResortID){
 	
 	title("div#rooms_cards_container","Rooms","regular");
 	
-	$.each(JSONobj[model[1]],function( key, value ){
+	$.each(JSONobj[model[1]][0],function( key, value ){
 		if(value.ResortID === ResortID){
 			render_rooms_cards("div#rooms_cards_container", value.Image, value.RoomType, value.Overview);
 		}
@@ -392,7 +392,7 @@ function includes_cards(ID){
 	
 	title("div#includes_cards_container","Includes","regular");
 	
-	$.each(JSONobj[model[0]],function( key, value ){
+	$.each(JSONobj[model[0]][0],function( key, value ){
 		if(value.ID === ID){
 			render_includes_cards("div#includes_cards_container", value.Includes);
 		}
@@ -415,10 +415,10 @@ function render_home(url){
 	
 	getSVG("assets/icons/arrow.svg","div#carousel_section #controls a");
 	
-	var home_slideshow = new slideshow("div#slideshow", JSONobj["Slideshow"], 9000, 500);
-	var featured_packages = new carousel_obj( "div#carousel_section", JSONobj["Packages"], 4, "State", "Featured", "packages" );
+	var home_slideshow = new slideshow("div#slideshow", JSONobj["Slideshow"][0], 9000, 500);
+	var featured_packages = new carousel_obj( "div#carousel_section", JSONobj["Packages"][0], 4, "State", "Featured", "packages" );
 	
-	$.each(JSONobj['Quotes'],function(key,value){
+	$.each(JSONobj['Quotes'][0],function(key,value){
 		key == 0 ? state = "active" : state = "inactive";
 		
 		$("div#customer_quote #controls").append(
@@ -452,8 +452,7 @@ function render_home(url){
 
 function basic_cards(){
 	$("main").html("<div class='basic_cards_container'></div>");
-	
-	$.each(JSONobj[model[0]],function( key, value ){
+	$.each(JSONobj[model[0]][0],function( key, value ){
 		title("div.basic_cards_container", value.Title, "alternate");
 		render_basic_cards(value.Text, "emphasis_small");
 	});

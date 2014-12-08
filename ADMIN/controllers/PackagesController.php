@@ -8,7 +8,7 @@ class PackagesController{
 	function index(){
 		
 		$packages = new Packages();
-		$packages = $packages -> getPackages("All",null);
+		$packages = $packages -> getPackages("All","Resorts");
 		
 		$view = new View();
 		$view = $view -> render("packages",array("data" => $packages));	
@@ -42,6 +42,7 @@ class PackagesController{
 	}
 	
 	function delete($id){
+		
 		$packages = new Packages();
 		$packages = $packages -> deletePackages($id);
 		
