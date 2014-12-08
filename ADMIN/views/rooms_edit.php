@@ -10,15 +10,20 @@ include("includes/header.php");
 		if(!is_numeric($key)){
 		?>
 		<tr>
-			<td><?php echo $key ?></td>
 			<?php
-			if($key === "ID" || $key === "ResortID" || $key === "Resort"){
+			if($key === "ID" || $key === "ResortID"){
 				?>
+				<input type="hidden" name='<?php echo $key ?>' value='<?php echo strip_tags($value) ?>'/>
+				<?php
+			}elseif($key === "Resort"){
+				?>
+				<td><?php echo $key ?></td>
 				<td><input type='text' value='<?php echo strip_tags($value) ?>' disabled/></td>
 				<input type="hidden" name='<?php echo $key ?>' value='<?php echo strip_tags($value) ?>'/>
 				<?php
 			}else{
 				?>
+				<td><?php echo $key ?></td>
 				<td><input type='text' name='<?php echo $key ?>' value='<?php echo strip_tags($value) ?>'/></td>
 				<?php
 			}

@@ -17,7 +17,7 @@ class PackagesController{
 	function edit($id){
 		
 		$packages = new Packages();
-		$packages = $packages -> getPackages("SELECT * FROM packages WHERE ID = $id");
+		$packages = $packages -> getPackages("SELECT * FROM packages WHERE ID = $id", null);
 		
 		$view = new View();
 		$view = $view -> render("packages_edit",array("data" => $packages));
