@@ -47,10 +47,10 @@ if(isset($add_status)){
 			}
 			?>
 				<td>
-					<a href="<?php echo URL::current()."edit/" . $id; ?>" class="edit">Edit</a>
+					<a href="<?php echo URL::sansController()."edit/" . $id; ?>" class="edit">Edit</a>
 				</td>
 				<td>
-					<a href="<?php echo URL::current() . "delete/" . $id; ?>" class="delete">Delete</a>
+					<a href="<?php echo URL::sansController() . "delete/" . $id; ?>" class="delete">Delete</a>
 				</td>
 			</tr>
 			<?php

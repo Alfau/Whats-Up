@@ -4,7 +4,7 @@ session_start();
 require_once "../includes/paths.php";
 
 if(isset($_SESSION['Username'])){
-	header("Location:".URL::base()."/admin");
+	header("Location:".URL::base()."admin");
 	exit();
 }
 
@@ -23,7 +23,7 @@ if(isset($_SESSION['Username'])){
   </head>
   <body>
     <div class="authenticate">
-		<form method="POST" action="../admin/sessions/authentication">
+		<form method="POST" action="<?php echo URL::sansController()."sessions/authentication" ?>">
 			<input type="text" name="Username" placeholder="Username"/><input type="password" name="Password" placeholder="Password"/><input type="submit" value="Log In"/>
 		</form>
 		<?php
@@ -34,14 +34,3 @@ if(isset($_SESSION['Username'])){
 	</div>
   </body> 
 </html>
-
-<?php
-
-$url = URL::current();
-$base = URL::base();
-
-$url = explode($base, $url);
-
-echo $url[1];
-
-?>

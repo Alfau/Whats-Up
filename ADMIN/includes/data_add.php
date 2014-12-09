@@ -2,7 +2,7 @@
 require_once("../includes/paths.php");
 ?>
 
-<form method="POST" action="<?php echo URL::current() . "add"; ?>" id="add">
+<form method="POST" action="<?php echo URL::sansController() . "add"; ?>" id="add">
 <table>
 	<?php
 	if(isset($data)){

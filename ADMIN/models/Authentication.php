@@ -21,9 +21,9 @@ class Authentication{
 			session_start();
 			$_SESSION['Username'] = $array[0]['Username'];
 			
-			return $array = array("_login", array("status" => "Login Successfull"));
+			return $array = array("_login", array("status" => "Login Successfull!"));
 		}else{
-			return $array = array("_login", array("status" => "Login Failed"));
+			return $array = array("_login", array("status" => "Login Failed!"));
 		}
 	}
 }

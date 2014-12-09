@@ -90,7 +90,7 @@ class Quotes{
 			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 		}
 		
-		return $array=array($this->getQuotes(), $status);
+		return $array=array($this->getQuotes("All"), $status);
 	}
 }
 

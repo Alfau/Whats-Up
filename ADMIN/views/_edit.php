@@ -4,7 +4,7 @@ session_start();
 require_once "../includes/paths.php";
 
 if(!isset($_SESSION['Username'])){
-	header("Location:".URL::base()."/admin/login");
+	header("Location:".URL::base()."admin/login");
 	exit();
 }
 
@@ -13,7 +13,7 @@ include("includes/header.php");
 
 <div class="wrapper">
 
-<form method="POST" action="../update">
+<form method="POST" action="<?php echo URL::sansController()."update" ?>">
 <table>
 	<?php
 	foreach($data[0][0] as $key => $value){

@@ -18,7 +18,7 @@ require_once "../includes/paths.php";
   <body>
   	<a href="#add" id="add_anchor">Add</a>
     <header>
-    	<div id="logo"><a href=# id="logo">Admin Dashboard</a><a href="logout" class="logout">Logout</a></div>
+    	<div id="logo"><a href="<?php echo URL::base()."admin" ?>" id="logo">Admin Dashboard</a><a href="logout" class="logout">Logout</a></div>
     	<ul>
 		<?php
 			$MainNav=new AdminNavigation();
