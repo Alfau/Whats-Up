@@ -1,5 +1,6 @@
 <?php  
 require_once("urlParse.php");
+include("controllers/NoPageController.php");
 
 class Route{
 	
@@ -18,12 +19,13 @@ class Route{
 			$controller = $controller."Controller";
 			
 			$controller = new $controller;
-			$controller = $controller -> index();
+			$controller = $controller -> $method();
 			
+		}else{
+			$controller = new ErrorPage;
+			$controller = $controller -> Index(404);
 		}
 	}
-	
-	
 }
 
 ?>
