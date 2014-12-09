@@ -17,7 +17,7 @@ class HomeController extends PackagesController{
 		$packages = $packages->getPackages("All", null);
 		
 		$quotes = new Quotes();
-		$quotes = $quotes->getQuotes();
+		$quotes = $quotes->getQuotes("All");
 		
 		$view = new View();
 		$view = $view -> render("_views",array("Slideshow"=>$slideshow, "Packages"=>$packages, "Quotes"=>$quotes));

@@ -15,7 +15,7 @@ class HomeController{
 		$packages = $packages->getPackages("All", null);
 		
 		$quotes = new Quotes();
-		$quotes = $quotes->getQuotes();
+		$quotes = $quotes->getQuotes("All");
 		
 		$homeBundle = array("Slideshow"=>$slideshow, "Packages"=>$packages, "Quotes"=>$quotes);
 		echo json_encode($homeBundle);

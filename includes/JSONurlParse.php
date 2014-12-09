@@ -1,4 +1,5 @@
 <?php  
+require_once "includes/paths.php";
 
 class urlParse{
 	protected $controller;
@@ -6,12 +7,12 @@ class urlParse{
 	protected $params;
 	
 	function __construct(){
-		$url = $_GET['url'];
-		$split = explode("/",$url);
+		$url = explode(URL::base(), $_GET['url']);
+		$url_segments = explode("/", $url[1]);
 		
-		$this -> controller = (isset($split[4]) && !empty($split[4])) ? $split[4] : "Home";
-		$this -> method = (isset($split[5]) && !empty($split[5])) ? "details" : "index";
-		$this -> params = (isset($split[0])) ? $split : array();
+		$this -> controller = (isset($url_segments[0]) && !empty($url_segments[0])) ? $url_segments[0] : "Home";
+		$this -> method = (isset($url_segments[1]) && !empty($url_segments[1])) ? $url_segments[1] : "index";
+		$this -> param = (isset($url_segments[2]) && !empty($url_segments[2])) ? $url_segments[2] : "";
 	}
 	
 	public function getController(){

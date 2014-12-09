@@ -1,14 +1,9 @@
 <?php
-
 require_once "../includes/paths.php";
 
 class Route{
 	public function __construct(){
-		// $url = $_SERVER['REQUEST_URI'];
-		// $url_segments = explode("/", $url);
-		
 		$url = explode(URL::base(), URL::current());
-		
 		$url_segments = explode("/", $url[1]);
 		
 		$controller = (isset($url_segments[1]) && !empty($url_segments[1])) ? $url_segments[1] : "about";
