@@ -1,4 +1,13 @@
-<?php include("includes/header.php");?>
+<?php 
+session_start();
+
+if(!isset($_SESSION['Username'])){
+	header("Location:../admin/login");
+	exit();
+}
+
+include("includes/header.php");
+?>
 
 <div class="wrapper">
 	

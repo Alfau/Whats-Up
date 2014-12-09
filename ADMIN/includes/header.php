@@ -14,7 +14,7 @@
   <body>
   	<a href="#add" id="add_anchor">Add</a>
     <header>
-    	<div id="logo"><a href=# id="logo">Admin Dashboard</a></div>
+    	<div id="logo"><a href=# id="logo">Admin Dashboard</a><a href="logout" class="logout">Logout</a></div>
     	<ul>
 		<?php
 			$MainNav=new AdminNavigation();

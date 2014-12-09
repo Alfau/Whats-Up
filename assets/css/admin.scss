@@ -214,7 +214,7 @@ h3{
   font-size:0.7em;
   color:#bbbdc0;
 }
-input[type=text],textarea{
+input[type=text],textarea,input[type=password]{
   border:solid 1px #c0c0c0;
   width:100%;
   padding:0.5em;
@@ -280,6 +280,14 @@ header{
     &#logo{
       color:#fff;
       margin:0 5.5555%;
+    }
+    
+    &.logout{
+      color: rgb(255, 255, 255);
+      position: absolute;
+      top: 1em;
+      right: 5.5555%;
+      padding: 0;
     }
   }
   div#logo{
@@ -349,7 +357,34 @@ main{
     background-color:#CF000F;
   }
 }
-
+.authenticate{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  input[type="text"]{
+    width: 200px;
+    border-radius: 3px 0 0 3px;
+  }
+  input[type="password"]{
+    width: 200px;
+    border-radius: 0;;
+  }
+  input[type="submit"]{
+    border-radius:0 3px 3px 0;
+    padding:0.5em;
+    background-color:#4183D7;
+  }
+  p.status{
+    color:#fff;
+    background-color:#CF000F;
+    border-radius:3px;
+    font-size:0.9em;
+    padding:0.2em 0.5em;
+    margin-top:.5em;
+  }
+}
 /* @media screen and (min-width: 500px) */
 @media screen and (min-width: 31.25em) {
   body {

@@ -175,14 +175,14 @@ h3 {
   font-size: 0.7em;
   color: #bbbdc0; }
 
-input[type=text], textarea, select {
+input[type=text], textarea, input[type=password] {
   border: solid 1px #c0c0c0;
   width: 100%;
   padding: 0.5em;
   border-radius: 3px;
   font-size: 0.9em;
   color: #505050; }
-  input[type=text]:focus, textarea:focus {
+  input[type=text]:focus, textarea:focus, input[type=password]:focus {
     border: solid 1px #30bec1; }
 
 input[type=submit] {
@@ -233,6 +233,12 @@ header {
     header a#logo {
       color: #fff;
       margin: 0 5.5555%; }
+    header a.logout {
+      color: white;
+      position: absolute;
+      top: 1em;
+      right: 5.5555%;
+      padding: 0; }
   header div#logo {
     background-color: #30bec1; }
 
@@ -278,6 +284,29 @@ main {
     border-radius: 3px; }
   main p.failed_strip {
     background-color: #CF000F; }
+
+.authenticate {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+  .authenticate input[type="text"] {
+    width: 200px;
+    border-radius: 3px 0 0 3px; }
+  .authenticate input[type="password"] {
+    width: 200px;
+    border-radius: 0; }
+  .authenticate input[type="submit"] {
+    border-radius: 0 3px 3px 0;
+    padding: 0.5em;
+    background-color: #4183D7; }
+  .authenticate p.status {
+    color: #fff;
+    background-color: #CF000F;
+    border-radius: 3px;
+    font-size: 0.9em;
+    padding: 0.2em 0.5em;
+    margin-top: .5em; }
 
 /* @media screen and (min-width: 500px) */
 @media screen and (min-width: 31.25em) {
