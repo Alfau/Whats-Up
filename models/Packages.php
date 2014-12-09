@@ -5,7 +5,7 @@ include_once("Resorts.php");
 class Packages{
 	protected $table = "packages";
 	
-	public function getPackages($stmt, $rst){ //stmt = statement, rst = resort
+	public function getPackages($stmt, $rst){
 		
 		$con=new Connection();
 		$con=$con->setCon();

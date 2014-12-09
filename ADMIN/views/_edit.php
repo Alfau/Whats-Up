@@ -1,8 +1,10 @@
 <?php 
 session_start();
 
+require_once "../includes/paths.php";
+
 if(!isset($_SESSION['Username'])){
-	header("Location:../admin/login");
+	header("Location:".URL::base()."/admin/login");
 	exit();
 }
 

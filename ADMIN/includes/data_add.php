@@ -1,12 +1,8 @@
 <?php 
-include("includes/array.php");
+require_once("../includes/paths.php");
 ?>
-<pre>
-<?php 
-// echo print_r_tree($data);
-?>
-</pre>
-<form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>/add" id="add">
+
+<form method="POST" action="<?php echo URL::current() . "add"; ?>" id="add">
 <table>
 	<?php
 	if(isset($data)){

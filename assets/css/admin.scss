@@ -366,10 +366,12 @@ main{
   input[type="text"]{
     width: 200px;
     border-radius: 3px 0 0 3px;
+    border-right:none;
   }
   input[type="password"]{
     width: 200px;
     border-radius: 0;;
+    border-right:none;
   }
   input[type="submit"]{
     border-radius:0 3px 3px 0;

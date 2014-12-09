@@ -1,4 +1,8 @@
-<?php include_once "models/Navigation.php" ?>
+<?php 
+require_once "models/Navigation.php";
+require_once "../includes/paths.php";
+?>
+
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -22,7 +26,7 @@
 			
 			foreach($navLinks as $value){
 				?>
-					<li><a href="/whatsup/admin/<?php echo $value['Name'] ?>"><?php echo $value['Name'] ?></a></li>
+					<li><a href="<?php echo URL::base() . "admin/" . $value['Name'] ?>"><?php echo $value['Name'] ?></a></li>
 				<?php
 			}
 		?>

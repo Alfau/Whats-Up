@@ -1,4 +1,6 @@
 <?php
+require_once '../includes/paths.php';
+
 if(isset($delete_status)){
 	echo $delete_status;
 }
@@ -45,10 +47,10 @@ if(isset($add_status)){
 			}
 			?>
 				<td>
-					<a href="<?php echo $_SERVER['REQUEST_URI'];?>/edit/<?php echo $id ?>" class="edit">Edit</a>
+					<a href="<?php echo URL::current()."edit/" . $id; ?>" class="edit">Edit</a>
 				</td>
 				<td>
-					<a href="<?php echo $_SERVER['REQUEST_URI'];?>/delete/<?php echo $id ?>" class="delete">Delete</a>
+					<a href="<?php echo URL::current() . "delete/" . $id; ?>" class="delete">Delete</a>
 				</td>
 			</tr>
 			<?php

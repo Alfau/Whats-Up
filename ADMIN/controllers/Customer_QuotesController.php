@@ -8,7 +8,7 @@ class Customer_QuotesController{
 	function index(){
 		
 		$customer_quotes = new Quotes();
-		$customer_quotes = $customer_quotes -> getQuotes();
+		$customer_quotes = $customer_quotes -> getQuotes("All");
 		
 		$view = new View();
 		$view = $view -> render("_view",array("data" => $customer_quotes));
@@ -17,7 +17,7 @@ class Customer_QuotesController{
 	function edit($id){
 		
 		$customer_quotes = new Quotes();
-		$customer_quotes = $customer_quotes -> getQuotes("SELECT * FROM customer_quotes WHERE ID = $id");
+		$customer_quotes = $customer_quotes -> getQuotes("SELECT * FROM customer_quotes WHERE ID = '$id'");
 		
 		$view = new View();
 		$view = $view -> render("_edit",array("data" => $customer_quotes));

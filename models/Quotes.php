@@ -4,11 +4,16 @@
 class Quotes{
 	protected $table = "customer_quotes";
 	
-	public function getQuotes(){
+	public function getQuotes($stmt){
 		
 		$con=new Connection();
 		$con=$con->setCon();
-		$query=$con -> prepare("SELECT * FROM ".$this->table);//order by order asc
+		
+		if($stmt === "All"){
+			$query=$con->prepare("SELECT * FROM ".$this->table);
+		}else{
+			$query=$con->prepare($stmt);
+		}
 		
 		$array=array();
 		

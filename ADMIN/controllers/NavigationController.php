@@ -18,7 +18,7 @@ class NavigationController{
 	function edit($id){
 		
 		$navigation = new Navigation();
-		$navigation = $navigation -> getNavigation("All");
+		$navigation = $navigation -> getNavigation("SELECT * FROM navigation WHERE ID = '$id'");
 		
 		$view = new View();
 		$view = $view -> render("_edit",array("data" => $navigation));

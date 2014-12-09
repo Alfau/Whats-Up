@@ -1,14 +1,19 @@
 <?php
 
+require_once "../includes/paths.php";
+
 class Route{
 	public function __construct(){
-		$url = $_SERVER['REQUEST_URI'];
-		$url_segments = explode("/", $url);
+		// $url = $_SERVER['REQUEST_URI'];
+		// $url_segments = explode("/", $url);
 		
+		$url = explode(URL::base(), URL::current());
 		
-		$controller = (isset($url_segments[3]) && !empty($url_segments[3])) ? $url_segments[3] : "about";
-		$method = (isset($url_segments[4]) && !empty($url_segments[4])) ? $url_segments[4] : "index";
-		$param = (isset($url_segments[5]) && !empty($url_segments[5])) ? $url_segments[5] : "";
+		$url_segments = explode("/", $url[1]);
+		
+		$controller = (isset($url_segments[1]) && !empty($url_segments[1])) ? $url_segments[1] : "about";
+		$method = (isset($url_segments[2]) && !empty($url_segments[2])) ? $url_segments[2] : "index";
+		$param = (isset($url_segments[3]) && !empty($url_segments[3])) ? $url_segments[3] : "";
 		
 		if($controller === "login"){
 			$controller = "sessions";

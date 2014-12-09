@@ -1,9 +1,10 @@
 <?php 
-
 session_start();
 
+require_once "../includes/paths.php";
+
 if(isset($_SESSION['Username'])){
-	header("Location:../admin");
+	header("Location:".URL::base()."/admin");
 	exit();
 }
 
@@ -33,3 +34,14 @@ if(isset($_SESSION['Username'])){
 	</div>
   </body> 
 </html>
+
+<?php
+
+$url = URL::current();
+$base = URL::base();
+
+$url = explode($base, $url);
+
+echo $url[1];
+
+?>
