@@ -518,8 +518,6 @@ function pageLoad(){
 
 	var req = model;
 	
-	console.log(url+" -- "+href+" -- "+req);
-	
 	if(href.indexOf("home") > -1){
 		handle(req_models[req],url,href,"render_home",null);
 	}else if(href.indexOf("about") > -1 || href.indexOf("contact") > -1){
