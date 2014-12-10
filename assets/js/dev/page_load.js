@@ -18,7 +18,7 @@ function pageLoad(){
 	// console.log(model);
 	
 	if(model.indexOf("_details") <= -1){
-		var model = model.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
+		var model = model.toLowerCase().replace(/\b[a-z]/g, function(result) {
 			return result.toUpperCase();
 		});
 	}
@@ -26,7 +26,6 @@ function pageLoad(){
 		model = "Home";
 	}
 	
-	// var url = window.location.href;
 	window.history.pushState("","Title",baseURL+href[1]);
 
 	var req = model;
@@ -36,13 +35,4 @@ function pageLoad(){
 	}else{
 		handle(req_models[req], url, segments[0], model, null);
 	}
-	// else if(model.indexOf("Home") > -1){
-		// handle(req_models[req],url,segments[0],"render_home",null);
-	// }
-	// else if(model.indexOf("About") > -1 || model.indexOf("Contact") > -1){
-		// handle(req_models[req],url,segments[0],"basic_cards",null);
-	// }
-	// else{
-		// handle(req_models[req],url,segments[0],"small_cards",null);
-	// }
 }

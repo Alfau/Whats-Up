@@ -67,7 +67,7 @@ var carousel_obj = function(container, data, num_rows, filter_key, filter_val, h
 			
 			object_ID = $(this).attr("data-id");
 			
-			handle(req_models[req],url,href,"large_cards",object_ID);
+			handle(req_models[req],url,href,req,object_ID);
 			
 			e.preventDefault();
 		});

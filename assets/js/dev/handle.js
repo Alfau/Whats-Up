@@ -3,7 +3,6 @@ function handle(model,url,href,page,object_ID){
 	this.url = url;
 	this.href = href;
 	this.page = page;
-	// this.type = type;
 	this.object_ID = object_ID;
 	
 	this.JSONconfirm = function(i){
@@ -20,29 +19,11 @@ function handle(model,url,href,page,object_ID){
 				JSONconfirm(key+1);
 			}
 		}else{
-			// render(this.type, this.href);
 			render(this.page, this.href);
 		}
 	};
 	JSONconfirm();
 }
-
-// function render(type,href){
-	// switch(type){
-		// case "small_cards" :
-			// small_cards(href);
-			// break;
-		// case "large_cards" :
-			// large_cards(href);
-			// break;
-		// case "basic_cards" :
-			// basic_cards();
-			// break;	
-		// case "render_home" :
-			// render_home();
-			// break;
-	// }
-// }
 
 function render(page, href){
 	switch(page){

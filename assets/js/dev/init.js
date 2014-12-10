@@ -27,12 +27,6 @@ $(document).ready(function(){
 		
 		var req = $(this).attr("data-req");
 		
-		// if($(this).parents("nav#right").length){
-			// handle(req_models[req],url,href,"basic_cards",null);
-		// }else{
-			// href.indexOf("home") > -1 ? handle(req_models[req],url,href,"render_home",null) : handle(req_models[req],url,href,"small_cards",null);	
-		// }
-		
 		handle(req_models[req],url,href,req,null);
 		
 		e.preventDefault();
@@ -52,7 +46,7 @@ $(document).ready(function(){
 		
 		object_ID = $(this).attr("data-id");
 		
-		handle(req_models[req],url,href,"large_cards",object_ID);
+		handle(req_models[req],url,href,req,object_ID);
 		
 		e.preventDefault();
 	});
