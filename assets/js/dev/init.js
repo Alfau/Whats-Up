@@ -27,11 +27,13 @@ $(document).ready(function(){
 		
 		var req = $(this).attr("data-req");
 		
-		if($(this).parents("nav#right").length){
-			handle(req_models[req],url,href,"basic_cards",null);
-		}else{
-			href.indexOf("home") > -1 ? handle(req_models[req],url,href,"render_home",null) : handle(req_models[req],url,href,"small_cards",null);	
-		}
+		// if($(this).parents("nav#right").length){
+			// handle(req_models[req],url,href,"basic_cards",null);
+		// }else{
+			// href.indexOf("home") > -1 ? handle(req_models[req],url,href,"render_home",null) : handle(req_models[req],url,href,"small_cards",null);	
+		// }
+		
+		handle(req_models[req],url,href,req,null);
 		
 		e.preventDefault();
 	});

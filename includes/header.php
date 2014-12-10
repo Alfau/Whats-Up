@@ -85,7 +85,7 @@
 				?>
 			</ul>
 		</nav>
-		<a href=#><img src="assets/icons/logo.svg" alt="What's Up? Maldives"/></a>
+		<a href=#><img src="/whatsup/assets/icons/logo.svg" alt="What's Up? Maldives"/></a>
 		<div id="header_right">
 			<nav id="right">
 				<ul>

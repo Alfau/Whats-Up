@@ -27,11 +27,13 @@ $(document).ready(function(){
 		
 		var req = $(this).attr("data-req");
 		
-		if($(this).parents("nav#right").length){
-			handle(req_models[req],url,href,"basic_cards",null);
-		}else{
-			href.indexOf("home") > -1 ? handle(req_models[req],url,href,"render_home",null) : handle(req_models[req],url,href,"small_cards",null);	
-		}
+		// if($(this).parents("nav#right").length){
+			// handle(req_models[req],url,href,"basic_cards",null);
+		// }else{
+			// href.indexOf("home") > -1 ? handle(req_models[req],url,href,"render_home",null) : handle(req_models[req],url,href,"small_cards",null);	
+		// }
+		
+		handle(req_models[req],url,href,req,null);
 		
 		e.preventDefault();
 	});
@@ -236,11 +238,12 @@ var carousel_obj = function(container, data, num_rows, filter_key, filter_val, h
 	
 	this.init();
 };
-function handle(model,url,href,type,object_ID){
+function handle(model,url,href,page,object_ID){
 	this.model = model;
 	this.url = url;
 	this.href = href;
-	this.type = type;
+	this.page = page;
+	// this.type = type;
 	this.object_ID = object_ID;
 	
 	this.JSONconfirm = function(i){
@@ -257,31 +260,51 @@ function handle(model,url,href,type,object_ID){
 				JSONconfirm(key+1);
 			}
 		}else{
-			render(this.type, this.href);
+			// render(this.type, this.href);
+			render(this.page, this.href);
 		}
 	};
 	JSONconfirm();
 }
 
-function render(type,href){
-	switch(type){
-		case "small_cards" :
-			small_cards(href);
-			break;
-		case "large_cards" :
-			large_cards(href);
-			break;
-		case "basic_cards" :
-			basic_cards();
-			break;	
-		case "render_home" :
-			render_home();
-			break;
+// function render(type,href){
+	// switch(type){
+		// case "small_cards" :
+			// small_cards(href);
+			// break;
+		// case "large_cards" :
+			// large_cards(href);
+			// break;
+		// case "basic_cards" :
+			// basic_cards();
+			// break;	
+		// case "render_home" :
+			// render_home();
+			// break;
+	// }
+// }
+
+function render(page, href){
+	switch(page){
+		case "Home" : render_home(); break;
+		
+		case "Packages" :
+		case "Stay" :
+		case "Sights" : small_cards(href); break;
+		
+		case "About" :
+		case "Contact" : basic_cards(); break;
+		
+		case "packages_details" :
+		case "stay_details" : large_cards(href); break;
 	}
 }
+
 function small_cards( href ){
 	$("main").html("<div id='small_cards_container'></div>");
-
+	
+	console.log(href);
+	 
 	var heading = href.toLowerCase().replace(/\b[a-z]/g, function( result ) { //can be made to a function
 	    return result.toUpperCase();
 	});
@@ -290,6 +313,7 @@ function small_cards( href ){
 	
 	$.each(JSONobj[model[0]][0],function( key, value ){
 		render_small_cards("div#small_cards_container", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration);
+		console.log(value.Image);
 	});
 }
 
@@ -306,7 +330,7 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 +	"<div>"
 +	"<a href='"+ href+"/"+name +"/"+ID+"' data-id='"+ ID +"' data-req='"+href+"_details'>"
 +	"<div>"
-+	"<img src='"+ image +"'/>"
++	"<img src='/whatsup/"+ image +"'/>"
 +	(price == undefined ? "" : "<span class='emphasis_small'>From <b>USD "+ price +"</b></span>")
 +	"</div>"
 +	"<div>"
@@ -316,7 +340,7 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 +	"</div>"
 +	"</a>"
 +	"<div>"
-+	"<img src='assets/icons/Duration.svg' height='15'/><span class='smallest'>"+ duration +" days</span>"
++	"<img src='/whatsup/assets/icons/Duration.svg' height='15'/><span class='smallest'>"+ duration +" days</span>"
 +	"<div class='social'>"
 +	"<a href=# class='facebook'></a>"
 +	"<a href=# class='twitter'></a>"
@@ -510,8 +534,8 @@ function pageLoad(){
 		$(this).remove();
 	});
 	
-	var href = window.location.href;
-	var href = href.split(baseURL);
+	var url = window.location.href;
+	var href = url.split(baseURL);
 	
 	var segments = href[1].split("/");
 	
@@ -522,6 +546,8 @@ function pageLoad(){
 		model = segments[0];
 	}
 	
+	// console.log(model);
+	
 	if(model.indexOf("_details") <= -1){
 		var model = model.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
 			return result.toUpperCase();
@@ -531,21 +557,23 @@ function pageLoad(){
 		model = "Home";
 	}
 	
-	var url = window.location.href;
+	// var url = window.location.href;
 	window.history.pushState("","Title",baseURL+href[1]);
 
 	var req = model;
 	
 	if(model.indexOf("_details") > -1){
-		handle(req_models[req],url,href[1],"large_cards",object_ID);
+		handle(req_models[req], url, href[1], model, object_ID);
+	}else{
+		handle(req_models[req], url, segments[0], model, null);
 	}
-	else if(model.indexOf("Home") > -1){
-		handle(req_models[req],url,segments[0],"render_home",null);
-	}
-	else if(model.indexOf("About") > -1 || model.indexOf("Contact") > -1){
-		handle(req_models[req],url,segments[0],"basic_cards",null);
-	}
-	else{
-		handle(req_models[req],url,segments[0],"small_cards",null);
-	}
+	// else if(model.indexOf("Home") > -1){
+		// handle(req_models[req],url,segments[0],"render_home",null);
+	// }
+	// else if(model.indexOf("About") > -1 || model.indexOf("Contact") > -1){
+		// handle(req_models[req],url,segments[0],"basic_cards",null);
+	// }
+	// else{
+		// handle(req_models[req],url,segments[0],"small_cards",null);
+	// }
 }

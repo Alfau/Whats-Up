@@ -1,6 +1,8 @@
 function small_cards( href ){
 	$("main").html("<div id='small_cards_container'></div>");
-
+	
+	console.log(href);
+	 
 	var heading = href.toLowerCase().replace(/\b[a-z]/g, function( result ) { //can be made to a function
 	    return result.toUpperCase();
 	});
@@ -9,6 +11,7 @@ function small_cards( href ){
 	
 	$.each(JSONobj[model[0]][0],function( key, value ){
 		render_small_cards("div#small_cards_container", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration);
+		console.log(value.Image);
 	});
 }
 
@@ -25,7 +28,7 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 +	"<div>"
 +	"<a href='"+ href+"/"+name +"/"+ID+"' data-id='"+ ID +"' data-req='"+href+"_details'>"
 +	"<div>"
-+	"<img src='"+ image +"'/>"
++	"<img src='/whatsup/"+ image +"'/>"
 +	(price == undefined ? "" : "<span class='emphasis_small'>From <b>USD "+ price +"</b></span>")
 +	"</div>"
 +	"<div>"
@@ -35,7 +38,7 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 +	"</div>"
 +	"</a>"
 +	"<div>"
-+	"<img src='assets/icons/Duration.svg' height='15'/><span class='smallest'>"+ duration +" days</span>"
++	"<img src='/whatsup/assets/icons/Duration.svg' height='15'/><span class='smallest'>"+ duration +" days</span>"
 +	"<div class='social'>"
 +	"<a href=# class='facebook'></a>"
 +	"<a href=# class='twitter'></a>"
