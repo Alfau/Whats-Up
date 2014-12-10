@@ -270,8 +270,6 @@ function handle(model,url,href,type,object_ID){
 		}
 	};
 	JSONconfirm();
-	
-	console.log(this.href);
 }
 
 function render(type,href){
@@ -472,7 +470,7 @@ function render_home(url){
 	+	'</div>'
 	);
 }
-function BBabasic_cards(){
+function basic_cards(){
 	$("main").html("<div class='basic_cards_container'></div>");
 	$.each(JSONobj[model[0]][0],function( key, value ){
 		title("div.basic_cards_container", value.Title, "alternate");
@@ -521,9 +519,6 @@ function pageLoad(){
 		$(this).remove();
 	});
 	
-	// var href = window.location.pathname;
-	// var href = href.split("/")[2];
-	
 	var href = window.location.href;
 	var href = href.split(baseURL);
 	
@@ -535,15 +530,6 @@ function pageLoad(){
 	}else{
 		model = segments[0];
 	}
-	// href= model[1];
-	
-	// var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
-		// return result.toUpperCase();
-	// });
-	
-	// var model = model.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
-		// return result.toUpperCase();
-	// });
 	
 	if(model.indexOf("_details") <= -1){
 		var model = model.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
@@ -559,15 +545,13 @@ function pageLoad(){
 
 	var req = model;
 	
-	console.log(segments[0]);
-	
 	if(model.indexOf("_details") > -1){
 		handle(req_models[req],url,href[1],"large_cards",object_ID);
 	}
-	else if(model.indexOf("home") > -1){
+	else if(model.indexOf("Home") > -1){
 		handle(req_models[req],url,segments[0],"render_home",null);
 	}
-	else if(model.indexOf("about") > -1 || model.indexOf("contact") > -1){
+	else if(model.indexOf("About") > -1 || model.indexOf("Contact") > -1){
 		handle(req_models[req],url,segments[0],"basic_cards",null);
 	}
 	else{

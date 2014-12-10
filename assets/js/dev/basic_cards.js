@@ -1,4 +1,4 @@
-function BBabasic_cards(){
+function basic_cards(){
 	$("main").html("<div class='basic_cards_container'></div>");
 	$.each(JSONobj[model[0]][0],function( key, value ){
 		title("div.basic_cards_container", value.Title, "alternate");

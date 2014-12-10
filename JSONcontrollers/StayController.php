@@ -17,11 +17,13 @@ class StayController{
 	}
 	
 	public function details(){
+		$stay = new Resorts();
+		$stay = $stay -> getResorts("All");
 		
 		$rooms = new Rooms();
 		$rooms = $rooms -> getRooms("All", null);
 		
-		$stayBundle = array("Rooms" => $rooms);
+		$stayBundle = array("Resorts" => $stay, "Rooms" => $rooms);
 		
 		echo json_encode($stayBundle);
 	} 
