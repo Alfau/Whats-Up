@@ -13,11 +13,15 @@ $filesOrder = ["init.js", "req.js", "slideshow.js", "carousel.js", "handle.js", 
 gulp.task('concat-scripts', function() {
     return gulp.src("assets/js/dev/*.js")
 		.pipe(order($filesOrder))    
-      	.pipe(concat('main.js'))
-      		.pipe(gulp.dest('assets/js'))
-      		.pipe(rename({suffix: '.min'}))
-      		.pipe(uglify())
+      		.pipe(concat('main.js'))
       		.pipe(gulp.dest('assets/js'));
+});
+
+gulp.task('minify', function(){
+	return gulp.src("assets/js/main.js")
+		.pipe(uglify())
+		.pipe(rename({suffix: '.min'}))
+      	.pipe(gulp.dest('assets/js'));
 });
 
 // Default Task

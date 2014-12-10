@@ -5,11 +5,9 @@ $(document).ready(function(){
 	$(document).on("click","a#menu",function(){
 		if($(this).hasClass("active")){
 			$(this).removeClass("active").children("svg").attr("class","");
-			 // $("header#large div#header_bottom").css({"margin-left":"100%"});
 			 $("header#small div#header_right, header#small nav#left").css({"margin-left":"100%"});
 		}else{
 			$(this).addClass("active").children("svg").attr("class","active");
-			// $("header#large div#header_bottom").css({"margin-left":"0"});
 			$("header#small div#header_right, header#small nav#left").css({"margin-left":"0"});
 		}
 	});
@@ -38,17 +36,12 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 	
-	
-	
 	$(document).on("click","div#small_cards_container a",function(e){
 		$("main").children().fadeOut(function(){
 			$(this).remove();
 		});
 		
 		var href = $(this).attr("href");
-		// var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
-		    // return result.toUpperCase();
-		// });
 		
 		var url = $(this).prop("href");
 		window.history.pushState("","Title",baseURL+href);
@@ -88,6 +81,4 @@ $(document).ready(function(){
 		}
 		e.preventDefault();
 	});
-	
-	// JSONobj = {};
 });
