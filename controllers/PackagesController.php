@@ -18,6 +18,17 @@ class PackagesController{
 			
 	}
 	
+	public function details(){
+		
+		$packages=new Packages();
+		$packages=$packages->getPackages("All", null);
+		
+		$packagesBundle = array("Packages" => $packages);
+		$packagesBundle = json_encode($packagesBundle);
+		
+		$view = new View();
+		$view = $view -> render("_views",array("Packages" => $packagesBundle));
+	}
 }
 
 ?>

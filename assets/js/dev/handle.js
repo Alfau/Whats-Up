@@ -23,6 +23,8 @@ function handle(model,url,href,type,object_ID){
 		}
 	};
 	JSONconfirm();
+	
+	console.log(this.href);
 }
 
 function render(type,href){

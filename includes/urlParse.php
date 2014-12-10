@@ -11,7 +11,8 @@ class urlParse{
 		$url_segments = explode("/", $url[1]);
 		
 		$this -> controller = (isset($url_segments[0]) && !empty($url_segments[0])) ? $url_segments[0] : "Home";
-		$this -> method = (isset($url_segments[1]) && !empty($url_segments[1])) ? $url_segments[1] : "index";
+		// $this -> method = (isset($url_segments[1]) && !empty($url_segments[1])) ? $url_segments[1] : "index";
+		$this -> method = (isset($url_segments[1]) && !empty($url_segments[1])) ? "details" : "index";
 		$this -> param = (isset($url_segments[2]) && !empty($url_segments[2])) ? $url_segments[2] : "";
 	}
 	

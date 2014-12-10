@@ -46,9 +46,9 @@ $(document).ready(function(){
 		});
 		
 		var href = $(this).attr("href");
-		var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
-		    return result.toUpperCase();
-		});
+		// var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
+		    // return result.toUpperCase();
+		// });
 		
 		var url = $(this).prop("href");
 		window.history.pushState("","Title",baseURL+href);
@@ -270,6 +270,8 @@ function handle(model,url,href,type,object_ID){
 		}
 	};
 	JSONconfirm();
+	
+	console.log(this.href);
 }
 
 function render(type,href){
@@ -313,7 +315,7 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 	$(container).append(
 	"<div class='container'>"
 +	"<div>"
-+	"<a href='"+ href+"/"+name +"' data-id='"+ ID +"' data-req='"+href+"_details'>"
++	"<a href='"+ href+"/"+name +"/"+ID+"' data-id='"+ ID +"' data-req='"+href+"_details'>"
 +	"<div>"
 +	"<img src='"+ image +"'/>"
 +	(price == undefined ? "" : "<span class='emphasis_small'>From <b>USD "+ price +"</b></span>")
@@ -339,12 +341,14 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 }
 function large_cards( href ){
 	$("main").html("<div id='large_cards_container'></div>");
-
-	var heading = href.toLowerCase().replace(/\b[a-z]/g, function( result ) { //can be made to a function
+	
+	var heading = (href.split("/")[1]).replace(/%20/g, " ");
+	
+	var heading = heading.toLowerCase().replace(/\b[a-z]/g, function( result ) { //can be made to a function
 	    return result.toUpperCase();
 	});
 	
-	title("div#large_cards_container",heading.split("/")[1],"alternate");
+	title("div#large_cards_container",heading,"alternate");
 	
 	$.each(JSONobj[model[0]][0],function( key, value ){
 		if(value.ID === object_ID){
@@ -517,26 +521,56 @@ function pageLoad(){
 		$(this).remove();
 	});
 	
-	var href = window.location.pathname;
-	var href = href.split("/")[2];
+	// var href = window.location.pathname;
+	// var href = href.split("/")[2];
 	
-	var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
-		return result.toUpperCase();
-	});
+	var href = window.location.href;
+	var href = href.split(baseURL);
+	
+	var segments = href[1].split("/");
+	
+	if(segments[1] && segments[1] !== ""){
+		model = segments[0]+"_details";
+		object_ID = segments[2];
+	}else{
+		model = segments[0];
+	}
+	// href= model[1];
+	
+	// var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
+		// return result.toUpperCase();
+	// });
+	
+	// var model = model.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
+		// return result.toUpperCase();
+	// });
+	
+	if(model.indexOf("_details") <= -1){
+		var model = model.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
+			return result.toUpperCase();
+		});
+	}
 	if(!model){
 		model = "Home";
 	}
 	
 	var url = window.location.href;
-	window.history.pushState("","Title",baseURL+href);
+	window.history.pushState("","Title",baseURL+href[1]);
 
 	var req = model;
 	
-	if(href.indexOf("home") > -1){
-		handle(req_models[req],url,href,"render_home",null);
-	}else if(href.indexOf("about") > -1 || href.indexOf("contact") > -1){
-		handle(req_models[req],url,href,"basic_cards",null);
-	}else{
-		handle(req_models[req],url,href,"small_cards",null);
+	console.log(segments[0]);
+	
+	if(model.indexOf("_details") > -1){
+		handle(req_models[req],url,href[1],"large_cards",object_ID);
+	}
+	else if(model.indexOf("home") > -1){
+		handle(req_models[req],url,segments[0],"render_home",null);
+	}
+	else if(model.indexOf("about") > -1 || model.indexOf("contact") > -1){
+		handle(req_models[req],url,segments[0],"basic_cards",null);
+	}
+	else{
+		handle(req_models[req],url,segments[0],"small_cards",null);
 	}
 }

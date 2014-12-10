@@ -23,7 +23,7 @@ function render_small_cards( container, href, ID, image, name, price, overview, 
 	$(container).append(
 	"<div class='container'>"
 +	"<div>"
-+	"<a href='"+ href+"/"+name +"' data-id='"+ ID +"' data-req='"+href+"_details'>"
++	"<a href='"+ href+"/"+name +"/"+ID+"' data-id='"+ ID +"' data-req='"+href+"_details'>"
 +	"<div>"
 +	"<img src='"+ image +"'/>"
 +	(price == undefined ? "" : "<span class='emphasis_small'>From <b>USD "+ price +"</b></span>")

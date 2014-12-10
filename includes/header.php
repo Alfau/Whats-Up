@@ -5,15 +5,15 @@
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>What's Up? Maldives</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	<script src="assets/js/jquery-1.11.1.min.js"></script>
-	<script src="assets/js/main.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/whatsup/assets/css/style.css">
+	<script src="/whatsup/assets/js/jquery-1.11.1.min.js"></script>
+	<script src="/whatsup/assets/js/main.js"></script>
 	<!-- <script src="assets/js/GGS.js"></script> -->
 </head>
 <body>	
 	<header id="large">
 		<div id="header_top">
-			<a href=#><img src="assets/icons/logo.svg" alt="What's Up? Maldives"/></a>
+			<a href=#><img src="/whatsup/assets/icons/logo.svg" alt="What's Up? Maldives"/></a>
 			<ul>
 				<?php
 					$SocialNav=new Navigation();

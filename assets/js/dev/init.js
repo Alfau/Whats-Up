@@ -46,9 +46,9 @@ $(document).ready(function(){
 		});
 		
 		var href = $(this).attr("href");
-		var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
-		    return result.toUpperCase();
-		});
+		// var model = href.toLowerCase().replace(/\b[a-z]/g, function(result) { //can be made to a function
+		    // return result.toUpperCase();
+		// });
 		
 		var url = $(this).prop("href");
 		window.history.pushState("","Title",baseURL+href);

@@ -1,11 +1,13 @@
 function large_cards( href ){
 	$("main").html("<div id='large_cards_container'></div>");
-
-	var heading = href.toLowerCase().replace(/\b[a-z]/g, function( result ) { //can be made to a function
+	
+	var heading = (href.split("/")[1]).replace(/%20/g, " ");
+	
+	var heading = heading.toLowerCase().replace(/\b[a-z]/g, function( result ) { //can be made to a function
 	    return result.toUpperCase();
 	});
 	
-	title("div#large_cards_container",heading.split("/")[1],"alternate");
+	title("div#large_cards_container",heading,"alternate");
 	
 	$.each(JSONobj[model[0]][0],function( key, value ){
 		if(value.ID === object_ID){
