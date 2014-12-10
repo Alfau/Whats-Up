@@ -1,7 +1,5 @@
 function small_cards( href ){
 	$("main").html("<div id='small_cards_container'></div>");
-	
-	console.log(href);
 	 
 	var heading = href.toLowerCase().replace(/\b[a-z]/g, function( result ) { //can be made to a function
 	    return result.toUpperCase();
@@ -11,7 +9,6 @@ function small_cards( href ){
 	
 	$.each(JSONobj[model[0]][0],function( key, value ){
 		render_small_cards("div#small_cards_container", href, value.ID, value.Image, value.Name, value.Price, value.Overview, value.Duration);
-		console.log(value.Image);
 	});
 }
 
