@@ -170,6 +170,7 @@ function handle(model,url,href,page,object_ID){
 	this.JSONconfirm = function(i){
 		var key = i || 0;
 		if(key < model.length){
+			console.log(key);
 			if(typeof JSONobj[model[key]] === "undefined" || JSONobj[model[key]].length < 1){
 				$.getJSON(baseURL+"/JSONroute.php",{url:url},function(data){
 					$.each(data,function(key,value){
@@ -184,6 +185,7 @@ function handle(model,url,href,page,object_ID){
 			render(this.page, this.href);
 		}
 	};
+	
 	JSONconfirm();
 }
 
