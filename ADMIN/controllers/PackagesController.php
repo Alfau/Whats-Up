@@ -26,7 +26,7 @@ class PackagesController{
 	function update(){
 		
 		$packages = new Packages();
-		$packages = $packages -> updatePackages($_POST);
+		$packages = $packages -> updatePackages($_POST, $_FILES);
 		
 		$view = new View();
 		$view = $view -> render("_view",array("data" => $packages[0], "update_status" => $packages[1]));
@@ -35,7 +35,7 @@ class PackagesController{
 	function add(){
 		
 		$packages = new Packages();
-		$packages = $packages -> addPackages($_POST);
+		$packages = $packages -> addPackages($_POST, $_FILES);
 		
 		$view = new View();
 		$view = $view -> render("_view",array("data" => $packages[0], "add_status" => $packages[1]));

@@ -13,7 +13,7 @@ include("includes/header.php");
 
 <div class="wrapper">
 
-<form method="POST" action="<?php echo URL::sansController()."update" ?>">
+<form method="POST" action="<?php echo URL::sansController()."update" ?>" enctype="multipart/form-data">
 <table>
 	<?php
 	foreach($data[0][0] as $key => $value){
@@ -30,6 +30,11 @@ include("includes/header.php");
 				<td><?php echo $key ?></td>
 				<td><input type='text' value='<?php echo strip_tags($value) ?>' disabled/></td>
 				<input type="hidden" name='<?php echo $key ?>' value='<?php echo strip_tags($value) ?>'/>
+				<?php
+			}elseif($key === "Image"){
+				?>
+				<td><?php echo $key ?></td>
+				<td><input type='file' name='<?php echo $key ?>' value='<?php echo strip_tags($value) ?>'/></td>
 				<?php
 			}else{
 				?>

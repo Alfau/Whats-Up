@@ -2,7 +2,7 @@
 require_once("../includes/paths.php");
 ?>
 
-<form method="POST" action="<?php echo URL::sansController() . "add"; ?>" id="add">
+<form method="POST" action="<?php echo URL::sansController() . 'add'; ?>" id="add" enctype="multipart/form-data">
 <table>
 	<?php
 	if(isset($data)){
@@ -32,6 +32,10 @@ require_once("../includes/paths.php");
 								</select>
 							</td>
 						</tr>
+						<?php
+					}elseif($key === "Image"){
+						?>
+						<tr><td><input type="file" name="<?php echo $key ?>"/></td></tr>
 						<?php
 					}else{
 						?>

@@ -27,7 +27,7 @@ class RoomsController{
 	function update(){
 		
 		$rooms = new Rooms();
-		$rooms = $rooms -> updateRooms($_POST);
+		$rooms = $rooms -> updateRooms($_POST, $_FILES);
 		
 		$view = new View();
 		$view = $view -> render("_view",array("data" => $rooms[0], "update_status" => $rooms[1]));
@@ -36,7 +36,7 @@ class RoomsController{
 	function add(){
 		
 		$rooms = new Rooms();
-		$rooms = $rooms -> addRooms($_POST);
+		$rooms = $rooms -> addRooms($_POST, $_FILES);
 		
 		$view = new View();
 		$view = $view -> render("_view",array("data" => $rooms[0], "add_status" => $rooms[1]));

@@ -27,7 +27,7 @@ class SlideshowController{
 	function update(){
 		
 		$slideshow = new Slideshow();
-		$slideshow = $slideshow -> updateSlideshow($_POST);
+		$slideshow = $slideshow -> updateSlideshow($_POST, $_FILES);
 		
 		$view = new View();
 		$view = $view -> render("_view",array("data" => $slideshow[0], "update_status" => $slideshow[1]));
@@ -36,7 +36,7 @@ class SlideshowController{
 	function add(){
 		
 		$slideshow = new Slideshow();
-		$slideshow = $slideshow -> addSlideshow($_POST);
+		$slideshow = $slideshow -> addSlideshow($_POST, $_FILES);
 		
 		$view = new View();
 		$view = $view -> render("_view",array("data" => $slideshow[0], "add_status" => $slideshow[1]));

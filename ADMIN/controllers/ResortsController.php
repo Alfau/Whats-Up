@@ -12,7 +12,6 @@ class ResortsController{
 		
 		$view = new View();
 		$view = $view -> render("_view",array("data" => $resorts));
-		
 	}
 	
 	function edit($id){
@@ -27,8 +26,8 @@ class ResortsController{
 	function update(){
 		
 		$resorts = new Resorts();
-		$resorts = $resorts -> updateResorts($_POST);
-		
+		$resorts = $resorts -> updateResorts($_POST, $_FILES);
+			
 		$view = new View();
 		$view = $view -> render("_view",array("data" => $resorts[0], "update_status" => $resorts[1]));
 	}
@@ -36,7 +35,7 @@ class ResortsController{
 	function add(){
 		
 		$resorts = new Resorts();
-		$resorts = $resorts -> addResorts($_POST);
+		$resorts = $resorts -> addResorts($_POST, $_FILES);
 		
 		$view = new View();
 		$view = $view -> render("_view",array("data" => $resorts[0], "add_status" => $resorts[1]));
