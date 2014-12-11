@@ -63,11 +63,11 @@ class Packages{
 				$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 			}
 			
-			return $array=array($this->getPackages("All", null), $status);
+			return $array=array($this->getPackages("All", "Resort"), $status);
 			
 		}else{
 			$status = "Image upload failed. Please check whether the image you uploaded was a JPG or a PNG.";
-			return $array=array($this->getPackages("All", null), $status);
+			return $array=array($this->getPackages("All", "Resort"), $status);
 		}
 	}
 	
@@ -110,10 +110,10 @@ class Packages{
 				$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 			}
 			
-			return $array=array($this->getPackages("All", null), $status);
+			return $array=array($this->getPackages("All", "Resort"), $status);
 		}else{
 			$status = "Image upload failed. Please check whether the image you uploaded was a JPG or a PNG.";
-			return $array=array($this->getPackages("All", null), $status);
+			return $array=array($this->getPackages("All", "Resort"), $status);
 		}
 	}
 		
@@ -131,7 +131,7 @@ class Packages{
 			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 		}
 		
-		return $array=array($this->getPackages("All", null), $status);
+		return $array=array($this->getPackages("All", "Resort"), $status);
 	}
 	
 	public function processImage($image_file){
