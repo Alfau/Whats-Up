@@ -175,14 +175,14 @@ h3 {
   font-size: 0.7em;
   color: #bbbdc0; }
 
-input[type=text], textarea, input[type=password] {
+input[type=text], textarea, input[type=password], select {
   border: solid 1px #c0c0c0;
   width: 100%;
   padding: 0.5em;
   border-radius: 3px;
   font-size: 0.9em;
   color: #505050; }
-  input[type=text]:focus, textarea:focus, input[type=password]:focus {
+  input[type=text]:focus, textarea:focus, input[type=password]:focus, select:focus {
     border: solid 1px #30bec1; }
 
 input[type=file] {

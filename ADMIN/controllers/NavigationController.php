@@ -27,7 +27,7 @@ class NavigationController{
 	function update(){
 		
 		$navigation = new Navigation();
-		$navigation = $navigation -> updateNavigation($_POST);
+		$navigation = $navigation -> updateNavigation($_POST, $_FILES);
 		
 		$view = new View();
 		$view = $view -> render("_view",array("data" => $navigation[0], "update_status" => $navigation[1]));
@@ -36,7 +36,7 @@ class NavigationController{
 	function add(){
 		
 		$navigation = new Navigation();
-		$navigation = $navigation -> addNavigation($_POST);
+		$navigation = $navigation -> addNavigation($_POST, $_FILES);
 		
 		$view = new View();
 		$view = $view -> render("_view",array("data" => $navigation[0], "add_status" => $navigation[1]));

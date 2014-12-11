@@ -36,31 +36,42 @@ class Rooms{
 		}
 	}
 	
-	public function updateRooms($post_data){
+	public function updateRooms($post_data, $image_file){
 		
-		$stmt = "UPDATE ".$this->table." SET";
-		foreach($post_data as $key => $value){
-			if($key !== "ID"){
-				$stmt .= " $key = '$value',";
+		$image = $this -> processImage($image_file['Image']['tmp_name']);
+		
+		if($image !== "failed"){
+			$stmt = "UPDATE ".$this->table." SET";
+			foreach($post_data as $key => $value){
+				if($key !== "ID"){
+					$stmt .= " $key = '$value',";	
+				}
 			}
-		}
-		$stmt = rtrim($stmt, ",");
-		$stmt .= " WHERE ID = '".$post_data['ID']."'";
-		
-		$con=new Connection();
-		$con=$con->setCon();
-		$query=$con -> prepare($stmt);
-		
-		if($query->execute()){
-			$status = "<p class='success_strip'>Entry updated successfully</p>";
+			if($image !== "empty"){
+				$stmt .= " Image = 'assets/uploads/$image'";
+			}
+			$stmt = rtrim($stmt, ",");
+			$stmt .= " WHERE ID = '".$post_data['ID']."'";
+			
+			$con=new Connection();
+			$con=$con->setCon();
+			$query=$con -> prepare($stmt);
+			
+			if($query->execute()){
+				$status = "<p class='success_strip'>Entry updated successfully</p>";
+			}else{
+				$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
+			}
+			
+			return $array=array($this->getRooms("All", null), $status);
+			
 		}else{
-			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
+			$status = "Image upload failed. Please check whether the image you uploaded was a JPG or a PNG.";
+			return $array=array($this->getRooms("All", null), $status);
 		}
-		
-		return $array=array($this->getRooms("All", null), $status);
 	}
 	
-	public function addRooms($post_data){
+	public function addRooms($post_data, $image_file){
 		
 		$resort_name = $post_data['Resort'];
 		
@@ -68,30 +79,42 @@ class Rooms{
 		$ResortID = $resort->getResorts("SELECT ID FROM resorts WHERE Name = '$resort_name'");
 		$ResortID = $ResortID[0][0][0];
 		
-		$stmt = "INSERT INTO ".$this->table." (ResortID,";
-		foreach($post_data as $key => $value){
-			$stmt .= "$key,";
-		}
-		$stmt = rtrim($stmt, ",");
-		$stmt .= ") VALUES('$ResortID',";
-		foreach($post_data as $key => $value){
-			$value = addslashes($value);
-			$stmt .= "'$value',";
-		}
-		$stmt = rtrim($stmt, ",").")";
+		$image = $this -> processImage($image_file['Image']['tmp_name']);
 		
-		
-		$con=new Connection();
-		$con=$con->setCon();
-		$query=$con -> prepare($stmt);
-		
-		if($query->execute()){
-			$status = "<p class='success_strip'>Entry added successfully</p>";
+		if($image !== "failed"){
+			$stmt = "INSERT INTO ".$this->table." (ResortID,";
+			foreach($post_data as $key => $value){
+				$stmt .= "$key,";
+			}
+			if($image !== "empty"){
+				$stmt .= "Image";
+			}
+			$stmt = rtrim($stmt, ",");
+			$stmt .= ") VALUES('$ResortID',";
+			foreach($post_data as $key => $value){
+				$value = addslashes($value);
+				$stmt .= "'$value',";
+			}
+			if($image !== "empty"){
+				$stmt .= "'assets/uploads/$image'";
+			}
+			$stmt = rtrim($stmt, ",").")";
+			
+			$con=new Connection();
+			$con=$con->setCon();
+			$query=$con -> prepare($stmt);
+			
+			if($query->execute()){
+				$status = "<p class='success_strip'>Entry added successfully</p>";
+			}else{
+				$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
+			}
+			
+			return $array=array($this->getRooms("All", null), $status);
 		}else{
-			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
+			$status = "Image upload failed. Please check whether the image you uploaded was a JPG or a PNG.";
+			return $array=array($this->getRooms("All", null), $status);
 		}
-		
-		return $array=array($this->getRooms("All", null), $status);
 	}
 	
 	public function deleteRooms($id){
@@ -109,6 +132,38 @@ class Rooms{
 		}
 		
 		return $array=array($this->getRooms("All", null), $status);
+	}
+	
+	public function processImage($image_file){
+		$status = true;
+		
+		if(!empty($image_file)){
+			$image_type = exif_imagetype($image_file);
+		    $allowedTypes = array(
+		        2,  // jpg
+		        3  // png
+		    );
+			
+		    if (!in_array($image_type, $allowedTypes)) {
+		        $status = false;
+		    }
+		    
+		    switch($image_type){
+				case 2 : $ext = ".jpg"; break;
+				case 3 : $ext = ".png"; break; 
+		    }
+		    $filename = mt_rand().mt_rand().$ext;
+		    
+			if($status === true){
+				if(move_uploaded_file($image_file, "../assets/uploads/".$filename)){
+					return $filename;
+				}else{
+					return "failed";
+				}
+			}
+		}else{
+			return "empty";
+		}
 	}
 }
 

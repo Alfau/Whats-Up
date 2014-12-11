@@ -61,30 +61,43 @@ class Slideshow{
 	}
 	
 	public function addSlideshow($post_data, $image_file){
+			
+		$image = $this -> processImage($image_file['Image']['tmp_name']);
 		
-		$stmt = "INSERT INTO ".$this->table." (";
-		foreach($post_data as $key => $value){
-			$stmt .= "$key,";
-		}
-		$stmt = rtrim($stmt, ",");
-		$stmt .= ") VALUES(";
-		foreach($post_data as $key => $value){
-			$value = addslashes($value);
-			$stmt .= "'$value',";
-		}
-		$stmt = rtrim($stmt, ",").")";
-		
-		$con=new Connection();
-		$con=$con->setCon();
-		$query=$con -> prepare($stmt);
-		
-		if($query->execute()){
-			$status = "<p class='success_strip'>Entry added successfully</p>";
+		if($image !== "failed"){
+			$stmt = "INSERT INTO ".$this->table." (";
+			foreach($post_data as $key => $value){
+				$stmt .= "$key,";
+			}
+			if($image !== "empty"){
+				$stmt .= "Image";
+			}
+			$stmt = rtrim($stmt, ",");
+			$stmt .= ") VALUES(";
+			foreach($post_data as $key => $value){
+				$value = addslashes($value);
+				$stmt .= "'$value',";
+			}
+			if($image !== "empty"){
+				$stmt .= "'assets/slideshow/$image'";
+			}
+			$stmt = rtrim($stmt, ",").")";
+			
+			$con=new Connection();
+			$con=$con->setCon();
+			$query=$con -> prepare($stmt);
+			
+			if($query->execute()){
+				$status = "<p class='success_strip'>Entry added successfully</p>";
+			}else{
+				$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
+			}
+			
+			return $array=array($this->getSlideshow("All"), $status);
 		}else{
-			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
+			$status = "Image upload failed. Please check whether the image you uploaded was a JPG or a PNG.";
+			return $array=array($this->getSlideshow("All"), $status);
 		}
-		
-		return $array=array($this->getSlideshow("All"), $status);
 	}
 	
 	public function deleteSlideshow($id){
