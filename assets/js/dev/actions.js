@@ -8,6 +8,11 @@ function mobile_menu(){
 			$("header#small div#header_right, header#small nav#left").css({"margin-left":"0"});
 		}
 	});
+	
+	$(document).on("click", "nav a", function(){
+		$("a#menu").removeClass("active").children("svg").attr("class","");
+		$("header#small div#header_right, header#small nav#left").css({"margin-left":"100%"});
+	}); //dfs
 }
 
 function nav_click(){

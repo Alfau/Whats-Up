@@ -170,7 +170,6 @@ function handle(model,url,href,page,object_ID){
 	this.JSONconfirm = function(i){
 		var key = i || 0;
 		if(key < model.length){
-			console.log(key);
 			if(typeof JSONobj[model[key]] === "undefined" || JSONobj[model[key]].length < 1){
 				$.getJSON(baseURL+"/JSONroute.php",{url:url},function(data){
 					$.each(data,function(key,value){
@@ -398,6 +397,39 @@ function basic_cards(){
 function render_basic_cards(content,type){
 	$("div.basic_cards_container").append('<div class="basic_cards '+ type +'">'+ content +'</div>');
 }
+function getBaseURL() {
+    var url = location.href;
+    var baseURL = url.substring(0, url.indexOf('/', 14));
+
+
+    if (baseURL.indexOf('http://localhost') != -1) {
+        var url = location.href;
+        var pathname = location.pathname;
+        var index1 = url.indexOf(pathname);
+        var index2 = url.indexOf("/", index1 + 1);
+        var baseLocalUrl = url.substr(0, index2);
+
+        return baseLocalUrl + "/";
+    }
+    else {
+        return baseURL + "/";
+    }
+
+}
+
+function getSVG(location,target){
+	$.get(baseURL+location,function(data){
+		$(target).html(data);
+	},"text");
+}
+
+function title(below,title,type){
+	$(below).before('<div class="heading_strip '+ type +'">'
++	'<div class="heading_wrapper">'
++	'<h3 class="heading">'+ title +'</b></h3>'
++	'</div>'
++	'</div>');
+}
 function mobile_menu(){
 	$(document).on("click","a#menu",function(){
 		if($(this).hasClass("active")){
@@ -408,6 +440,11 @@ function mobile_menu(){
 			$("header#small div#header_right, header#small nav#left").css({"margin-left":"0"});
 		}
 	});
+	
+	$(document).on("click", "nav a", function(){
+		$("a#menu").removeClass("active").children("svg").attr("class","");
+		$("header#small div#header_right, header#small nav#left").css({"margin-left":"100%"});
+	}); //dfs
 }
 
 function nav_click(){
@@ -484,39 +521,6 @@ function cards_expand(){
 	});
 }
 
-function getBaseURL() {
-    var url = location.href;
-    var baseURL = url.substring(0, url.indexOf('/', 14));
-
-
-    if (baseURL.indexOf('http://localhost') != -1) {
-        var url = location.href;
-        var pathname = location.pathname;
-        var index1 = url.indexOf(pathname);
-        var index2 = url.indexOf("/", index1 + 1);
-        var baseLocalUrl = url.substr(0, index2);
-
-        return baseLocalUrl + "/";
-    }
-    else {
-        return baseURL + "/";
-    }
-
-}
-
-function getSVG(location,target){
-	$.get(baseURL+location,function(data){
-		$(target).html(data);
-	},"text");
-}
-
-function title(below,title,type){
-	$(below).before('<div class="heading_strip '+ type +'">'
-+	'<div class="heading_wrapper">'
-+	'<h3 class="heading">'+ title +'</b></h3>'
-+	'</div>'
-+	'</div>');
-}
 function pageLoad(){
 	$("main").children().fadeOut(function(){
 		$(this).remove();
