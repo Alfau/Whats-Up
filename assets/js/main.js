@@ -441,10 +441,12 @@ function mobile_menu(){
 		}
 	});
 	
-	$(document).on("click", "nav a", function(){
-		$("a#menu").removeClass("active").children("svg").attr("class","");
-		$("header#small div#header_right, header#small nav#left").css({"margin-left":"100%"});
-	}); //dfs
+	if(window.innerWidth < 500){
+		$(document).on("click", "nav a", function(){
+			$("a#menu").removeClass("active").children("svg").attr("class","");
+			$("header#small div#header_right, header#small nav#left").css({"margin-left":"100%"});
+		});
+	}
 }
 
 function nav_click(){

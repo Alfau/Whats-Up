@@ -5,9 +5,9 @@
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>What's Up? Maldives</title>
-	<link rel="stylesheet" type="text/css" href="/whatsup/assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/whatsup/assets/css/style.min.css">
 	<script src="/whatsup/assets/js/jquery-1.11.1.min.js"></script>
-	<script src="/whatsup/assets/js/main.js"></script>
+	<script src="/whatsup/assets/js/main.min.js"></script>
 	<!-- <script src="assets/js/GGS.js"></script> -->
 </head>
 <body>	
