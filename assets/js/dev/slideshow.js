@@ -7,6 +7,7 @@ var slideshow = function(container, slides, interval, speed){
 	this.slides = slides;
 	this.interval = interval;
 	this.speed = speed;
+	// this.slide_interval = setInterval(self.trigger, self.interval);
 	
 	this.init = function(){
 		self.render();
@@ -19,6 +20,9 @@ var slideshow = function(container, slides, interval, speed){
 			
 			clearInterval(slide_interval);
 			slide_interval = setInterval(self.trigger, self.interval);
+			
+			// self.reset();
+			
 			e.preventDefault();
 		});
 	};
@@ -58,6 +62,11 @@ var slideshow = function(container, slides, interval, speed){
 		
 		$( self.container + " #controls" ).append( controls );
 		$( self.container + " #slides" ).append( content );
+	};
+	
+	this.reset = function(){
+		clearInterval(self.slide_interval);
+		slide_interval = setInterval(self.trigger, self.interval);
 	};
 	
 	this.init();
