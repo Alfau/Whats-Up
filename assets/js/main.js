@@ -14,10 +14,12 @@ var req_models = {
 	Home : ["Slideshow", "Packages", "Quotes"],
 	Packages : ["Packages"],
 	Stay : ["Resorts", "Packages"],
+	Sights : ["Sights"],
 	About : ["About"],
 	Contact : ["Contact"],
 	stay_details : ["Resorts", "Rooms"],
-	packages_details : ["Packages"]
+	packages_details : ["Packages"],
+	sights_details : ["Sights"]
 };
 var slideshow = function(container, slides, interval, speed){
 	var self = this;
@@ -52,8 +54,8 @@ var slideshow = function(container, slides, interval, speed){
 	};
 	
 	this.slide = function(id){
-		$( self.container + " #slides li" ).animate({ "opacity" : 0 }, self.speed ).removeClass( "active" );
-		$( self.container + " #slides li[ data-id = " + id + "]" ).animate({ "opacity" : 1 }, self.speed ).addClass( "active" );
+		$( self.container + " #slides li" ).animate({ "opacity" : 0 }, { duration: self.speed, queue: false }).removeClass( "active" );
+		$( self.container + " #slides li[ data-id = " + id + "]" ).animate({ "opacity" : 1 }, { duration: self.speed, queue: false }).addClass( "active" );
 		
 		$( self.container + " #controls a").removeClass( "active" );
 		$( self.container + " #controls a[ data-id = " + id + "]" ).addClass( "active" );
@@ -200,6 +202,7 @@ function render(page, href){
 		case "Contact" : basic_cards(); break;
 		
 		case "packages_details" :
+		case "sights_details" :
 		case "stay_details" : large_cards(href); break;
 	}
 }
@@ -522,7 +525,6 @@ function cards_expand(){
 		e.preventDefault();
 	});
 }
-
 function pageLoad(){
 	$("main").children().fadeOut(function(){
 		$(this).remove();
@@ -540,8 +542,6 @@ function pageLoad(){
 		model = segments[0];
 	}
 	
-	// console.log(model);
-	
 	if(model.indexOf("_details") <= -1){
 		var model = model.toLowerCase().replace(/\b[a-z]/g, function(result) {
 			return result.toUpperCase();
@@ -554,7 +554,7 @@ function pageLoad(){
 	window.history.pushState("","Title",baseURL+href[1]);
 
 	var req = model;
-	
+
 	if(model.indexOf("_details") > -1){
 		handle(req_models[req], url, href[1], model, object_ID);
 	}else{

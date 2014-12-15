@@ -11,11 +11,8 @@ class SightsController{
 		$sights=$sights->getSights("All");
 		
 		$sightsBundle = array("Sights" => $sights);
-		$sightsBundle = json_encode($sightsBundle);
 		
-		$view = new View();
-		$view = $view -> render("_views",array("Sights" => $sightsBundle));
-			
+		echo json_encode($sightsBundle);
 	}
 	
 	public function details(){
@@ -24,10 +21,8 @@ class SightsController{
 		$sights=$sights->getSights("All");
 		
 		$sightsBundle = array("Sights" => $sights);
-		$sightsBundle = json_encode($sightsBundle);
 		
-		$view = new View();
-		$view = $view -> render("_views",array("Sights" => $sightsBundle));
+		echo json_encode($sightsBundle);
 	}
 }
 

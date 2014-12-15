@@ -38,6 +38,7 @@ function render(page, href){
 		case "Contact" : basic_cards(); break;
 		
 		case "packages_details" :
+		case "sights_details" :
 		case "stay_details" : large_cards(href); break;
 	}
 }

@@ -10,6 +10,7 @@ if(!isset($_SESSION['Username'])){
 
 include("includes/header.php");
 ?>
+<a href="#add" id="add_anchor">Add</a>
 
 <div class="wrapper">
 	

@@ -16,7 +16,6 @@ require_once "../includes/paths.php";
     <!-- <script src="GGS.js"></script> -->
   </head>
   <body>
-  	<a href="#add" id="add_anchor">Add</a>
     <header>
     	<div id="logo"><a href="<?php echo URL::base()."admin" ?>" id="logo">Admin Dashboard</a><a href="logout" class="logout">Logout</a></div>
     	<ul>
