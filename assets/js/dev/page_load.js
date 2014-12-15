@@ -15,8 +15,6 @@ function pageLoad(){
 		model = segments[0];
 	}
 	
-	// console.log(model);
-	
 	if(model.indexOf("_details") <= -1){
 		var model = model.toLowerCase().replace(/\b[a-z]/g, function(result) {
 			return result.toUpperCase();
@@ -29,7 +27,7 @@ function pageLoad(){
 	window.history.pushState("","Title",baseURL+href[1]);
 
 	var req = model;
-	
+
 	if(model.indexOf("_details") > -1){
 		handle(req_models[req], url, href[1], model, object_ID);
 	}else{

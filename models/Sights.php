@@ -1,11 +1,10 @@
 <?php  
 // require_once "includes/connect.php";
-include_once("Resorts.php");
 
-class Packages{
-	protected $table = "packages";
+class Sights{
+	protected $table = "sights";
 	
-	public function getPackages($stmt, $rst){
+	public function getSights($stmt){
 		
 		$con=new Connection();
 		$con=$con->setCon();
@@ -18,25 +17,15 @@ class Packages{
 		
 		$array=array();
 		
-		if(empty($rst)){
-			if($query->execute()){
-				while($row=$query->fetch()){
-					$array[]=$row;
-				}
-				return $array=array($array);
+		if($query->execute()){
+			while($row=$query->fetch()){
+				$array[]=$row;
 			}
-		}else{
-			if($query->execute()){
-				while($row=$query->fetch()){
-					$array[]=$row;
-				}
-				$resorts = new Resorts();
-				return $array=array($array, $resorts->getResorts("SELECT Name FROM resorts"));
-			}
+			return $array=array($array);
 		}
 	}
-	
-	public function updatePackages($post_data, $image_file){
+		
+	public function updateSights($post_data, $image_file){
 		
 		$image = $this -> processImage($image_file['Image']['tmp_name']);
 		
@@ -63,26 +52,20 @@ class Packages{
 				$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 			}
 			
-			return $array=array($this->getPackages("All", "Resort"), $status);
+			return $array=array($this->getSights("All"), $status);
 			
 		}else{
 			$status = "Image upload failed. Please check whether the image you uploaded was a JPG or a PNG.";
-			return $array=array($this->getPackages("All", "Resort"), $status);
+			return $array=array($this->getSights("All"), $status);
 		}
 	}
 	
-	public function addPackages($post_data, $image_file){
-		
-		$resort_name = $post_data['Resort'];
-		
-		$resort = new Resorts();
-		$ResortID = $resort->getResorts("SELECT ID FROM resorts WHERE Name = '$resort_name'");
-		$ResortID = $ResortID[0][0][0];
+	public function addSights($post_data, $image_file){
 		
 		$image = $this -> processImage($image_file['Image']['tmp_name']);
 		
 		if($image !== "failed"){
-			$stmt = "INSERT INTO ".$this->table." (ResortID,";
+			$stmt = "INSERT INTO ".$this->table." (";
 			foreach($post_data as $key => $value){
 				$stmt .= "$key,";
 			}
@@ -90,7 +73,7 @@ class Packages{
 				$stmt .= "Image";
 			}
 			$stmt = rtrim($stmt, ",");
-			$stmt .= ") VALUES('$ResortID',";
+			$stmt .= ") VALUES(";
 			foreach($post_data as $key => $value){
 				$value = addslashes($value);
 				$stmt .= "'$value',";
@@ -110,14 +93,14 @@ class Packages{
 				$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 			}
 			
-			return $array=array($this->getPackages("All", "Resort"), $status);
+			return $array=array($this->getSights("All"), $status);
 		}else{
 			$status = "Image upload failed. Please check whether the image you uploaded was a JPG or a PNG.";
-			return $array=array($this->getPackages("All", "Resort"), $status);
+			return $array=array($this->getSights("All"), $status);
 		}
 	}
-		
-	public function deletePackages($id){
+	
+	public function deleteSights($id){
 		
 		$con=new Connection();
 		$con=$con->setCon();
@@ -131,7 +114,7 @@ class Packages{
 			$status = "<p class='failed_strip'>An error occured. Please try again.</p>";
 		}
 		
-		return $array=array($this->getPackages("All", "Resort"), $status);
+		return $array=array($this->getSights("All"), $status);
 	}
 	
 	public function processImage($image_file){
